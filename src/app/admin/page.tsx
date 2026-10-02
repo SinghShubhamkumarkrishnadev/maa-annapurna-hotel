@@ -462,7 +462,7 @@ export default function AdminPage() {
                 required
                 value={usernameInput}
                 onChange={(e) => setUsernameInput(e.target.value)}
-                placeholder="Enter username (e.g. admin)"
+                placeholder="Enter username"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-800 text-sm text-white placeholder-stone-600 focus:outline-none focus:ring-2 focus:ring-amber-500/60 focus:border-amber-500 transition"
               />
             </div>
@@ -506,28 +506,7 @@ export default function AdminPage() {
             </button>
           </form>
 
-          {/* Quick Credential Hint for Host */}
-          <div className="mt-6 pt-4 border-t border-stone-800/80 text-[11px] text-stone-400">
-            <div className="flex items-center justify-between bg-stone-950/80 p-2.5 rounded-xl border border-stone-800">
-              <div>
-                <span className="text-stone-500 block">Default Credentials:</span>
-                <span className="font-mono text-amber-300">admin</span> /{" "}
-                <span className="font-mono text-amber-300">annapurna@bodhgaya2025</span>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setUsernameInput("admin");
-                  setPasswordInput("annapurna@bodhgaya2025");
-                }}
-                className="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 px-2 py-1 rounded-md transition font-medium"
-              >
-                Auto-Fill
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-4 text-center">
+          <div className="mt-6 text-center">
             <Link
               href="/"
               className="text-xs text-stone-400 hover:text-white transition flex items-center justify-center gap-1"

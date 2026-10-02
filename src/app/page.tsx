@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
-import QuickBookingBar from "@/components/QuickBookingBar";
 import RoomsSection from "@/components/RoomsSection";
 import GallerySection from "@/components/GallerySection";
 import Tour360Section from "@/components/Tour360Section";
@@ -139,20 +138,6 @@ export default function HomePage() {
           onOpenEnquiry={openRoomEnquiry}
           onWhatsAppBooking={handleWhatsAppBooking}
           onOpenLightbox={setLightboxIndex}
-        />
-
-        {/* Quick Availability & Direct Booking Search Bar */}
-        <QuickBookingBar
-          rooms={rooms}
-          checkIn={bookingDetails.checkIn}
-          checkOut={bookingDetails.checkOut}
-          guests={bookingDetails.guests}
-          selectedRoom={bookingDetails.roomName}
-          onCheckInChange={(val) => updateBookingDetails({ checkIn: val })}
-          onCheckOutChange={(val) => updateBookingDetails({ checkOut: val })}
-          onGuestsChange={(val) => updateBookingDetails({ guests: val })}
-          onSelectedRoomChange={(val) => updateBookingDetails({ roomName: val })}
-          onSearch={() => handleWhatsAppBooking()}
         />
 
         {/* Room Showcase Section */}

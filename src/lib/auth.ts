@@ -1,9 +1,9 @@
 import crypto from "crypto";
 import { cookies } from "next/headers";
 
-export const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "annapurna@bodhgaya2025";
-const AUTH_SECRET = process.env.ADMIN_AUTH_SECRET || "maa-annapurna-hotel-bodhgaya-sec-key-2025";
+export const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "mukeshsingh";
+export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "Mukesh#Annapurna$9931!824231";
+const AUTH_SECRET = process.env.ADMIN_AUTH_SECRET || "maa-annapurna-hotel-mukeshsingh-sec-key-824231";
 export const COOKIE_NAME = "admin_session";
 
 interface SessionPayload {

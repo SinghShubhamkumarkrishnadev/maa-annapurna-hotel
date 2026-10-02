@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
@@ -59,16 +58,7 @@ export default function Footer() {
 
         <div className="pt-5 sm:pt-6 flex flex-col sm:flex-row items-center justify-between text-stone-500 gap-2">
           <p>© {new Date().getFullYear()} Maa Annapurna Home Stay &amp; Hotel Bodhgaya. All rights reserved.</p>
-          <div className="flex items-center gap-3 text-[11px]">
-            <p className="hidden sm:inline">100% SEO Optimized • Fast &amp; Lightweight Experience</p>
-            <span className="hidden sm:inline">•</span>
-            <Link
-              href="/admin"
-              className="text-stone-500 hover:text-amber-400 transition flex items-center gap-1 font-medium"
-            >
-              <span>🔒 Host Login</span>
-            </Link>
-          </div>
+          <p className="text-[11px] hidden sm:inline">100% SEO Optimized • Fast &amp; Lightweight Experience</p>
         </div>
       </div>
     </footer>
