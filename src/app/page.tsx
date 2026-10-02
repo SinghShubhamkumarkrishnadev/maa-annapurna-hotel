@@ -1289,22 +1289,56 @@ export default function HomePage() {
               return (
                 <div
                   key={index}
-                  className="rounded-2xl border border-stone-200 overflow-hidden bg-stone-50/50 transition"
+                  className={`rounded-2xl border transition-all duration-300 ease-in-out overflow-hidden group ${
+                    isOpen
+                      ? "bg-white border-amber-300/80 shadow-md shadow-amber-900/5 ring-1 ring-amber-200/50"
+                      : "bg-stone-50/60 hover:bg-stone-50/90 border-stone-200/90 shadow-2xs hover:border-stone-300"
+                  }`}
                 >
                   <button
                     onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                    className="w-full text-left p-5 flex items-center justify-between gap-4 font-semibold text-stone-900 text-sm sm:text-base hover:bg-stone-50 transition cursor-pointer"
+                    className="w-full text-left p-4 sm:p-5 flex items-center justify-between gap-4 transition-colors cursor-pointer select-none"
+                    aria-expanded={isOpen}
                   >
-                    <span>{faq.q}</span>
-                    <span className="text-stone-400 font-bold text-lg shrink-0">
-                      {isOpen ? "−" : "+"}
+                    <span
+                      className={`text-sm sm:text-base transition-colors duration-200 ${
+                        isOpen ? "font-bold text-amber-950" : "font-semibold text-stone-900 group-hover:text-amber-900"
+                      }`}
+                    >
+                      {faq.q}
+                    </span>
+                    <span
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ease-in-out ${
+                        isOpen
+                          ? "bg-amber-100 text-amber-900 rotate-180 shadow-2xs"
+                          : "bg-white text-stone-400 border border-stone-200/80 group-hover:text-stone-700 group-hover:border-stone-300"
+                      }`}
+                    >
+                      <svg
+                        className="w-4 h-4 transition-transform duration-300"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M19 9l-7 7-7-7" />
+                      </svg>
                     </span>
                   </button>
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-stone-600 text-xs sm:text-sm leading-relaxed border-t border-stone-100 pt-3">
-                      {faq.a}
+
+                  {/* Smooth Grid-Template-Rows Expand / Collapse Animation */}
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isOpen
+                        ? "grid-rows-[1fr] opacity-100"
+                        : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-1 text-stone-600 text-xs sm:text-sm leading-relaxed border-t border-stone-100/90">
+                        {faq.a}
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
