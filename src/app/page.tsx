@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import PanoramicViewer360 from "@/components/PanoramicViewer360";
+import { RoomItem } from "@/lib/data";
 
 // Image dataset from the property with SEO-optimized alt and captions
 const HOTEL_IMAGES = [
@@ -119,7 +121,7 @@ const HOTEL_IMAGES = [
 ];
 
 // Room packages with real tariffs, discounts & live availability status
-const ROOM_CATEGORIES = [
+const ROOM_CATEGORIES: RoomItem[] = [
   {
     id: "deluxe-double",
     name: "Deluxe AC Double Room",
@@ -132,12 +134,13 @@ const ROOM_CATEGORIES = [
     discount: "32% OFF",
     priceNote: "Direct Host Deal • Zero Commission",
     status: "Available Today",
-    statusType: "available" as const,
+    statusType: "available",
     availableUnits: 3,
     totalUnits: 4,
     bookedToday: 1,
     availabilityText: "3 Rooms Available Today",
     isAvailable: true,
+    isActive: true,
     features: [
       "Split Air Conditioner",
       "Attached Modern Bath",
@@ -161,12 +164,13 @@ const ROOM_CATEGORIES = [
     discount: "30% OFF",
     priceNote: "Includes Private Kitchenette & Sink",
     status: "High Demand",
-    statusType: "limited" as const,
+    statusType: "limited",
     availableUnits: 1,
     totalUnits: 3,
     bookedToday: 2,
     availabilityText: "Only 1 Room Left for Today",
     isAvailable: true,
+    isActive: true,
     features: [
       "In-room Kitchenette Sink",
       "Split Air Conditioner",
@@ -190,12 +194,13 @@ const ROOM_CATEGORIES = [
     discount: "29% OFF",
     priceNote: "Best Budget AC Comfort in Bodhgaya",
     status: "Available Today",
-    statusType: "available" as const,
+    statusType: "available",
     availableUnits: 2,
     totalUnits: 3,
     bookedToday: 1,
     availabilityText: "2 Rooms Available Today",
     isAvailable: true,
+    isActive: true,
     features: [
       "Two Separate Beds",
       "Wooden Accent Paneling",
@@ -219,12 +224,13 @@ const ROOM_CATEGORIES = [
     discount: "29% OFF",
     priceNote: "Great for Yatras & Families (4-6 Guests)",
     status: "Limited Availability",
-    statusType: "limited" as const,
+    statusType: "limited",
     availableUnits: 1,
     totalUnits: 2,
     bookedToday: 1,
     availabilityText: "Only 1 Suite Left for Today",
     isAvailable: true,
+    isActive: true,
     features: [
       "Multiple Beds & Linens",
       "Split Air Conditioner",
@@ -383,6 +389,30 @@ export default function HomePage() {
   const [needPickDrop, setNeedPickDrop] = useState(false);
   const [needTours, setNeedTours] = useState(false);
 
+  // Dynamic rooms & gallery state synced with admin updates
+  const [rooms, setRooms] = useState(ROOM_CATEGORIES);
+  const [hotelImages, setHotelImages] = useState(HOTEL_IMAGES);
+
+  useEffect(() => {
+    fetch("/api/rooms")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.rooms) && data.rooms.length > 0) {
+          setRooms(data.rooms);
+        }
+      })
+      .catch(() => {});
+
+    fetch("/api/admin/photos")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.photos) && data.photos.length > 0) {
+          setHotelImages(data.photos);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   // Gallery filter & Lightbox state
   const [galleryFilter, setGalleryFilter] = useState<"all" | "rooms" | "bathrooms">("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -396,14 +426,14 @@ export default function HomePage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   // Filtered gallery items
-  const filteredImages = HOTEL_IMAGES.filter((img) =>
+  const filteredImages = hotelImages.filter((img) =>
     galleryFilter === "all" ? true : img.category === galleryFilter
   );
 
   // Construct WhatsApp URL
   const handleWhatsAppBooking = (roomName?: string) => {
     const targetRoom = roomName || selectedRoom;
-    const roomObj = ROOM_CATEGORIES.find((r) => r.name === targetRoom);
+    const roomObj = rooms.find((r) => r.name === targetRoom);
     const phone = "919931924027"; // Direct hotel contact
     let text = `Hello Maa Annapurna Home Stay! I would like to enquire about room availability & booking:\n\n`;
     text += `• Room: ${targetRoom}`;
@@ -957,7 +987,7 @@ export default function HomePage() {
                     onChange={(e) => setSelectedRoom(e.target.value)}
                     className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-stone-300 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:ring-1.5 focus:ring-stone-900 bg-stone-50/50"
                   >
-                    {ROOM_CATEGORIES.map((r) => (
+                    {rooms.filter((r) => r.isActive !== false).map((r) => (
                       <option key={r.id} value={r.name}>
                         {r.name}
                       </option>
@@ -1044,7 +1074,7 @@ export default function HomePage() {
 
           {/* Room Cards Grid */}
           <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
-            {ROOM_CATEGORIES.map((room) => (
+            {rooms.filter((r) => r.isActive !== false).map((room) => (
               <article
                 key={room.id}
                 className="bg-white rounded-2xl overflow-hidden border border-stone-200/90 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group"
@@ -1677,7 +1707,7 @@ export default function HomePage() {
                   onChange={(e) => setSelectedRoom(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-stone-900 bg-stone-50/50"
                 >
-                  {ROOM_CATEGORIES.map((r) => (
+                  {rooms.filter((r) => r.isActive !== false).map((r) => (
                     <option key={r.id} value={r.name}>
                       {r.name}
                     </option>
@@ -1788,7 +1818,16 @@ export default function HomePage() {
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-stone-500 gap-2">
             <p>© {new Date().getFullYear()} Maa Annapurna Home Stay & Hotel Bodhgaya. All rights reserved.</p>
-            <p>100% SEO Optimized • Fast & Lightweight Next.js Experience</p>
+            <div className="flex items-center gap-3">
+              <p>100% SEO Optimized • Fast & Lightweight Experience</p>
+              <span>•</span>
+              <Link
+                href="/admin"
+                className="text-stone-500 hover:text-amber-400 transition text-[11px] flex items-center gap-1 font-medium"
+              >
+                <span>🔒 Host Login</span>
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
@@ -1906,7 +1945,7 @@ export default function HomePage() {
             </p>
 
             {(() => {
-              const modalRoom = ROOM_CATEGORIES.find((r) => r.name === modalRoomTitle) || ROOM_CATEGORIES[0];
+              const modalRoom = rooms.find((r) => r.name === modalRoomTitle) || rooms[0];
               return modalRoom ? (
                 <div className="mt-3.5 p-3 rounded-2xl bg-stone-50 border border-stone-200/90 flex items-center justify-between gap-3">
                   <div>

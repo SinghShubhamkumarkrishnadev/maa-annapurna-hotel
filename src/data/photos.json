@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "Triple Bed AC Room with Kitchenette - Maa Annapurna Bodhgaya",
+    "category": "rooms",
+    "src": "/images/room-triple-kitchenette.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Spacious triple bed AC room with kitchenette counter and sink at Maa Annapurna Home Stay Bodhgaya",
+    "caption": "Spacious triple occupancy bedroom with attached kitchenette counter & sink in Bodhgaya"
+  },
+  {
+    "id": 2,
+    "title": "Deluxe AC Bedroom with Dressing Table - Bodhgaya Hotel",
+    "category": "rooms",
+    "src": "/images/deluxe-room-dressing-table.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Deluxe AC room with dressing table and mirror at Maa Annapurna Hotel near Mahabodhi Temple",
+    "caption": "Private room featuring vanity mirror, large wooden wardrobe, and split AC"
+  },
+  {
+    "id": 3,
+    "title": "Classic Twin Bed Room - Maa Annapurna Guest House",
+    "category": "rooms",
+    "src": "/images/room-twin-wooden-paneling.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Twin single beds with wooden accent paneling at Maa Annapurna Home Stay Bodhgaya",
+    "caption": "Twin single beds with warm wooden paneling and quiet courtyard view"
+  },
+  {
+    "id": 4,
+    "title": "Guest Room with Bedside Table & AC - Hotel in Bodhgaya",
+    "category": "rooms",
+    "src": "/images/room-bedside-table-ac.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Clean double bedroom with bedside table and split air conditioner in Bodhgaya",
+    "caption": "Comfortable double room with nightstand, split air conditioner and soft lighting"
+  },
+  {
+    "id": 5,
+    "title": "Double Single-Bed Room - Bodhgaya Pilgrimage Stay",
+    "category": "rooms",
+    "src": "/images/room-double-single-beds.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Tiled floor room with two single beds at Maa Annapurna Hotel Bodhgaya",
+    "caption": "Clean, tiled floor room with two single beds, ideal for friends or pilgrims"
+  },
+  {
+    "id": 6,
+    "title": "Spacious Family Suite - Best Family Hotel in Bodhgaya",
+    "category": "rooms",
+    "src": "/images/family-suite-blue-linens.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Spacious family room with blue bedding for pilgrimage groups at Maa Annapurna Home Stay",
+    "caption": "Generous room layout with fresh blue linens, perfect for pilgrimage groups and families"
+  },
+  {
+    "id": 7,
+    "title": "Room Window & Split AC Cooling - Maa Annapurna Bodhgaya",
+    "category": "rooms",
+    "src": "/images/room-window-ac.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Bedroom window with curtains and split AC at Maa Annapurna Hotel Bodhgaya",
+    "caption": "Large window with natural light, privacy curtains, and wall-mounted split AC"
+  },
+  {
+    "id": 8,
+    "title": "Attached Bathroom with Overhead Shower - Bodhgaya Hotel",
+    "category": "bathrooms",
+    "src": "/images/bathroom-shower-tiled.jpg",
+    "width": 1600,
+    "height": 738,
+    "alt": "Clean attached bathroom with tiled wall and overhead shower at Maa Annapurna Home Stay",
+    "caption": "Modern tiled bathroom with high-pressure overhead shower and geyser connection"
+  },
+  {
+    "id": 9,
+    "title": "Bathroom Full View with 24/7 Geyser - Maa Annapurna",
+    "category": "bathrooms",
+    "src": "/images/bathroom-full-view.jpg",
+    "width": 738,
+    "height": 1600,
+    "alt": "Spotless bathroom with Western toilet and water heater geyser in Bodhgaya homestay",
+    "caption": "Spotless private bathroom equipped with Western commode and 24/7 hot water geyser"
+  },
+  {
+    "id": 10,
+    "title": "Modern Bathroom Wash Basin & Vanity - Hotel Bodhgaya",
+    "category": "bathrooms",
+    "src": "/images/bathroom-wash-basin.jpg",
+    "width": 738,
+    "height": 1600,
+    "alt": "Wash basin with glass shelf and mirror in bathroom at Maa Annapurna Hotel Bodhgaya",
+    "caption": "Clean wash basin with glass shelf, toiletries space, and mirror"
+  },
+  {
+    "id": 11,
+    "title": "Maa Annapurna House Building Exterior - Maharani Road Bodhgaya",
+    "category": "rooms",
+    "src": "/images/hotel-building-facade.jpg",
+    "width": 246,
+    "height": 428,
+    "alt": "Exterior facade of Maa Annapurna House on Maharani Road Bodhgaya with balconies and entrance gate",
+    "caption": "5-Story modern hotel building with front entrance gate, balconies, and rooftop terrace"
+  }
+]
