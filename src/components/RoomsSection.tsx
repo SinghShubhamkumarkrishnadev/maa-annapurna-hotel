@@ -39,27 +39,36 @@ export default function RoomsSection({
 
         {/* Live Room Inventory & Availability Dashboard */}
         <div className="mb-6 sm:mb-8 p-3.5 sm:p-5 rounded-2xl bg-stone-50 border border-stone-200/90 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4">
-          <div className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs sm:text-sm font-bold text-stone-900">
-                  Live Today&apos;s Room Inventory &amp; Tariff
-                </span>
-                <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Live Updates
-                </span>
+          <div className="flex items-center gap-2.5 sm:gap-3 w-full md:w-auto justify-between md:justify-start">
+            <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs sm:text-sm font-bold text-stone-900 truncate">
+                    <span className="hidden sm:inline">Live Today&apos;s Room Inventory &amp; Tariff</span>
+                    <span className="sm:hidden">Today&apos;s Room Inventory</span>
+                  </span>
+                  <span className="hidden sm:inline-flex text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0">
+                    Live Updates
+                  </span>
+                </div>
+                <p className="hidden sm:block text-xs text-stone-500 mt-0.5">
+                  Direct host pricing • 25%–35% lower than online travel portals • No booking commission
+                </p>
               </div>
-              <p className="hidden sm:block text-xs text-stone-500 mt-0.5">
-                Direct host pricing • 25%–35% lower than online travel portals • No booking commission
-              </p>
             </div>
+
+            {/* Mobile-only Live badge cleanly aligned to the right */}
+            <span className="sm:hidden text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap shrink-0">
+              Live
+            </span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white border border-stone-200 text-stone-700 font-medium shadow-2xs text-[11px] sm:text-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              7 Rooms Available Today
+          <div className="flex items-center justify-between sm:justify-start w-full md:w-auto gap-2 text-xs pt-1.5 sm:pt-0 border-t border-stone-200/60 sm:border-0">
+            <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-white border border-stone-200 text-stone-700 font-medium shadow-2xs text-[11px] sm:text-xs shrink-0">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+              <span>7 Rooms Available</span>
+              <span className="hidden sm:inline">Today</span>
             </span>
             <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-stone-200 text-stone-700 font-medium shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-amber-500"></span>
@@ -67,7 +76,7 @@ export default function RoomsSection({
             </span>
             <a
               href="tel:+919931924027"
-              className="inline-flex items-center gap-1 text-amber-800 font-semibold hover:underline ml-1 text-xs butter-touch"
+              className="inline-flex items-center gap-1 text-amber-800 hover:text-amber-900 font-semibold text-xs px-2.5 py-1 rounded-full bg-amber-50 sm:bg-transparent border border-amber-200/80 sm:border-0 butter-touch shrink-0"
             >
               <span>Instant Call 📞</span>
             </a>
