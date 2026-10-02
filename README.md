@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+ the top section where we are showing : 24/7 Open • Airport & Railway Pick & Drop • Tours & Travels Desk • Direct Booking Guarantee this section make this section as marque that moves from right to left infinite 
+
+create a icon for my website that suits name of the hotel
+
+remove the login admin button from footer as admin will access directly by route also name will be mukeshsingh and password will use some random har password 

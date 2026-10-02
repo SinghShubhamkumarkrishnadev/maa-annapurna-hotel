@@ -426,6 +426,7 @@ export default function PanoramicViewer360() {
         onTouchEnd={handleTouchEnd}
         onWheel={handleWheel}
         tabIndex={0}
+        style={{ touchAction: "pan-y" }}
         className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9] rounded-2xl sm:rounded-3xl overflow-hidden select-none bg-stone-900 border border-stone-200/90 shadow-xl cursor-grab active:cursor-grabbing outline-none"
         aria-label="Interactive 360 degree panoramic view of Maa Annapurna Hotel rooftop terrace and Mahabodhi Temple. Drag or swipe to look around."
       >
@@ -459,7 +460,7 @@ export default function PanoramicViewer360() {
                 top: `${pos.y}px`,
                 transform: "translate(-50%, -50%)",
               }}
-              className="absolute z-10 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-full"
+              className="absolute z-10 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-full butter-touch"
               aria-label={`Inspect ${spot.name}`}
             >
               <span className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center">
@@ -501,7 +502,7 @@ export default function PanoramicViewer360() {
           <button
             key={`chip-${spot.id}`}
             onClick={() => jumpToHotspot(spot)}
-            className={`px-3 py-1.5 rounded-full font-medium shrink-0 transition flex items-center gap-1.5 cursor-pointer border ${
+            className={`px-3 py-1.5 rounded-full font-medium shrink-0 butter-touch flex items-center gap-1.5 cursor-pointer border ${
               selectedHotspot?.id === spot.id
                 ? "bg-amber-600 text-white border-amber-600 shadow-xs"
                 : "bg-stone-100 hover:bg-stone-200 text-stone-700 border-stone-200/80"
@@ -515,10 +516,10 @@ export default function PanoramicViewer360() {
 
       {/* Selected Hotspot Detail Card */}
       {selectedHotspot && (
-        <div className="mt-3 p-4 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-md animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="mt-3 p-3.5 sm:p-5 bg-white rounded-2xl border border-stone-200 shadow-md animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="flex items-start justify-between gap-3">
-            <div className="flex items-start gap-3">
-              <span className="text-2xl sm:text-3xl p-2 rounded-xl bg-amber-50 border border-amber-200/60 shrink-0">
+            <div className="flex items-start gap-2.5 sm:gap-3">
+              <span className="text-xl sm:text-3xl p-2 rounded-xl bg-amber-50 border border-amber-200/60 shrink-0">
                 {selectedHotspot.icon}
               </span>
               <div>
@@ -530,10 +531,10 @@ export default function PanoramicViewer360() {
                     {selectedHotspot.distance}
                   </span>
                 </div>
-                <h4 className="font-serif text-base sm:text-lg font-bold text-stone-900 mt-1">
+                <h4 className="font-serif text-sm sm:text-lg font-bold text-stone-900 mt-1">
                   {selectedHotspot.name}
                 </h4>
-                <p className="text-stone-600 text-xs sm:text-sm mt-0.5 leading-relaxed max-w-xl">
+                <p className="text-stone-600 text-xs sm:text-sm mt-0.5 leading-relaxed max-w-xl line-clamp-2 sm:line-clamp-none">
                   {selectedHotspot.desc}
                 </p>
               </div>
@@ -541,7 +542,7 @@ export default function PanoramicViewer360() {
 
             <button
               onClick={() => setSelectedHotspot(null)}
-              className="text-stone-400 hover:text-stone-700 p-1.5 rounded-full hover:bg-stone-100 transition cursor-pointer shrink-0"
+              className="text-stone-400 hover:text-stone-700 p-1.5 rounded-full hover:bg-stone-100 transition cursor-pointer shrink-0 butter-touch"
               aria-label="Close"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -552,15 +553,15 @@ export default function PanoramicViewer360() {
 
           {selectedHotspot.mapUrl && (
             <div className="mt-3 pt-2.5 border-t border-stone-100 flex items-center justify-between text-xs">
-              <span className="text-stone-500 font-medium">5-7 mins via e-rickshaw or taxi</span>
+              <span className="hidden sm:inline text-stone-500 font-medium">5-7 mins via e-rickshaw or taxi</span>
               <a
                 href={selectedHotspot.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5 py-1.5 rounded-full bg-stone-900 hover:bg-amber-900 text-white font-semibold flex items-center gap-1.5 transition text-xs shadow-2xs"
+                className="w-full sm:w-auto text-center px-3.5 py-1.5 rounded-full bg-stone-900 hover:bg-amber-900 text-white font-semibold flex items-center justify-center gap-1.5 butter-touch text-xs shadow-2xs"
               >
                 <span>Directions on Google Maps</span>
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
