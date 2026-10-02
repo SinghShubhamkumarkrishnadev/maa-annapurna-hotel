@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import TopBanner from "./TopBanner";
 import MobileMenu from "./MobileMenu";
 
@@ -14,18 +15,30 @@ export default function Header({ onOpenEnquiry }: HeaderProps) {
       <TopBanner />
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/90 shadow-2xs">
         <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-16 lg:h-[68px] flex items-center justify-between gap-4 lg:gap-6">
-          {/* Logo with Generous Breathing Space */}
+          {/* Logo with Emblem Icon & Generous Breathing Space */}
           <a
             href="#"
-            className="flex flex-col justify-center shrink-0 group py-1 pr-4 lg:pr-6"
+            className="flex items-center gap-2.5 shrink-0 group py-1 pr-4 lg:pr-6"
             title="Maa Annapurna Home Stay & Hotel Bodhgaya"
           >
-            <span className="font-serif text-xl sm:text-[22px] font-bold tracking-tight text-stone-900 group-hover:text-amber-800 transition-colors leading-tight whitespace-nowrap">
-              Maa Annapurna
-            </span>
-            <span className="text-[9.5px] sm:text-[10px] tracking-[0.22em] uppercase font-semibold text-amber-800/80 leading-none mt-0.5 whitespace-nowrap">
-              Home Stay &amp; Hotel • Bodhgaya
-            </span>
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden shrink-0 shadow-2xs border border-amber-900/10 group-hover:scale-105 transition-transform duration-300">
+              <Image
+                src="/icon.svg"
+                alt="Maa Annapurna Hotel Emblem"
+                width={36}
+                height={36}
+                className="w-full h-full object-cover"
+                priority
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <span className="font-serif text-lg sm:text-[21px] font-bold tracking-tight text-stone-900 group-hover:text-amber-800 transition-colors leading-tight whitespace-nowrap">
+                Maa Annapurna
+              </span>
+              <span className="text-[9px] sm:text-[9.5px] tracking-[0.2em] uppercase font-semibold text-amber-800/80 leading-none mt-0.5 whitespace-nowrap">
+                Home Stay &amp; Hotel • Bodhgaya
+              </span>
+            </div>
           </a>
 
           {/* Desktop Nav */}

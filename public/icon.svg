@@ -1,0 +1,121 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background Radial Gradient -->
+    <radialGradient id="bg-grad" cx="50%" cy="45%" r="55%" fx="50%" fy="45%">
+      <stop offset="0%" stop-color="#292524" />
+      <stop offset="60%" stop-color="#1c1917" />
+      <stop offset="100%" stop-color="#0c0a09" />
+    </radialGradient>
+
+    <!-- Rich Gold Linear Gradients -->
+    <linearGradient id="gold-bright" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="25%" stop-color="#f59e0b" />
+      <stop offset="60%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+
+    <linearGradient id="gold-glow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+
+    <linearGradient id="flame-grad" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#ea580c" />
+      <stop offset="40%" stop-color="#f59e0b" />
+      <stop offset="85%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+
+    <filter id="gold-shadow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <filter id="flame-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Circular Base Badge -->
+  <rect width="512" height="512" rx="128" fill="url(#bg-grad)" />
+
+  <!-- Outer Fine Decorative Ring -->
+  <circle cx="256" cy="256" r="236" stroke="url(#gold-bright)" stroke-width="2.5" stroke-dasharray="14 8" opacity="0.4" />
+  <circle cx="256" cy="256" r="222" stroke="url(#gold-bright)" stroke-width="3" opacity="0.85" />
+  <circle cx="256" cy="256" r="214" stroke="url(#gold-bright)" stroke-width="1.5" opacity="0.5" />
+
+  <!-- Corner Ornamental Accents -->
+  <g opacity="0.8" stroke="url(#gold-bright)" stroke-width="2" fill="none">
+    <path d="M 256 26 L 256 42 M 256 470 L 256 486" />
+    <path d="M 26 256 L 42 256 M 470 256 L 486 256" />
+    <circle cx="256" cy="42" r="3" fill="url(#gold-bright)" />
+    <circle cx="256" cy="470" r="3" fill="url(#gold-bright)" />
+    <circle cx="42" cy="256" r="3" fill="url(#gold-bright)" />
+    <circle cx="470" cy="256" r="3" fill="url(#gold-bright)" />
+  </g>
+
+  <!-- Temple Sacred Archway -->
+  <path d="M 120 380 C 120 220 180 120 256 75 C 332 120 392 220 392 380" 
+        stroke="url(#gold-bright)" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.9" />
+  
+  <path d="M 140 375 C 140 240 190 148 256 108 C 322 148 372 240 372 375" 
+        stroke="url(#gold-bright)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4" />
+
+  <!-- Arch Apex Crown Finial -->
+  <path d="M 256 52 L 264 68 L 256 76 L 248 68 Z" fill="url(#gold-bright)" />
+  <circle cx="256" cy="48" r="4" fill="#fef08a" />
+
+  <!-- Sacred Flame / Diya of Hospitality (24/7 Warmth & Light) -->
+  <g filter="url(#flame-glow)">
+    <path d="M 256 130 C 275 160 288 185 288 210 C 288 232 274 246 256 246 C 238 246 224 232 224 210 C 224 185 237 160 256 130 Z" 
+          fill="url(#flame-grad)" />
+    <path d="M 256 160 C 267 180 274 196 274 212 C 274 224 266 234 256 234 C 246 234 238 224 238 212 C 238 196 245 180 256 160 Z" 
+          fill="#ffffff" opacity="0.9" />
+  </g>
+
+  <!-- Sacred Annapurna Kalash (Abundance & Nourishment Vessel) -->
+  <g filter="url(#gold-shadow)">
+    <!-- Kalash Rim / Mouth -->
+    <ellipse cx="256" cy="242" rx="46" ry="10" fill="url(#gold-bright)" stroke="#b45309" stroke-width="2" />
+    <path d="M 218 244 C 218 258 224 266 234 270 L 278 270 C 288 266 294 258 294 244 Z" fill="url(#gold-glow)" />
+
+    <!-- Kalash Pot Belly -->
+    <path d="M 234 270 C 185 285 178 348 220 376 C 232 384 280 384 292 376 C 334 348 327 285 278 270 Z" 
+          fill="url(#gold-bright)" stroke="#b45309" stroke-width="2" />
+
+    <!-- Kalash Decorative Carved Bands -->
+    <path d="M 198 320 Q 256 338 314 320" stroke="#78350f" stroke-width="3.5" fill="none" opacity="0.75" />
+    <path d="M 192 338 Q 256 358 320 338" stroke="#78350f" stroke-width="3" fill="none" opacity="0.75" />
+    
+    <!-- Central Sacred Motif (Floral Sun Emblem on Pot) -->
+    <circle cx="256" cy="326" r="14" fill="#fef08a" stroke="#78350f" stroke-width="2" />
+    <circle cx="256" cy="326" r="6" fill="#b45309" />
+  </g>
+
+  <!-- Blooming Lotus Petals Base (Sacred Bodhgaya Enlightenment Motif) -->
+  <g filter="url(#gold-shadow)">
+    <!-- Center Leaf/Petal -->
+    <path d="M 256 364 C 248 395 244 425 256 442 C 268 425 264 395 256 364 Z" fill="url(#gold-bright)" stroke="#78350f" stroke-width="2" />
+
+    <!-- Inner Flanking Petals -->
+    <path d="M 244 372 C 218 395 200 422 216 438 C 234 438 248 412 254 388 Z" fill="url(#gold-glow)" stroke="#78350f" stroke-width="2" />
+    <path d="M 268 372 C 294 395 312 422 296 438 C 278 438 264 412 258 388 Z" fill="url(#gold-glow)" stroke="#78350f" stroke-width="2" />
+
+    <!-- Outer Lotus Petals spreading wide -->
+    <path d="M 226 380 C 182 396 156 418 168 432 C 186 436 216 422 232 400 Z" fill="url(#gold-bright)" stroke="#78350f" stroke-width="2" />
+    <path d="M 286 380 C 330 396 356 418 344 432 C 326 436 296 422 280 400 Z" fill="url(#gold-bright)" stroke="#78350f" stroke-width="2" />
+  </g>
+
+  <!-- Base Pedestal Bar -->
+  <rect x="180" y="440" width="152" height="12" rx="6" fill="url(#gold-bright)" stroke="#78350f" stroke-width="2" />
+
+  <!-- Divine Shimmer Stars -->
+  <g fill="#fef08a" opacity="0.9">
+    <!-- Left Shimmer -->
+    <path d="M 160 180 Q 160 195 145 195 Q 160 195 160 210 Q 160 195 175 195 Q 160 195 160 180 Z" />
+    <!-- Right Shimmer -->
+    <path d="M 352 180 Q 352 195 337 195 Q 352 195 352 210 Q 352 195 367 195 Q 352 195 352 180 Z" />
+  </g>
+</svg>

@@ -68,6 +68,13 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/apple-icon.svg",
+  },
   openGraph: {
     title: "Maa Annapurna Home Stay & Hotel | 24/7 Open • Pick & Drop • Near Mahabodhi Temple Bodhgaya",
     description:

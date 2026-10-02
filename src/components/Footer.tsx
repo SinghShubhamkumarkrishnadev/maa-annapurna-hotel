@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,9 +8,20 @@ export default function Footer() {
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-stone-800">
           <div>
-            <span className="font-serif text-lg font-bold text-white tracking-wide">
-              Maa Annapurna Home Stay &amp; Hotel
-            </span>
+            <div className="flex items-center gap-2.5 mb-2">
+              <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-amber-600/30">
+                <Image
+                  src="/icon.svg"
+                  alt="Maa Annapurna Hotel Emblem"
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <span className="font-serif text-lg font-bold text-white tracking-wide">
+                Maa Annapurna Home Stay &amp; Hotel
+              </span>
+            </div>
             <p className="hidden sm:block mt-2 text-stone-400 leading-relaxed text-xs">
               A serene guest house and hotel in Bodhgaya open 24 hours (24/7) offering airport &amp; railway station pick &amp; drop service, tours and travels packages, fully air-conditioned rooms, attached modern bathrooms, kitchenette amenities, and heartfelt service for temple pilgrims, yatras, and world travelers.
             </p>
