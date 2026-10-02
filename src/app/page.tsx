@@ -198,6 +198,33 @@ const AMENITIES = [
   {
     icon: (
       <svg className="w-5 h-5 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    title: "24 Hours Open (24/7 Front Desk)",
+    desc: "Round-the-clock reception, seamless late-night check-in, and 24/7 on-call guest assistance",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+      </svg>
+    ),
+    title: "Pick & Drop Service",
+    desc: "Prompt pickup and drop facility for Gaya International Airport (GAY) & Gaya Junction Railway Station",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+      </svg>
+    ),
+    title: "Tours & Travels Facility",
+    desc: "Pilgrimage tours across Bodhgaya, Rajgir, Nalanda, and Dungeshwari Caves with trusted private vehicles",
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
@@ -268,6 +295,14 @@ const FAQS = [
     a: "Maa Annapurna Home Stay is located approximately 2.2 km from the UNESCO World Heritage Mahabodhi Temple, which is just a 5 to 7 minute drive or quick e-rickshaw ride away. It offers the perfect quiet retreat away from bustling traffic while remaining easily accessible to all major shrines.",
   },
   {
+    q: "Do you offer airport/railway station pick and drop service and tour packages?",
+    a: "Yes! We provide dedicated 24/7 pick and drop service for Gaya International Airport (GAY) and Gaya Junction Railway Station. We also provide a full tours and travels facility organizing local Bodhgaya temple visits as well as day trips to Rajgir, Nalanda, and Dungeshwari Cave temples.",
+  },
+  {
+    q: "Is Maa Annapurna Hotel open 24 hours (24/7) for check-in and assistance?",
+    a: "Yes, Maa Annapurna Hotel is open 24 hours (24/7 front desk). Our host and team are available round-the-clock to assist with late-night check-ins, early-morning departures, travel guidance, and any guest requirements.",
+  },
+  {
     q: "What amenities are included in the rooms at Maa Annapurna Hotel?",
     a: "Every room at Maa Annapurna Home Stay is equipped with split air conditioning (AC), an attached private bathroom with 24/7 hot water geyser, high-speed Wi-Fi, clean sanitized linens, and dressing furniture. Select rooms also feature a convenient in-room kitchenette counter and sink.",
   },
@@ -285,7 +320,7 @@ const FAQS = [
   },
   {
     q: "What are the check-in and check-out timings?",
-    a: "Standard check-in is from 12:00 PM onwards and check-out is by 11:00 AM. Early check-in or late check-out is readily accommodated subject to room availability upon prior request.",
+    a: "Standard check-in is from 12:00 PM onwards and check-out is by 11:00 AM. Because our front desk is open 24/7, early check-in or late check-out is readily accommodated subject to room availability upon prior request.",
   },
 ];
 
@@ -297,6 +332,8 @@ export default function HomePage() {
   const [selectedRoom, setSelectedRoom] = useState("Deluxe AC Double Room");
   const [guestName, setGuestName] = useState("");
   const [guestPhone, setGuestPhone] = useState("");
+  const [needPickDrop, setNeedPickDrop] = useState(false);
+  const [needTours, setNeedTours] = useState(false);
 
   // Gallery filter & Lightbox state
   const [galleryFilter, setGalleryFilter] = useState<"all" | "rooms" | "bathrooms">("all");
@@ -324,6 +361,8 @@ export default function HomePage() {
     if (checkIn) text += `• Check-in: ${checkIn}\n`;
     if (checkOut) text += `• Check-out: ${checkOut}\n`;
     text += `• Guests: ${guests}\n`;
+    if (needPickDrop) text += `• Pick & Drop Service: Yes (Airport / Railway Station)\n`;
+    if (needTours) text += `• Tours & Travels Facility: Yes (Bodhgaya / Rajgir / Nalanda)\n`;
     if (guestName) text += `• Name: ${guestName}\n`;
     if (guestPhone) text += `• Phone: ${guestPhone}\n`;
     text += `\nPlease let me know the rates and availability. Thank you!`;
@@ -350,7 +389,7 @@ export default function HomePage() {
       "Maa Annapurna Hotel"
     ],
     "description":
-      "Peaceful, clean AC hotel and homestay in Bodhgaya near Mahabodhi Temple. Offering private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
+      "Peaceful, clean AC hotel and homestay in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
     "url": "https://maaannapurnahotel.com",
     "telephone": "+919931924027",
     "priceRange": "₹₹",
@@ -381,6 +420,9 @@ export default function HomePage() {
     },
     "petsAllowed": false,
     "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "24-Hour Front Desk (24/7 Open)", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Airport & Railway Pick and Drop Service", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Tours & Travels Facility", "value": true },
       { "@type": "LocationFeatureSpecification", "name": "Split Air Conditioning", "value": true },
       { "@type": "LocationFeatureSpecification", "name": "24/7 Hot Water Geyser", "value": true },
       { "@type": "LocationFeatureSpecification", "name": "Free High-Speed Wi-Fi", "value": true },
@@ -465,7 +507,9 @@ export default function HomePage() {
         <div className="w-full max-w-[1536px] mx-auto flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 truncate">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-            <span className="truncate">Best Rated AC Homestay & Hotel in Bodhgaya • Direct Booking Guarantee</span>
+            <span className="truncate">
+              <span className="text-emerald-400 font-semibold">24/7 Open</span> • Airport & Railway Pick & Drop • Tours & Travels Desk • Direct Booking Guarantee
+            </span>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-stone-300 shrink-0">
             <a href="tel:+919931924027" className="hover:text-white transition-colors flex items-center gap-1.5 font-medium">
@@ -659,8 +703,8 @@ export default function HomePage() {
             {/* Left Content Column - Streamlined Vertical Rhythm */}
             <div className="lg:col-span-6 space-y-3.5 sm:space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
-                <span>Bodhgaya, Bihar • 5 Mins to Mahabodhi Temple</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>24/7 Open • Airport & Station Pick & Drop • Tours & Travels • 5 Mins to Mahabodhi</span>
               </div>
 
               {/* Single targeted H1 - Compact line-height & font size */}
@@ -669,19 +713,25 @@ export default function HomePage() {
               </h1>
 
               <p className="text-stone-600 text-xs sm:text-sm lg:text-[14px] leading-relaxed max-w-xl">
-                Authentic pilgrimage hospitality at Maa Annapurna Home Stay. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette options, and quiet comfort just minutes from the sacred Bodhi Tree.
+                Authentic pilgrimage hospitality at Maa Annapurna Home Stay. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette options, 24/7 front desk, and prompt airport/station pick & drop service.
               </p>
 
               {/* Highlights Pill Row - Compact & Consistent */}
               <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs text-stone-700 font-medium">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+                  <span className="text-emerald-600 font-bold">✓</span> 24 Hours Open (24/7)
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+                  <span className="text-emerald-600 font-bold">✓</span> Pick & Drop Service
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+                  <span className="text-emerald-600 font-bold">✓</span> Tours & Travels Desk
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
                   <span className="text-emerald-600 font-bold">✓</span> Split AC in All Rooms
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
                   <span className="text-emerald-600 font-bold">✓</span> 24/7 Geyser Hot Water
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
-                  <span className="text-emerald-600 font-bold">✓</span> High-Speed Wi-Fi
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
                   <span className="text-emerald-600 font-bold">✓</span> Kitchenette Suites
@@ -1227,10 +1277,25 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="space-y-3 text-xs text-stone-600 border-t border-stone-100 pt-4">
+                <div className="space-y-2.5 text-xs text-stone-600 border-t border-stone-100 pt-4">
+                  <div className="flex justify-between py-1 border-b border-stone-50">
+                    <span className="font-medium text-stone-500">Front Desk:</span>
+                    <span className="font-semibold text-emerald-700 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      24 Hours Open (24/7 Assistance)
+                    </span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-stone-50">
+                    <span className="font-medium text-stone-500">Pick & Drop:</span>
+                    <span className="font-semibold text-stone-800">Airport (GAY) & Railway Station</span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-stone-50">
+                    <span className="font-medium text-stone-500">Tours & Travels:</span>
+                    <span className="font-semibold text-stone-800">Bodhgaya, Rajgir, Nalanda & Caves</span>
+                  </div>
                   <div className="flex justify-between py-1 border-b border-stone-50">
                     <span className="font-medium text-stone-500">Check-In Time:</span>
-                    <span className="font-semibold text-stone-800">12:00 PM (Flexible upon request)</span>
+                    <span className="font-semibold text-stone-800">12:00 PM (24/7 Flexible check-in)</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-stone-50">
                     <span className="font-medium text-stone-500">Check-Out Time:</span>
@@ -1433,6 +1498,27 @@ export default function HomePage() {
                   <option value="Family (4+ Guests)">Family (4+ Guests)</option>
                 </select>
               </div>
+
+              <div className="sm:col-span-2 pt-1 flex flex-wrap gap-4 text-xs text-stone-700">
+                <label className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={needPickDrop}
+                    onChange={(e) => setNeedPickDrop(e.target.checked)}
+                    className="w-4 h-4 rounded text-amber-700 focus:ring-amber-600 border-stone-300"
+                  />
+                  <span>Need Airport / Railway Station Pick &amp; Drop</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={needTours}
+                    onChange={(e) => setNeedTours(e.target.checked)}
+                    className="w-4 h-4 rounded text-amber-700 focus:ring-amber-600 border-stone-300"
+                  />
+                  <span>Need Tours &amp; Travels Desk Assistance</span>
+                </label>
+              </div>
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -1469,7 +1555,7 @@ export default function HomePage() {
                 Maa Annapurna Home Stay & Hotel
               </span>
               <p className="mt-2 text-stone-400 leading-relaxed text-xs">
-                A serene guest house and hotel in Bodhgaya offering fully air-conditioned rooms, attached modern bathrooms, kitchenette amenities, and heartfelt service for temple pilgrims, yatras, and world travelers.
+                A serene guest house and hotel in Bodhgaya open 24 hours (24/7) offering airport & railway station pick & drop service, tours and travels packages, fully air-conditioned rooms, attached modern bathrooms, kitchenette amenities, and heartfelt service for temple pilgrims, yatras, and world travelers.
               </p>
             </div>
 
@@ -1495,7 +1581,8 @@ export default function HomePage() {
                   +91 99319 24027
                 </a>
               </p>
-              <p className="mt-1 text-emerald-400">Instant WhatsApp Booking Available</p>
+              <p className="mt-1.5 text-emerald-400 font-medium">✓ 24/7 Front Desk • Instant WhatsApp Booking</p>
+              <p className="mt-1 text-stone-300">✓ Airport Pick & Drop • Tours & Travels Desk</p>
             </div>
           </div>
 
@@ -1663,6 +1750,27 @@ export default function HomePage() {
                   <option value="3 Guests">3 Guests</option>
                   <option value="4+ Guests (Family)">4+ Guests (Family)</option>
                 </select>
+              </div>
+
+              <div className="pt-1 flex flex-col gap-2 text-xs text-stone-700">
+                <label className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={needPickDrop}
+                    onChange={(e) => setNeedPickDrop(e.target.checked)}
+                    className="w-4 h-4 rounded text-amber-700 focus:ring-amber-600 border-stone-300"
+                  />
+                  <span>Need Airport / Railway Pick &amp; Drop</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={needTours}
+                    onChange={(e) => setNeedTours(e.target.checked)}
+                    className="w-4 h-4 rounded text-amber-700 focus:ring-amber-600 border-stone-300"
+                  />
+                  <span>Need Tours &amp; Travels Desk Assistance</span>
+                </label>
               </div>
 
               <div className="pt-2 flex flex-col gap-2">
