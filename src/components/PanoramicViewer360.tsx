@@ -73,7 +73,6 @@ export default function PanoramicViewer360() {
 
   // Interaction State
   const [selectedHotspot, setSelectedHotspot] = useState<Hotspot | null>(null);
-  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [compassHeading, setCompassHeading] = useState<string>("N • Mahabodhi Temple");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
@@ -303,15 +302,7 @@ export default function PanoramicViewer360() {
     };
   }, [calculateCompass]);
 
-  // Adjust Zoom via Camera FOV
-  const handleZoomChange = (delta: number) => {
-    if (!cameraRef.current) return;
-    const currentFov = cameraRef.current.fov;
-    const newFov = Math.max(50, Math.min(85, currentFov - delta * 15));
-    cameraRef.current.fov = newFov;
-    cameraRef.current.updateProjectionMatrix();
-    setZoomLevel(75 / newFov);
-  };
+
 
   // Mouse Drag Events
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -422,13 +413,7 @@ export default function PanoramicViewer360() {
   };
 
   return (
-    <div
-      className={`relative w-full transition-all duration-300 ${
-        isFullscreen
-          ? "fixed inset-0 z-50 bg-stone-950 flex flex-col justify-center p-2 sm:p-6"
-          : "rounded-3xl"
-      }`}
-    >
+    <div className="relative w-full rounded-3xl">
       {/* 360 WebGL Viewport Container */}
       <div
         ref={containerRef}
@@ -441,11 +426,7 @@ export default function PanoramicViewer360() {
         onTouchEnd={handleTouchEnd}
         onWheel={handleWheel}
         tabIndex={0}
-        className={`relative w-full overflow-hidden select-none bg-stone-900 border border-stone-200/90 shadow-xl cursor-grab active:cursor-grabbing outline-none ${
-          isFullscreen
-            ? "h-[90vh] rounded-2xl"
-            : "aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9] rounded-2xl sm:rounded-3xl"
-        }`}
+        className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9] rounded-2xl sm:rounded-3xl overflow-hidden select-none bg-stone-900 border border-stone-200/90 shadow-xl cursor-grab active:cursor-grabbing outline-none"
         aria-label="Interactive 360 degree panoramic view of Maa Annapurna Hotel rooftop terrace and Mahabodhi Temple. Drag or swipe to look around."
       >
         {/* Three.js WebGL Canvas */}
@@ -508,33 +489,7 @@ export default function PanoramicViewer360() {
           </div>
         </div>
 
-        {/* Discreet Controls: Zoom & Fullscreen Only */}
-        <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5">
-          <button
-            onClick={() => handleZoomChange(1)}
-            className="w-8 h-8 rounded-full bg-stone-900/70 hover:bg-stone-900/95 text-white text-base font-bold flex items-center justify-center backdrop-blur-md shadow-md transition cursor-pointer"
-            aria-label="Zoom in"
-            title="Zoom in"
-          >
-            +
-          </button>
-          <button
-            onClick={() => handleZoomChange(-1)}
-            className="w-8 h-8 rounded-full bg-stone-900/70 hover:bg-stone-900/95 text-white text-base font-bold flex items-center justify-center backdrop-blur-md shadow-md transition cursor-pointer"
-            aria-label="Zoom out"
-            title="Zoom out"
-          >
-            −
-          </button>
-          <button
-            onClick={() => setIsFullscreen(!isFullscreen)}
-            className="w-8 h-8 rounded-full bg-stone-900/70 hover:bg-stone-900/95 text-white text-xs flex items-center justify-center backdrop-blur-md shadow-md transition cursor-pointer"
-            aria-label={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
-            title={isFullscreen ? "Exit fullscreen" : "Fullscreen"}
-          >
-            {isFullscreen ? "✕" : "⛶"}
-          </button>
-        </div>
+
       </div>
 
       {/* Quick Jump Landmark Navigation Chips Below Viewer */}

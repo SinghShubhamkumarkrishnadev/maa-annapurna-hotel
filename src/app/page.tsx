@@ -460,15 +460,15 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* Top Banner */}
-      <div className="bg-stone-900 text-stone-300 text-xs py-2 px-4 border-b border-stone-800">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Best Rated AC Homestay & Hotel in Bodhgaya • Direct Booking Guarantee</span>
+      {/* Top Banner - Crisp Visual Separation */}
+      <div className="bg-stone-950 text-stone-300 text-[11px] sm:text-xs py-1.5 px-4 sm:px-6 lg:px-8 xl:px-10 border-b border-stone-800">
+        <div className="w-full max-w-[1536px] mx-auto flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 truncate">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+            <span className="truncate">Best Rated AC Homestay & Hotel in Bodhgaya • Direct Booking Guarantee</span>
           </div>
-          <div className="hidden sm:flex items-center gap-4 text-stone-300">
-            <a href="tel:+919931924027" className="hover:text-white transition flex items-center gap-1.5 font-medium">
+          <div className="hidden sm:flex items-center gap-4 text-stone-300 shrink-0">
+            <a href="tel:+919931924027" className="hover:text-white transition-colors flex items-center gap-1.5 font-medium">
               <svg className="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
@@ -480,40 +480,77 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Main Header */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="flex flex-col group" title="Maa Annapurna Home Stay & Hotel Bodhgaya">
-            <span className="font-serif text-2xl sm:text-2xl font-bold tracking-tight text-stone-900 group-hover:text-amber-800 transition">
+      {/* Main Header - Balanced, Vertically Centered & Responsive Full Width */}
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/90 shadow-2xs">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-16 lg:h-[68px] flex items-center justify-between gap-4 lg:gap-6">
+          {/* Logo with Generous Breathing Space */}
+          <a
+            href="#"
+            className="flex flex-col justify-center shrink-0 group py-1 pr-4 lg:pr-6"
+            title="Maa Annapurna Home Stay & Hotel Bodhgaya"
+          >
+            <span className="font-serif text-xl sm:text-[22px] font-bold tracking-tight text-stone-900 group-hover:text-amber-800 transition-colors leading-tight whitespace-nowrap">
               Maa Annapurna
             </span>
-            <span className="text-[10px] tracking-[0.2em] uppercase font-semibold text-amber-800/80 -mt-0.5">
+            <span className="text-[9.5px] sm:text-[10px] tracking-[0.22em] uppercase font-semibold text-amber-800/80 leading-none mt-0.5 whitespace-nowrap">
               Home Stay & Hotel • Bodhgaya
             </span>
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
-            <a href="#rooms" className="hover:text-stone-900 transition">Rooms & Suites</a>
-            <a href="#tour360" className="text-amber-800 font-semibold hover:text-stone-900 transition flex items-center gap-1">
-              <span>360° View</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+          {/* Desktop Nav - Guaranteed Single Line (One-Liner) with whitespace-nowrap */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 text-[13px] font-medium text-stone-600 whitespace-nowrap shrink-0">
+            <a
+              href="#rooms"
+              className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+            >
+              Rooms & Suites
             </a>
-            <a href="#gallery" className="hover:text-stone-900 transition">Photo Tour</a>
-            <a href="#amenities" className="hover:text-stone-900 transition">Amenities</a>
-            <a href="#location" className="hover:text-stone-900 transition">Location & Temples</a>
-            <a href="#faq" className="hover:text-stone-900 transition">FAQs</a>
-            <a href="#contact" className="hover:text-stone-900 transition">Contact</a>
+            <a
+              href="#tour360"
+              className="px-3 py-1.5 rounded-full text-amber-900 font-semibold hover:bg-amber-50/80 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
+            >
+              <span>360° View</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0"></span>
+            </a>
+            <a
+              href="#gallery"
+              className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+            >
+              Photo Tour
+            </a>
+            <a
+              href="#amenities"
+              className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+            >
+              Amenities
+            </a>
+            <a
+              href="#location"
+              className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+            >
+              Location
+            </a>
+            <a
+              href="#faq"
+              className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center hidden xl:inline-flex"
+            >
+              FAQs
+            </a>
+            <a
+              href="#contact"
+              className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+            >
+              Contact
+            </a>
           </nav>
 
-          {/* Header Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Header Action Buttons - Perfectly Matched Heights & Proportions */}
+          <div className="hidden sm:flex items-center gap-2.5 shrink-0">
             <a
               href="tel:+919931924027"
-              className="px-4 py-2 text-xs font-semibold text-stone-700 border border-stone-300 rounded-full hover:bg-stone-50 transition flex items-center gap-1.5"
+              className="h-9 px-3.5 sm:px-4 text-xs font-semibold text-stone-700 bg-white hover:bg-stone-50 border border-stone-300 rounded-full transition-colors flex items-center gap-1.5 shadow-2xs whitespace-nowrap"
             >
-              <svg className="w-3.5 h-3.5 text-stone-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-3.5 h-3.5 text-stone-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               <span>Call Host</span>
@@ -521,10 +558,10 @@ export default function HomePage() {
 
             <button
               onClick={() => openRoomEnquiry("Deluxe AC Double Room")}
-              className="px-5 py-2.5 text-xs font-semibold text-white bg-stone-900 hover:bg-amber-900 rounded-full shadow-sm transition flex items-center gap-1.5 cursor-pointer"
+              className="h-9 px-4 sm:px-4.5 text-xs font-semibold text-white bg-stone-900 hover:bg-amber-900 rounded-full transition-all duration-150 flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 whitespace-nowrap"
             >
               <span>Book / Enquire</span>
-              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-3.5 h-3.5 text-amber-300 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
@@ -533,15 +570,15 @@ export default function HomePage() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-stone-700 hover:bg-stone-100 transition"
+            className="lg:hidden p-2 rounded-lg text-stone-700 hover:bg-stone-100 transition"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
@@ -550,18 +587,18 @@ export default function HomePage() {
 
         {/* Mobile Dropdown Nav */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-stone-200 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
+          <div className="lg:hidden border-t border-stone-200 bg-white px-4 pt-3 pb-5 space-y-2.5 shadow-lg animate-in fade-in slide-in-from-top-2 duration-150">
             <a
               href="#rooms"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-stone-800 font-medium hover:text-amber-800"
+              className="block py-2 text-stone-800 text-sm font-medium hover:text-amber-800"
             >
               Rooms & Family Suites
             </a>
             <a
               href="#tour360"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-amber-900 font-semibold hover:text-amber-800 flex items-center justify-between"
+              className="block py-2 text-amber-900 text-sm font-semibold hover:text-amber-800 flex items-center justify-between"
             >
               <span>360° Panoramic Tour</span>
               <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">New</span>
@@ -569,28 +606,28 @@ export default function HomePage() {
             <a
               href="#gallery"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-stone-800 font-medium hover:text-amber-800"
+              className="block py-2 text-stone-800 text-sm font-medium hover:text-amber-800"
             >
               HD Photo Tour
             </a>
             <a
               href="#amenities"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-stone-800 font-medium hover:text-amber-800"
+              className="block py-2 text-stone-800 text-sm font-medium hover:text-amber-800"
             >
               Hotel Amenities
             </a>
             <a
               href="#location"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-stone-800 font-medium hover:text-amber-800"
+              className="block py-2 text-stone-800 text-sm font-medium hover:text-amber-800"
             >
               Location & Temple Vicinity
             </a>
             <a
               href="#faq"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-stone-800 font-medium hover:text-amber-800"
+              className="block py-2 text-stone-800 text-sm font-medium hover:text-amber-800"
             >
               Bodhgaya Travel FAQs
             </a>
@@ -606,7 +643,7 @@ export default function HomePage() {
                   setMobileMenuOpen(false);
                   openRoomEnquiry("Deluxe AC Double Room");
                 }}
-                className="w-full py-2.5 text-center text-xs font-semibold text-white bg-stone-900 rounded-lg shadow"
+                className="w-full py-2.5 text-center text-xs font-semibold text-white bg-stone-900 rounded-lg shadow-sm"
               >
                 Instant Room Enquiry
               </button>
@@ -615,57 +652,57 @@ export default function HomePage() {
         )}
       </header>
 
-      {/* Hero Section with Targeted Primary H1 */}
-      <section className="relative bg-stone-50/70 border-b border-stone-200 pt-8 pb-14 lg:pt-14 lg:pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Left Content Column */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-xs font-medium">
-                <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+      {/* Hero Section - Viewport-Aware, Balanced & Compact Full Width */}
+      <section className="relative bg-gradient-to-b from-stone-50/80 via-white to-stone-50/40 border-b border-stone-200/90 py-5 sm:py-6 lg:py-6 xl:py-7">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center">
+            {/* Left Content Column - Streamlined Vertical Rhythm */}
+            <div className="lg:col-span-6 space-y-3.5 sm:space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
                 <span>Bodhgaya, Bihar • 5 Mins to Mahabodhi Temple</span>
               </div>
 
-              {/* Single targeted H1 for Top SEO Ranking */}
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-stone-900 leading-[1.18]">
+              {/* Single targeted H1 - Compact line-height & font size */}
+              <h1 className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] xl:text-[2.35rem] font-bold tracking-tight text-stone-900 leading-[1.2]">
                 Peaceful Hotel & Home Stay in Bodhgaya Near Mahabodhi Temple
               </h1>
 
-              <p className="text-stone-600 text-base sm:text-lg leading-relaxed max-w-xl">
-                Experience authentic hospitality at Maa Annapurna Home Stay. Clean, modern AC rooms, private attached hot-water bathrooms, in-room kitchenette options, and tranquil surroundings for your spiritual pilgrimage.
+              <p className="text-stone-600 text-xs sm:text-sm lg:text-[14px] leading-relaxed max-w-xl">
+                Authentic pilgrimage hospitality at Maa Annapurna Home Stay. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette options, and quiet comfort just minutes from the sacred Bodhi Tree.
               </p>
 
-              {/* Highlights Pill Row */}
-              <div className="flex flex-wrap gap-2.5 pt-1 text-xs text-stone-700 font-medium">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-2xs">
-                  <span className="text-emerald-600 font-bold">✓</span> Split AC in Every Room
+              {/* Highlights Pill Row - Compact & Consistent */}
+              <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs text-stone-700 font-medium">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+                  <span className="text-emerald-600 font-bold">✓</span> Split AC in All Rooms
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-2xs">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
                   <span className="text-emerald-600 font-bold">✓</span> 24/7 Geyser Hot Water
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-2xs">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
                   <span className="text-emerald-600 font-bold">✓</span> High-Speed Wi-Fi
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-2xs">
-                  <span className="text-emerald-600 font-bold">✓</span> Kitchenette Suites Available
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+                  <span className="text-emerald-600 font-bold">✓</span> Kitchenette Suites
                 </span>
               </div>
 
-              {/* Direct Actions */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-3">
+              {/* Direct Actions - Refined Sizing & Consistent Visual Weight */}
+              <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
                 <button
                   onClick={() => openRoomEnquiry("Deluxe AC Double Room")}
-                  className="px-7 py-3.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-semibold text-sm transition shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  className="h-10 px-5 sm:px-5.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs sm:text-[13px] transition-all duration-150 shadow-xs hover:shadow flex items-center justify-center gap-2 cursor-pointer active:scale-98"
                 >
                   <span>Book / Check Availability</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-3.5 h-3.5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </button>
 
                 <button
                   onClick={() => handleWhatsAppBooking("General Inquiry")}
-                  className="px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  className="h-10 px-4.5 sm:px-5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-[13px] transition-all duration-150 shadow-xs hover:shadow flex items-center justify-center gap-2 cursor-pointer active:scale-98"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.288.043.088.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.2.662.591 1.221.774 1.394.86.173.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.086s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z" />
@@ -675,148 +712,152 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Photo Showcase */}
-            <div className="lg:col-span-6">
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {/* Right Photo Showcase - Perfectly Balanced Composition Matching Content Height */}
+            <div className="lg:col-span-6 h-[250px] sm:h-[280px] lg:h-[320px] xl:h-[340px]">
+              <div className="grid grid-cols-12 gap-2.5 sm:gap-3 h-full">
+                {/* Large Featured Photo */}
                 <div
                   onClick={() => setLightboxIndex(0)}
-                  className="col-span-2 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-md group cursor-pointer border border-stone-200/80 bg-stone-100"
+                  className="col-span-7 relative h-full rounded-2xl overflow-hidden shadow-sm hover:shadow-md group cursor-pointer border border-stone-200/80 bg-stone-100"
                 >
                   <Image
                     src="/images/room-triple-kitchenette.jpg"
                     alt="Triple Bed Room with Kitchenette at Maa Annapurna Home Stay Bodhgaya"
                     fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover group-hover:scale-105 transition duration-500"
+                    sizes="(max-width: 768px) 60vw, 30vw"
+                    className="object-cover group-hover:scale-103 transition duration-500"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent flex items-end p-4 sm:p-5">
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/75 via-stone-950/20 to-transparent flex items-end p-3 sm:p-4">
                     <div className="text-white">
-                      <span className="text-[11px] font-semibold tracking-wider uppercase bg-stone-900/80 backdrop-blur px-2.5 py-1 rounded">
-                        Triple AC Room + Kitchenette
+                      <span className="text-[10px] font-semibold tracking-wider uppercase bg-stone-900/80 backdrop-blur-xs px-2 py-0.5 rounded">
+                        Triple Room + Kitchenette
                       </span>
-                      <p className="text-xs sm:text-sm text-stone-200 mt-1 font-medium">
-                        Spacious layout with dining counter, split AC & private bathroom
+                      <p className="text-[11px] sm:text-xs text-stone-200 mt-1 font-medium line-clamp-1">
+                        Spacious layout with split AC & private bathroom
                       </p>
                     </div>
                   </div>
-                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur text-stone-800 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-xs flex items-center gap-1">
-                    <span>🔍 Tap to view HD</span>
+                  <div className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-xs text-stone-800 text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-2xs">
+                    HD Photo
                   </div>
                 </div>
 
-                <div
-                  onClick={() => setLightboxIndex(1)}
-                  className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-sm group cursor-pointer border border-stone-200/80 bg-stone-100"
-                >
-                  <Image
-                    src="/images/deluxe-room-dressing-table.jpg"
-                    alt="Deluxe AC Bedroom at Maa Annapurna Hotel Bodhgaya"
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-105 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 to-transparent flex items-end p-3">
-                    <span className="text-xs font-semibold text-white">Deluxe AC Room</span>
+                {/* Right Stack of Two Proportional Supporting Images */}
+                <div className="col-span-5 flex flex-col gap-2.5 sm:gap-3 h-full">
+                  <div
+                    onClick={() => setLightboxIndex(1)}
+                    className="relative flex-1 rounded-xl overflow-hidden shadow-2xs hover:shadow-xs group cursor-pointer border border-stone-200/80 bg-stone-100"
+                  >
+                    <Image
+                      src="/images/deluxe-room-dressing-table.jpg"
+                      alt="Deluxe AC Bedroom at Maa Annapurna Hotel Bodhgaya"
+                      fill
+                      sizes="(max-width: 768px) 40vw, 20vw"
+                      className="object-cover group-hover:scale-103 transition duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 to-transparent flex items-end p-2.5">
+                      <span className="text-[11px] font-semibold text-white">Deluxe AC Room</span>
+                    </div>
                   </div>
-                </div>
 
-                <div
-                  onClick={() => setLightboxIndex(7)}
-                  className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-sm group cursor-pointer border border-stone-200/80 bg-stone-100"
-                >
-                  <Image
-                    src="/images/bathroom-shower-tiled.jpg"
-                    alt="Clean Attached Bathroom with Geyser at Hotel in Bodhgaya"
-                    fill
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-105 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 to-transparent flex items-end p-3">
-                    <span className="text-xs font-semibold text-white">Modern Attached Bath</span>
+                  <div
+                    onClick={() => setLightboxIndex(7)}
+                    className="relative flex-1 rounded-xl overflow-hidden shadow-2xs hover:shadow-xs group cursor-pointer border border-stone-200/80 bg-stone-100"
+                  >
+                    <Image
+                      src="/images/bathroom-shower-tiled.jpg"
+                      alt="Clean Attached Bathroom with Geyser at Hotel in Bodhgaya"
+                      fill
+                      sizes="(max-width: 768px) 40vw, 20vw"
+                      className="object-cover group-hover:scale-103 transition duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 to-transparent flex items-end p-2.5">
+                      <span className="text-[11px] font-semibold text-white">Attached Modern Bath</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Quick Booking & Availability Search Bar */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-xl shadow-stone-200/50 border border-stone-200">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-              {/* Check-In */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">
-                  Check-In Date
-                </label>
-                <input
-                  type="date"
-                  value={checkIn}
-                  onChange={(e) => setCheckIn(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-stone-800 text-sm focus:outline-none focus:ring-2 focus:ring-stone-900 bg-stone-50/50"
-                />
-              </div>
+          {/* Quick Booking & Availability Search Bar - Sleek & Viewport-Aware */}
+          <div className="mt-5 lg:mt-6">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-md shadow-stone-200/50 border border-stone-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 items-end">
+                {/* Check-In */}
+                <div>
+                  <label className="block text-[10.5px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                    Check-In Date
+                  </label>
+                  <input
+                    type="date"
+                    value={checkIn}
+                    onChange={(e) => setCheckIn(e.target.value)}
+                    className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-stone-300 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:ring-1.5 focus:ring-stone-900 bg-stone-50/50"
+                  />
+                </div>
 
-              {/* Check-Out */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">
-                  Check-Out Date
-                </label>
-                <input
-                  type="date"
-                  value={checkOut}
-                  onChange={(e) => setCheckOut(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-stone-800 text-sm focus:outline-none focus:ring-2 focus:ring-stone-900 bg-stone-50/50"
-                />
-              </div>
+                {/* Check-Out */}
+                <div>
+                  <label className="block text-[10.5px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                    Check-Out Date
+                  </label>
+                  <input
+                    type="date"
+                    value={checkOut}
+                    onChange={(e) => setCheckOut(e.target.value)}
+                    className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-stone-300 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:ring-1.5 focus:ring-stone-900 bg-stone-50/50"
+                  />
+                </div>
 
-              {/* Guests */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">
-                  Total Guests
-                </label>
-                <select
-                  value={guests}
-                  onChange={(e) => setGuests(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-stone-800 text-sm focus:outline-none focus:ring-2 focus:ring-stone-900 bg-stone-50/50"
-                >
-                  <option value="1 Guest">1 Guest</option>
-                  <option value="2 Guests">2 Guests (Couple / Friends)</option>
-                  <option value="3 Guests">3 Guests (Triple Room)</option>
-                  <option value="Family / 4+ Guests">Family / Group (4+ Guests)</option>
-                </select>
-              </div>
+                {/* Guests */}
+                <div>
+                  <label className="block text-[10.5px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                    Total Guests
+                  </label>
+                  <select
+                    value={guests}
+                    onChange={(e) => setGuests(e.target.value)}
+                    className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-stone-300 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:ring-1.5 focus:ring-stone-900 bg-stone-50/50"
+                  >
+                    <option value="1 Guest">1 Guest</option>
+                    <option value="2 Guests">2 Guests (Couple / Friends)</option>
+                    <option value="3 Guests">3 Guests (Triple Room)</option>
+                    <option value="Family / 4+ Guests">Family / Group (4+ Guests)</option>
+                  </select>
+                </div>
 
-              {/* Room Preference */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-stone-500 mb-1.5">
-                  Room Category
-                </label>
-                <select
-                  value={selectedRoom}
-                  onChange={(e) => setSelectedRoom(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-stone-300 text-stone-800 text-sm focus:outline-none focus:ring-2 focus:ring-stone-900 bg-stone-50/50"
-                >
-                  {ROOM_CATEGORIES.map((r) => (
-                    <option key={r.id} value={r.name}>
-                      {r.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                {/* Room Preference */}
+                <div>
+                  <label className="block text-[10.5px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                    Room Category
+                  </label>
+                  <select
+                    value={selectedRoom}
+                    onChange={(e) => setSelectedRoom(e.target.value)}
+                    className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-stone-300 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:ring-1.5 focus:ring-stone-900 bg-stone-50/50"
+                  >
+                    {ROOM_CATEGORIES.map((r) => (
+                      <option key={r.id} value={r.name}>
+                        {r.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              {/* Search / Inquire Button */}
-              <div>
-                <button
-                  onClick={() => handleWhatsAppBooking()}
-                  className="w-full py-3 px-4 rounded-lg bg-stone-900 hover:bg-amber-900 text-white font-semibold text-sm transition shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>Check Availability</span>
-                  <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
+                {/* Search / Inquire Button */}
+                <div>
+                  <button
+                    onClick={() => handleWhatsAppBooking()}
+                    className="w-full h-[36px] sm:h-[38px] px-3 rounded-lg bg-stone-900 hover:bg-amber-900 text-white font-semibold text-xs sm:text-[13px] transition shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span>Check Availability</span>
+                    <svg className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -825,7 +866,7 @@ export default function HomePage() {
 
       {/* Room Showcase Section with H2 Keyword Optimization */}
       <section id="rooms" className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
@@ -929,7 +970,7 @@ export default function HomePage() {
 
       {/* Photo Gallery Section */}
       <section id="gallery" className="py-16 sm:py-20 bg-stone-50/80 border-y border-stone-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
               Visual Tour
@@ -1008,7 +1049,7 @@ export default function HomePage() {
 
       {/* 360° Virtual Vicinity Tour & Live Location Section (White Theme) */}
       <section id="tour360" className="py-12 sm:py-16 bg-stone-50/80 border-b border-stone-200 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-3">
             <div>
               <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-100/70 border border-amber-200 text-amber-900 text-[11px] font-semibold mb-1.5">
@@ -1086,7 +1127,7 @@ export default function HomePage() {
 
       {/* Hotel Amenities Section */}
       <section id="amenities" className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="text-center max-w-xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
               Thoughtful Comforts
@@ -1122,7 +1163,7 @@ export default function HomePage() {
 
       {/* Location & Pilgrimage Vicinity */}
       <section id="location" className="py-16 sm:py-20 bg-stone-50/70 border-t border-stone-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             {/* Vicinity Details */}
             <div className="lg:col-span-6 space-y-6">
@@ -1387,7 +1428,7 @@ export default function HomePage() {
 
       {/* Footer with Local NAP Consistency */}
       <footer className="bg-stone-900 text-stone-400 text-xs border-t border-stone-800 pt-12 pb-24 md:pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-stone-800">
             <div>
               <span className="font-serif text-lg font-bold text-white tracking-wide">
