@@ -8,7 +8,7 @@
 }
 
 @theme inline {
-  --font-serif: var(--font-playfair), Georgia, Cambria, serif;
+  --font-serif: var(--font-heading), var(--font-sans), system-ui, -apple-system, sans-serif;
   --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
   --color-warm-50: #faf8f5;
   --color-warm-100: #f4ede3;
@@ -39,7 +39,7 @@ body {
 }
 
 .font-serif {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-heading), var(--font-sans), system-ui, -apple-system, sans-serif;
 }
 
 /* Butter-smooth interactive touch & click effects */
