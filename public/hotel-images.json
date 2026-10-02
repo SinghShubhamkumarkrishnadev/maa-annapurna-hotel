@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Triple Bed Room with Kitchenette",
+    "fileName": "room-triple-kitchenette.jpg",
+    "path": "/images/room-triple-kitchenette.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 131585
+  },
+  {
+    "id": 2,
+    "title": "Attached Bathroom with Shower and Tiling",
+    "fileName": "bathroom-shower-tiled.jpg",
+    "path": "/images/bathroom-shower-tiled.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 107413
+  },
+  {
+    "id": 3,
+    "title": "Bedroom Window with Curtains and Air Conditioner",
+    "fileName": "room-window-ac.jpg",
+    "path": "/images/room-window-ac.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 146926
+  },
+  {
+    "id": 4,
+    "title": "Bathroom Full View with Western Toilet & Geyser",
+    "fileName": "bathroom-full-view.jpg",
+    "path": "/images/bathroom-full-view.jpg",
+    "width": 738,
+    "height": 1600,
+    "sizeBytes": 112416
+  },
+  {
+    "id": 5,
+    "title": "Bathroom Wash Basin and Glass Shelf Mirror",
+    "fileName": "bathroom-wash-basin.jpg",
+    "path": "/images/bathroom-wash-basin.jpg",
+    "width": 738,
+    "height": 1600,
+    "sizeBytes": 124189
+  },
+  {
+    "id": 6,
+    "title": "Deluxe Bedroom with Dressing Table and AC",
+    "fileName": "deluxe-room-dressing-table.jpg",
+    "path": "/images/deluxe-room-dressing-table.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 202290
+  },
+  {
+    "id": 7,
+    "title": "Twin Beds with Wooden Accent Paneling",
+    "fileName": "room-twin-wooden-paneling.jpg",
+    "path": "/images/room-twin-wooden-paneling.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 150889
+  },
+  {
+    "id": 8,
+    "title": "Guest Room with Bedside Table & Air Conditioner",
+    "fileName": "room-bedside-table-ac.jpg",
+    "path": "/images/room-bedside-table-ac.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 139111
+  },
+  {
+    "id": 9,
+    "title": "Double Single-Bed Room Layout with Floor Tiles",
+    "fileName": "room-double-single-beds.jpg",
+    "path": "/images/room-double-single-beds.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 147064
+  },
+  {
+    "id": 10,
+    "title": "Spacious Family Room with Blue Bedding",
+    "fileName": "family-suite-blue-linens.jpg",
+    "path": "/images/family-suite-blue-linens.jpg",
+    "width": 1600,
+    "height": 738,
+    "sizeBytes": 160881
+  }
+]
