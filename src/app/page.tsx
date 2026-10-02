@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import PanoramicViewer360 from "@/components/PanoramicViewer360";
 
 // Image dataset from the property with SEO-optimized alt and captions
 const HOTEL_IMAGES = [
@@ -104,6 +105,16 @@ const HOTEL_IMAGES = [
     height: 1600,
     alt: "Wash basin with glass shelf and mirror in bathroom at Maa Annapurna Hotel Bodhgaya",
     caption: "Clean wash basin with glass shelf, toiletries space, and mirror",
+  },
+  {
+    id: 11,
+    title: "Maa Annapurna House Building Exterior - Maharani Road Bodhgaya",
+    category: "rooms",
+    src: "/images/hotel-building-facade.jpg",
+    width: 246,
+    height: 428,
+    alt: "Exterior facade of Maa Annapurna House on Maharani Road Bodhgaya with balconies and entrance gate",
+    caption: "5-Story modern hotel building with front entrance gate, balconies, and rooftop terrace",
   },
 ];
 
@@ -485,6 +496,10 @@ export default function HomePage() {
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
             <a href="#rooms" className="hover:text-stone-900 transition">Rooms & Suites</a>
+            <a href="#tour360" className="text-amber-800 font-semibold hover:text-stone-900 transition flex items-center gap-1">
+              <span>360° View</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+            </a>
             <a href="#gallery" className="hover:text-stone-900 transition">Photo Tour</a>
             <a href="#amenities" className="hover:text-stone-900 transition">Amenities</a>
             <a href="#location" className="hover:text-stone-900 transition">Location & Temples</a>
@@ -542,6 +557,14 @@ export default function HomePage() {
               className="block py-2 text-stone-800 font-medium hover:text-amber-800"
             >
               Rooms & Family Suites
+            </a>
+            <a
+              href="#tour360"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-amber-900 font-semibold hover:text-amber-800 flex items-center justify-between"
+            >
+              <span>360° Panoramic Tour</span>
+              <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">New</span>
             </a>
             <a
               href="#gallery"
@@ -979,6 +1002,84 @@ export default function HomePage() {
                 </div>
               </figure>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 360° Virtual Vicinity Tour & Live Location Section (White Theme) */}
+      <section id="tour360" className="py-12 sm:py-16 bg-stone-50/80 border-b border-stone-200 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-3">
+            <div>
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-amber-100/70 border border-amber-200 text-amber-900 text-[11px] font-semibold mb-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse"></span>
+                <span>360° Rooftop Terrace Experience</span>
+              </div>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-stone-900">
+                Stand On Our Rooftop Terrace
+              </h2>
+              <p className="text-stone-600 text-xs sm:text-sm mt-1 max-w-xl">
+                Scroll around 360° directly from our open hotel terrace overlooking Bodhgaya and the sacred Mahabodhi Temple spire in the near distance.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href="https://share.google/u28zYVIFglv8XWTyZ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-white bg-stone-900 hover:bg-amber-900 px-4 py-2 rounded-full transition shadow-xs flex items-center gap-1.5"
+              >
+                <span>Open in Google Maps</span>
+                <svg className="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Interactive 360 Panoramic Viewer Component */}
+          <div className="bg-white p-2 sm:p-3 rounded-3xl border border-stone-200 shadow-sm">
+            <PanoramicViewer360 />
+          </div>
+
+          {/* Key Distance & Connectivity Badges */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-8">
+            <div className="p-4 rounded-2xl bg-white border border-stone-200 shadow-2xs">
+              <div className="flex items-center gap-2 text-stone-900 text-sm font-bold">
+                <span className="text-lg">📍</span>
+                <span>Maa Annapurna Hotel</span>
+              </div>
+              <p className="text-xs text-stone-600 mt-1">Sujata Rd, opp. Nagina Palace</p>
+              <span className="text-[11px] text-emerald-700 font-semibold block mt-1.5">You Are Here • Quiet Stay</span>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-stone-200 shadow-2xs">
+              <div className="flex items-center gap-2 text-stone-900 text-sm font-bold">
+                <span className="text-lg">🛕</span>
+                <span>Mahabodhi Temple</span>
+              </div>
+              <p className="text-xs text-stone-600 mt-1">UNESCO World Heritage Site</p>
+              <span className="text-[11px] text-amber-800 font-semibold block mt-1.5">~2.2 km • 5-7 mins drive</span>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-stone-200 shadow-2xs">
+              <div className="flex items-center gap-2 text-stone-900 text-sm font-bold">
+                <span className="text-lg">☸️</span>
+                <span>Great Buddha Statue</span>
+              </div>
+              <p className="text-xs text-stone-600 mt-1">80ft Daijokyo Buddhist Statue</p>
+              <span className="text-[11px] text-amber-800 font-semibold block mt-1.5">~2.5 km • 6 mins drive</span>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-stone-200 shadow-2xs">
+              <div className="flex items-center gap-2 text-stone-900 text-sm font-bold">
+                <span className="text-lg">🛺</span>
+                <span>Local Transport</span>
+              </div>
+              <p className="text-xs text-stone-600 mt-1">E-Rickshaws & Taxis 24/7</p>
+              <span className="text-[11px] text-emerald-700 font-semibold block mt-1.5">Available outside hotel</span>
+            </div>
           </div>
         </div>
       </section>
