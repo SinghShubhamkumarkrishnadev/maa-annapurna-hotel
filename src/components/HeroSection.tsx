@@ -72,8 +72,8 @@ export default function HeroSection({
               </span>
             </div>
 
-            {/* Actions */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-1">
+            {/* Actions (Hidden on mobile as sticky bottom bar provides quick actions) */}
+            <div className="hidden sm:flex flex-wrap items-center gap-2.5 pt-1">
               <button
                 onClick={() => onOpenEnquiry("Deluxe AC Double Room")}
                 className="h-10 px-5 sm:px-5.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs sm:text-[13px] butter-touch shadow-xs hover:shadow flex items-center justify-center gap-2 cursor-pointer"
