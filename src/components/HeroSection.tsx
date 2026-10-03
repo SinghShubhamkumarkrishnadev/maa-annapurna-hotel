@@ -17,13 +17,13 @@ export default function HeroSection({
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid md:grid-cols-12 gap-2 sm:gap-3 md:gap-6 lg:gap-10 xl:gap-12 items-center">
           
-          {/* Mobile Only Top Image (Hidden on Tablet & Desktop) */}
+          {/* Mobile Only Top Image (Hidden on Tablet & Desktop) with Calm Green Grass Lawn */}
           <div className="md:hidden flex items-center justify-center p-0 select-none w-full">
             <Image
-              src="/images/buddha-monasteries-mobile.webp"
-              alt="Sacred 80 Feet Great Buddha Statue flanked by Bodhgaya Monasteries"
-              width={1356}
-              height={491}
+              src="/images/buddha-monasteries-grass-mobile.webp"
+              alt="Sacred 80 Feet Great Buddha Statue flanked by Bodhgaya Monasteries with calm green grass lawn"
+              width={1376}
+              height={635}
               priority
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, 600px"
               className="w-full h-auto max-w-[480px] sm:max-w-[580px] object-contain pointer-events-none drop-shadow-xs"
