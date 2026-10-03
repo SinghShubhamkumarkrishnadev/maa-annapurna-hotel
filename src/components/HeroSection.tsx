@@ -96,16 +96,16 @@ export default function HeroSection({
             </div>
           </ScrollReveal>
 
-          {/* Desktop Right Column: Transparent Mahabodhi & 80 Feet Buddha Artwork */}
+          {/* Desktop Right Column: Transparent Mahabodhi Temple, 80ft Great Buddha & Monasteries with Calm Green Grass Lawn */}
           <ScrollReveal variant="fade" delayMs={80} className="hidden lg:flex lg:col-span-6 items-center justify-center relative select-none">
             <Image
               src="/images/mahabodhi-buddha-transparent.webp"
-              alt="Sacred Mahabodhi Temple spire and 80 Feet Great Buddha statue in Bodhgaya"
+              alt="Sacred Mahabodhi Temple, 80 Feet Great Buddha statue, and monasteries in Bodhgaya"
               width={1200}
               height={896}
               priority
               sizes="(max-width: 1024px) 50vw, 45vw"
-              className="w-full h-auto max-w-[540px] xl:max-w-[580px] object-contain pointer-events-none drop-shadow-xs"
+              className="w-full h-auto max-w-[540px] xl:max-w-[600px] object-contain pointer-events-none drop-shadow-xs"
             />
           </ScrollReveal>
 
