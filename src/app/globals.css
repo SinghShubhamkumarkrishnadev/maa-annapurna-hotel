@@ -116,9 +116,67 @@ button, a, input, select {
 @media (prefers-reduced-motion: reduce) {
   .reveal-init,
   .reveal-fade-init,
-  .reveal-scale-init {
+  .reveal-scale-init,
+  .cloud-layer-1,
+  .cloud-layer-2,
+  .cloud-layer-3 {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+    animation: none !important;
   }
+}
+
+/* Realistic Volumetric Cloud Drift (Hardware Accelerated Right-to-Left) */
+@keyframes cloud-drift-rtl-1 {
+  0% {
+    transform: translate3d(105vw, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0vw, -8px, 0) scale(1.03);
+  }
+  100% {
+    transform: translate3d(-105vw, 0, 0) scale(1);
+  }
+}
+
+@keyframes cloud-drift-rtl-2 {
+  0% {
+    transform: translate3d(115vw, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(5vw, 10px, 0) scale(0.98);
+  }
+  100% {
+    transform: translate3d(-115vw, 0, 0) scale(1.05);
+  }
+}
+
+@keyframes cloud-drift-rtl-3 {
+  0% {
+    transform: translate3d(120vw, 0, 0) scale(0.95);
+  }
+  50% {
+    transform: translate3d(10vw, -12px, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(-120vw, 0, 0) scale(0.95);
+  }
+}
+
+.cloud-layer-1 {
+  will-change: transform;
+  animation: cloud-drift-rtl-1 65s linear infinite;
+}
+
+.cloud-layer-2 {
+  will-change: transform;
+  animation: cloud-drift-rtl-2 80s linear infinite;
+  animation-delay: -32s;
+}
+
+.cloud-layer-3 {
+  will-change: transform;
+  animation: cloud-drift-rtl-3 95s linear infinite;
+  animation-delay: -58s;
 }

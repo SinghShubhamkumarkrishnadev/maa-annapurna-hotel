@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import ScrollReveal from "./ScrollReveal";
+import SkyClouds from "./SkyClouds";
 
 interface HeroSectionProps {
   onOpenEnquiry: (roomTitle: string) => void;
@@ -13,8 +14,11 @@ export default function HeroSection({
   onWhatsAppBooking,
 }: HeroSectionProps) {
   return (
-    <section className="relative bg-white border-b border-stone-200/90 pt-3 pb-6 sm:py-7 lg:py-10">
-      <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+    <section className="relative overflow-hidden bg-white border-b border-stone-200/90 pt-3 pb-6 sm:py-7 lg:py-10">
+      {/* Living Atmospheric Snowy-Blue Clouds Drifting Right to Left */}
+      <SkyClouds />
+
+      <div className="relative z-10 w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="grid md:grid-cols-12 gap-2 sm:gap-3 md:gap-6 lg:gap-10 xl:gap-12 items-center">
           
           {/* Mobile Only Top Image (Hidden on Tablet & Desktop) with Calm Green Grass Lawn */}
