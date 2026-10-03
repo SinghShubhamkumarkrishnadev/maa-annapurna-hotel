@@ -4,20 +4,19 @@ import Image from "next/image";
 interface HeroSectionProps {
   onOpenEnquiry: (roomTitle: string) => void;
   onWhatsAppBooking: (roomTitle?: string) => void;
-  onOpenLightbox: (index: number) => void;
+  onOpenLightbox?: (index: number) => void;
 }
 
 export default function HeroSection({
   onOpenEnquiry,
   onWhatsAppBooking,
-  onOpenLightbox,
 }: HeroSectionProps) {
   return (
-    <section className="relative bg-gradient-to-b from-stone-50/80 via-white to-stone-50/40 border-b border-stone-200/90 py-5 sm:py-6 lg:py-6 xl:py-7">
+    <section className="relative bg-white border-b border-stone-200/90 py-6 sm:py-8 lg:py-10">
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-10 items-center">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
           {/* Left Content Column */}
-          <div className="lg:col-span-6 space-y-3.5 sm:space-y-4">
+          <div className="lg:col-span-6 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="hidden sm:inline">24/7 Open • Airport &amp; Station Pick &amp; Drop • Tours &amp; Travels • 5 Mins to Mahabodhi</span>
@@ -25,11 +24,11 @@ export default function HeroSection({
             </div>
 
             {/* Single targeted H1 */}
-            <h1 className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] xl:text-[2.35rem] font-bold tracking-tight text-stone-900 leading-[1.2]">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.45rem] font-bold tracking-tight text-stone-900 leading-[1.2]">
               Peaceful Hotel &amp; Home Stay in Bodhgaya Near Mahabodhi Temple
             </h1>
 
-            <p className="hidden sm:block text-stone-600 text-xs sm:text-sm lg:text-[14px] leading-relaxed max-w-xl">
+            <p className="hidden sm:block text-stone-600 text-xs sm:text-sm lg:text-[14.5px] leading-relaxed max-w-xl">
               Authentic pilgrimage hospitality at Maa Annapurna Home Stay. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette options, 24/7 front desk, and prompt airport/station pick &amp; drop service.
             </p>
             <p className="sm:hidden text-stone-600 text-xs leading-relaxed">
@@ -38,28 +37,28 @@ export default function HeroSection({
 
             {/* Highlights Pill Row */}
             <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs text-stone-700 font-medium">
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200/90 shadow-2xs">
                 <span className="text-emerald-600 font-bold">✓</span> 24 Hours Open (24/7)
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200/90 shadow-2xs">
                 <span className="text-emerald-600 font-bold">✓</span> Pick &amp; Drop Service
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200/90 shadow-2xs">
                 <span className="text-emerald-600 font-bold">✓</span> Tours &amp; Travels Desk
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200/90 shadow-2xs">
                 <span className="text-emerald-600 font-bold">✓</span> Split AC in All Rooms
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200/90 shadow-2xs">
                 <span className="text-emerald-600 font-bold">✓</span> 24/7 Geyser Hot Water
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-stone-200/90 shadow-2xs">
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200/90 shadow-2xs">
                 <span className="text-emerald-600 font-bold">✓</span> Kitchenette Suites
               </span>
             </div>
 
             {/* Actions */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
               <button
                 onClick={() => onOpenEnquiry("Deluxe AC Double Room")}
                 className="h-10 px-5 sm:px-5.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs sm:text-[13px] butter-touch shadow-xs hover:shadow flex items-center justify-center gap-2 cursor-pointer"
@@ -82,72 +81,17 @@ export default function HeroSection({
             </div>
           </div>
 
-          {/* Right Photo Showcase */}
-          <div className="lg:col-span-6 h-[250px] sm:h-[280px] lg:h-[320px] xl:h-[340px]">
-            <div className="grid grid-cols-12 gap-2.5 sm:gap-3 h-full">
-              {/* Large Featured Photo */}
-              <div
-                onClick={() => onOpenLightbox(0)}
-                className="col-span-7 relative h-full rounded-2xl overflow-hidden shadow-sm hover:shadow-md group cursor-pointer border border-stone-200/80 bg-stone-100"
-              >
-                <Image
-                  src="/images/room-triple-kitchenette.jpg"
-                  alt="Triple Bed Room with Kitchenette at Maa Annapurna Home Stay Bodhgaya"
-                  fill
-                  sizes="(max-width: 768px) 60vw, 30vw"
-                  className="object-cover group-hover:scale-103 transition duration-500"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/75 via-stone-950/20 to-transparent flex items-end p-3 sm:p-4">
-                  <div className="text-white">
-                    <span className="text-[10px] font-semibold tracking-wider uppercase bg-stone-900/80 backdrop-blur-xs px-2 py-0.5 rounded">
-                      Triple Room + Kitchenette
-                    </span>
-                    <p className="hidden sm:block text-[11px] sm:text-xs text-stone-200 mt-1 font-medium line-clamp-1">
-                      Spacious layout with split AC &amp; private bathroom
-                    </p>
-                  </div>
-                </div>
-                <div className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-xs text-stone-800 text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-2xs">
-                  HD Photo
-                </div>
-              </div>
-
-              {/* Right Stack of Two Proportional Supporting Images */}
-              <div className="col-span-5 flex flex-col gap-2.5 sm:gap-3 h-full">
-                <div
-                  onClick={() => onOpenLightbox(1)}
-                  className="relative flex-1 rounded-xl overflow-hidden shadow-2xs hover:shadow-xs group cursor-pointer border border-stone-200/80 bg-stone-100"
-                >
-                  <Image
-                    src="/images/deluxe-room-dressing-table.jpg"
-                    alt="Deluxe AC Bedroom at Maa Annapurna Hotel Bodhgaya"
-                    fill
-                    sizes="(max-width: 768px) 40vw, 20vw"
-                    className="object-cover group-hover:scale-103 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 to-transparent flex items-end p-2.5">
-                    <span className="text-[11px] font-semibold text-white">Deluxe AC Room</span>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => onOpenLightbox(7)}
-                  className="relative flex-1 rounded-xl overflow-hidden shadow-2xs hover:shadow-xs group cursor-pointer border border-stone-200/80 bg-stone-100"
-                >
-                  <Image
-                    src="/images/bathroom-shower-tiled.jpg"
-                    alt="Clean Attached Bathroom with Geyser at Hotel in Bodhgaya"
-                    fill
-                    sizes="(max-width: 768px) 40vw, 20vw"
-                    className="object-cover group-hover:scale-103 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 to-transparent flex items-end p-2.5">
-                    <span className="text-[11px] font-semibold text-white">Attached Modern Bath</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Right Column: Seamless Transparent Mahabodhi Temple & 80 Feet Buddha Artwork */}
+          <div className="lg:col-span-6 flex items-center justify-center relative select-none">
+            <Image
+              src="/images/mahabodhi-buddha-transparent.webp"
+              alt="Sacred Mahabodhi Temple spire and 80 Feet Great Buddha statue in Bodhgaya"
+              width={1200}
+              height={896}
+              priority
+              sizes="(max-width: 640px) 94vw, (max-width: 1024px) 50vw, 45vw"
+              className="w-full h-auto max-w-[420px] sm:max-w-[480px] lg:max-w-[540px] xl:max-w-[580px] object-contain pointer-events-none drop-shadow-xs"
+            />
           </div>
         </div>
       </div>
