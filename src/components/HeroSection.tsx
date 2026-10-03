@@ -14,7 +14,7 @@ export default function HeroSection({
   onWhatsAppBooking,
 }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden bg-white border-b border-stone-200/90 pt-3 pb-6 sm:py-7 lg:py-10">
+    <section className="relative overflow-hidden bg-white border-b border-stone-200/90 pt-7 pb-6 sm:py-7 lg:py-10">
       {/* Living Atmospheric Snowy-Blue Clouds Drifting Right to Left */}
       <SkyClouds />
 
@@ -22,7 +22,7 @@ export default function HeroSection({
         <div className="grid md:grid-cols-12 gap-2 sm:gap-3 md:gap-6 lg:gap-10 xl:gap-12 items-center">
           
           {/* Mobile Only Top Image (Hidden on Tablet & Desktop) with Calm Green Grass Lawn */}
-          <div className="md:hidden flex items-center justify-center p-0 select-none w-full">
+          <div className="md:hidden flex items-center justify-center pt-4 pb-1 sm:p-0 select-none w-full">
             <Image
               src="/images/buddha-monasteries-grass-mobile.webp"
               alt="Sacred 80 Feet Great Buddha Statue flanked by Bodhgaya Monasteries with calm green grass lawn"
