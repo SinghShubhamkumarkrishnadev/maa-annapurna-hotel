@@ -78,25 +78,6 @@ button, a, input, select {
   padding-bottom: calc(0.625rem + env(safe-area-inset-bottom, 0px));
 }
 
-/* Infinite Marquee with hardware acceleration */
-@keyframes marquee-infinite {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: marquee-infinite var(--marquee-duration, 30s) linear infinite;
-  animation-direction: var(--marquee-direction, normal);
-  animation-play-state: var(--marquee-play-state, running);
-}
-
 /* Super-smooth Reveal on Scroll Animations (GPU Accelerated) */
 .reveal-init {
   opacity: 0;

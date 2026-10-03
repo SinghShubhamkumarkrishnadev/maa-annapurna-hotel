@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import TopBanner from "./TopBanner";
 import MobileMenu from "./MobileMenu";
 
 interface HeaderProps {
@@ -12,7 +11,6 @@ export default function Header({ onOpenEnquiry }: HeaderProps) {
 
   return (
     <>
-      <TopBanner />
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/90 shadow-2xs">
         <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-16 lg:h-[68px] flex items-center justify-between gap-4 lg:gap-6">
           {/* Logo with Emblem Icon & Generous Breathing Space */}
