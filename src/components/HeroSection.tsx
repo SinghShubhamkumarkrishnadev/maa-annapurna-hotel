@@ -12,25 +12,25 @@ export default function HeroSection({
   onWhatsAppBooking,
 }: HeroSectionProps) {
   return (
-    <section className="relative bg-white border-b border-stone-200/90 py-5 sm:py-7 lg:py-10">
+    <section className="relative bg-white border-b border-stone-200/90 pt-3 pb-6 sm:py-7 lg:py-10">
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-2 sm:gap-3 lg:gap-10 xl:gap-12 items-center">
           
-          {/* Mobile & Tablet Top Image: 80ft Great Buddha Statue flanked by Bodhgaya Monasteries */}
-          <div className="lg:hidden flex items-center justify-center pt-1 pb-2 select-none px-1">
+          {/* Mobile & Tablet Top Image: Large Full-Width Buddha + Monasteries Skyline */}
+          <div className="lg:hidden flex items-center justify-center p-0 select-none w-full">
             <Image
               src="/images/buddha-monasteries-mobile.webp"
               alt="Sacred 80 Feet Great Buddha Statue flanked by Bodhgaya Monasteries"
-              width={1376}
-              height={768}
+              width={1356}
+              height={491}
               priority
-              sizes="(max-width: 640px) 96vw, 500px"
-              className="w-full h-auto max-w-[360px] sm:max-w-[440px] object-contain pointer-events-none drop-shadow-xs"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 600px"
+              className="w-full h-auto max-w-[480px] sm:max-w-[580px] object-contain pointer-events-none drop-shadow-xs"
             />
           </div>
 
-          {/* Content Column: Texts & Actions */}
-          <div className="lg:col-span-6 space-y-4">
+          {/* Content Column: Texts & Actions starting directly below image with small space */}
+          <div className="lg:col-span-6 space-y-3.5 sm:space-y-4 mt-1 sm:mt-2 lg:mt-0">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="hidden sm:inline">24/7 Open • Airport &amp; Station Pick &amp; Drop • Tours &amp; Travels • 5 Mins to Mahabodhi</span>
