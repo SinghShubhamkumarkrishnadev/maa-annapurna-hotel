@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { RoomItem, PhotoItem } from "@/lib/data";
+import { RoomItem, PhotoItem, ReviewItem } from "@/lib/data";
 
-export type { RoomItem, PhotoItem };
+export type { RoomItem, PhotoItem, ReviewItem };
 
 export interface AmenityItem {
   icon: ReactNode;

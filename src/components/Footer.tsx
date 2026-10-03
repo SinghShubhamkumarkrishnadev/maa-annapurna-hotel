@@ -36,6 +36,7 @@ export default function Footer() {
               <a href="#gallery" className="hover:text-white transition">Photo Tour</a>
               <a href="#amenities" className="hover:text-white transition">Hotel Amenities</a>
               <a href="#location" className="hover:text-white transition">Temple Distances</a>
+              <a href="#reviews" className="hover:text-white transition">Guest Reviews</a>
               <a href="#faq" className="hover:text-white transition">Travel FAQs</a>
               <a href="#contact" className="hover:text-white transition">Direct Booking</a>
             </div>

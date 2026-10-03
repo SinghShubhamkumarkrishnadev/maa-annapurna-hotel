@@ -1,0 +1,68 @@
+[
+  {
+    "id": "rev-1",
+    "name": "Rajesh & Sunita Sharma",
+    "rating": 5,
+    "comment": "Stayed here for 3 days during our Pitru Paksha and Mahabodhi darshan. Mukesh ji (the host) is exceptionally helpful and courteous. The room AC was powerful, bathrooms were spotless with 24/7 hot water geyser, and the peaceful location away from noisy traffic made our trip truly memorable.",
+    "avatar": "family",
+    "date": "September 2026",
+    "stayType": "Family Pilgrimage",
+    "verified": true,
+    "createdAt": "2026-09-28T10:15:00.000Z"
+  },
+  {
+    "id": "rev-2",
+    "name": "Ven. Tenzin & Pilgrimage Group",
+    "rating": 5,
+    "comment": "Extremely clean, quiet and spiritually peaceful home stay in Bodhgaya. Only 5 minutes by auto to the sacred Mahabodhi Temple. The kitchenette facility in our room was a blessing for boiling herbal tea. Highly recommend for all international monks and pilgrims.",
+    "avatar": "zen",
+    "date": "August 2026",
+    "stayType": "Pilgrimage Group",
+    "verified": true,
+    "createdAt": "2026-08-14T14:30:00.000Z"
+  },
+  {
+    "id": "rev-3",
+    "name": "Dr. Ananya Sen",
+    "rating": 5,
+    "comment": "Outstanding hospitality! They arranged safe 24/7 pick and drop from Gaya Junction late at night without any delay. Beds are comfortable, Wi-Fi is blazing fast, and the host treats you like family. One of the best budget AC hotels in Bodhgaya.",
+    "avatar": "traveler",
+    "date": "July 2026",
+    "stayType": "Solo Traveler",
+    "verified": true,
+    "createdAt": "2026-07-20T18:45:00.000Z"
+  },
+  {
+    "id": "rev-4",
+    "name": "Michael & Sarah Jenkins",
+    "rating": 5,
+    "comment": "Wonderful stay in Bodhgaya! Spotless rooms, super attentive host, and very quiet at night. They arranged an English-speaking driver for our Rajgir and Nalanda day tours. Genuine 5-star experience with great value.",
+    "avatar": "peace",
+    "date": "June 2026",
+    "stayType": "International Couple",
+    "verified": true,
+    "createdAt": "2026-06-12T09:20:00.000Z"
+  },
+  {
+    "id": "rev-5",
+    "name": "Pradeep Kumar & Parents",
+    "rating": 5,
+    "comment": "Very safe and comfortable for elderly parents. Clean Western washrooms with grab rails, hot water always running, and peaceful ambiance. Mukesh ji personally assisted with local conveyance for morning prayers at the Temple.",
+    "avatar": "namaste",
+    "date": "May 2026",
+    "stayType": "Family Stay",
+    "verified": true,
+    "createdAt": "2026-05-04T16:10:00.000Z"
+  },
+  {
+    "id": "rev-6",
+    "name": "Amitav Roy",
+    "rating": 5,
+    "comment": "Great value for money hotel near Mahabodhi. Fresh crisp linens, powerful AC cooling in the heat, and spacious double room. Direct booking via WhatsApp was seamless with zero commission fees.",
+    "avatar": "star",
+    "date": "April 2026",
+    "stayType": "Business & Spiritual Visit",
+    "verified": true,
+    "createdAt": "2026-04-18T11:00:00.000Z"
+  }
+]

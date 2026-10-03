@@ -8,6 +8,7 @@ import GallerySection from "@/components/GallerySection";
 import Tour360Section from "@/components/Tour360Section";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import LocationSection from "@/components/LocationSection";
+import ReviewSection from "@/components/ReviewSection";
 import FaqSection from "@/components/FaqSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -164,6 +165,9 @@ export default function HomePage() {
           nearbyPlaces={NEARBY_PLACES}
           onOpenEnquiry={openRoomEnquiry}
         />
+
+        {/* Guest Reviews & Ratings Section */}
+        <ReviewSection />
 
         {/* Frequently Asked Questions Section */}
         <FaqSection faqs={FAQS} />

@@ -48,6 +48,14 @@ export default function MobileMenu({ isOpen, onClose, onOpenEnquiry }: MobileMen
         Location &amp; Vicinity
       </a>
       <a
+        href="#reviews"
+        onClick={onClose}
+        className="py-2.5 px-3 rounded-xl text-amber-950 text-sm font-semibold hover:bg-amber-50/70 flex items-center justify-between butter-touch"
+      >
+        <span>Guest Reviews &amp; Ratings</span>
+        <span className="text-[10px] bg-amber-100 text-amber-900 px-2 py-0.5 rounded-full font-bold">4.9 ★</span>
+      </a>
+      <a
         href="#faq"
         onClick={onClose}
         className="block py-2.5 px-3 rounded-xl text-stone-800 text-sm font-medium hover:text-amber-800 hover:bg-stone-50 butter-touch"

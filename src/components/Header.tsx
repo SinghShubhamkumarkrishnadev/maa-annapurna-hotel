@@ -75,6 +75,12 @@ export default function Header({ onOpenEnquiry }: HeaderProps) {
               Location
             </a>
             <a
+              href="#reviews"
+              className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
+            >
+              Reviews
+            </a>
+            <a
               href="#faq"
               className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center hidden xl:inline-flex"
             >

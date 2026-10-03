@@ -36,8 +36,21 @@ export interface PhotoItem {
   caption: string;
 }
 
+export interface ReviewItem {
+  id: string;
+  name: string;
+  rating: number;
+  comment?: string;
+  avatar: string;
+  date: string;
+  stayType?: string;
+  verified?: boolean;
+  createdAt: string;
+}
+
 const ROOMS_FILE_PATH = path.join(process.cwd(), "src", "data", "rooms.json");
 const PHOTOS_FILE_PATH = path.join(process.cwd(), "src", "data", "photos.json");
+const REVIEWS_FILE_PATH = path.join(process.cwd(), "src", "data", "reviews.json");
 
 export async function getRooms(): Promise<RoomItem[]> {
   try {
@@ -70,3 +83,20 @@ export async function savePhotos(photos: PhotoItem[]): Promise<void> {
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(PHOTOS_FILE_PATH, JSON.stringify(photos, null, 2), "utf-8");
 }
+
+export async function getReviews(): Promise<ReviewItem[]> {
+  try {
+    const raw = await fs.readFile(REVIEWS_FILE_PATH, "utf-8");
+    return JSON.parse(raw);
+  } catch (error) {
+    console.error("Error reading reviews.json, using empty array fallback:", error);
+    return [];
+  }
+}
+
+export async function saveReviews(reviews: ReviewItem[]): Promise<void> {
+  const dir = path.dirname(REVIEWS_FILE_PATH);
+  await fs.mkdir(dir, { recursive: true });
+  await fs.writeFile(REVIEWS_FILE_PATH, JSON.stringify(reviews, null, 2), "utf-8");
+}
+
