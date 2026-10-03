@@ -23,7 +23,7 @@ export default function InstallAppModal() {
       });
     }
 
-    // 2. Check if already installed in standalone mode
+    // 2. Check if already installed and running in standalone mode
     const isStandalone =
       typeof window !== "undefined" &&
       (window.matchMedia("(display-mode: standalone)").matches ||
@@ -32,6 +32,12 @@ export default function InstallAppModal() {
     if (isStandalone) {
       setIsInstalled(true);
       return;
+    }
+
+    // Clear any previous persistent dismissal block so popup always appears on each refresh/reload
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("maa_install_dismissed_until");
+      localStorage.removeItem("maa_app_installed");
     }
 
     // 3. Detect iOS device
@@ -48,31 +54,18 @@ export default function InstallAppModal() {
     const handleAppInstalled = () => {
       setIsInstalled(true);
       setIsOpen(false);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("maa_app_installed", "true");
-      }
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleAppInstalled);
 
-    // 5. Open popup automatically with a smooth entrance delay if not dismissed recently
-    const dismissedUntil = localStorage.getItem("maa_install_dismissed_until");
-    const wasAlreadyInstalled = localStorage.getItem("maa_app_installed");
-
-    if (!wasAlreadyInstalled && (!dismissedUntil || Number(dismissedUntil) < Date.now())) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 1500); // 1.5 seconds after page loads
-
-      return () => {
-        clearTimeout(timer);
-        window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-        window.removeEventListener("appinstalled", handleAppInstalled);
-      };
-    }
+    // 5. Open popup on each refresh or hard reload after a smooth entrance delay
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, 1200);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
       window.removeEventListener("appinstalled", handleAppInstalled);
     };
@@ -80,13 +73,6 @@ export default function InstallAppModal() {
 
   const handleDismiss = () => {
     setIsOpen(false);
-    // Dismiss for 2 days
-    if (typeof window !== "undefined") {
-      localStorage.setItem(
-        "maa_install_dismissed_until",
-        (Date.now() + 2 * 24 * 60 * 60 * 1000).toString()
-      );
-    }
   };
 
   const handleInstallClick = async () => {
