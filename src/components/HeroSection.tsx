@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import ScrollReveal from "./ScrollReveal";
 
 interface HeroSectionProps {
   onOpenEnquiry: (roomTitle: string) => void;
@@ -30,7 +31,7 @@ export default function HeroSection({
           </div>
 
           {/* Content Column: Texts & Actions starting directly below image with small space */}
-          <div className="lg:col-span-6 space-y-3.5 sm:space-y-4 mt-1 sm:mt-2 lg:mt-0">
+          <ScrollReveal variant="fade" delayMs={0} className="lg:col-span-6 space-y-3.5 sm:space-y-4 mt-1 sm:mt-2 lg:mt-0">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="hidden sm:inline">24/7 Open • Airport &amp; Station Pick &amp; Drop • Tours &amp; Travels • 5 Mins to Mahabodhi</span>
@@ -93,10 +94,10 @@ export default function HeroSection({
                 <span>WhatsApp Inquiry</span>
               </button>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Desktop Right Column: Transparent Mahabodhi & 80 Feet Buddha Artwork */}
-          <div className="hidden lg:flex lg:col-span-6 items-center justify-center relative select-none">
+          <ScrollReveal variant="fade" delayMs={80} className="hidden lg:flex lg:col-span-6 items-center justify-center relative select-none">
             <Image
               src="/images/mahabodhi-buddha-transparent.webp"
               alt="Sacred Mahabodhi Temple spire and 80 Feet Great Buddha statue in Bodhgaya"
@@ -106,7 +107,7 @@ export default function HeroSection({
               sizes="(max-width: 1024px) 50vw, 45vw"
               className="w-full h-auto max-w-[540px] xl:max-w-[580px] object-contain pointer-events-none drop-shadow-xs"
             />
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>

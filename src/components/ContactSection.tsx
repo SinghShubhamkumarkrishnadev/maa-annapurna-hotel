@@ -1,5 +1,6 @@
 import React from "react";
 import { RoomItem, BookingDetails } from "@/types/hotel";
+import ScrollReveal from "./ScrollReveal";
 
 interface ContactSectionProps {
   rooms: RoomItem[];
@@ -19,7 +20,8 @@ export default function ContactSection({
   return (
     <section id="contact" className="py-12 sm:py-20 bg-stone-50/70 border-t border-stone-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl sm:rounded-3xl border border-stone-200 p-5 sm:p-10 shadow-sm">
+        <ScrollReveal variant="scale">
+          <div className="bg-white rounded-2xl sm:rounded-3xl border border-stone-200 p-5 sm:p-10 shadow-sm">
           <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
               Direct Booking Enquiry
@@ -148,6 +150,7 @@ export default function ContactSection({
             </a>
           </div>
         </div>
+        </ScrollReveal>
       </div>
     </section>
   );

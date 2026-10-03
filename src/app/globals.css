@@ -97,5 +97,47 @@ button, a, input, select {
   animation-play-state: var(--marquee-play-state, running);
 }
 
+/* Super-smooth Reveal on Scroll Animations (GPU Accelerated) */
+.reveal-init {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
 
+.reveal-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
 
+.reveal-fade-init {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.reveal-fade-in {
+  opacity: 1;
+}
+
+.reveal-scale-init {
+  opacity: 0;
+  transform: scale(0.96) translate3d(0, 20px, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale-in {
+  opacity: 1;
+  transform: scale(1) translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init,
+  .reveal-fade-init,
+  .reveal-scale-init {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
