@@ -50,13 +50,6 @@ export default function Header({ onOpenEnquiry }: HeaderProps) {
               Rooms &amp; Suites
             </a>
             <a
-              href="#tour360"
-              className="px-3 py-1.5 rounded-full text-amber-900 font-semibold hover:bg-amber-50/80 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
-            >
-              <span>360° View</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0"></span>
-            </a>
-            <a
               href="#gallery"
               className="px-3 py-1.5 rounded-full hover:text-stone-950 hover:bg-stone-100/70 transition-colors whitespace-nowrap shrink-0 inline-flex items-center"
             >

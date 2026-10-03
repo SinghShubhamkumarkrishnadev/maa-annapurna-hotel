@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import RoomsSection from "@/components/RoomsSection";
 import GallerySection from "@/components/GallerySection";
-import Tour360Section from "@/components/Tour360Section";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import LocationSection from "@/components/LocationSection";
 import ReviewSection from "@/components/ReviewSection";
@@ -154,8 +153,6 @@ export default function HomePage() {
           onSelectImage={setLightboxIndex}
         />
 
-        {/* 360° Virtual Vicinity Tour & Live Location Section */}
-        <Tour360Section />
 
         {/* Hotel Amenities Section */}
         <AmenitiesSection amenities={AMENITIES} />

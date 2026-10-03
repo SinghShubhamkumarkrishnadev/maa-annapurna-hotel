@@ -19,14 +19,6 @@ export default function MobileMenu({ isOpen, onClose, onOpenEnquiry }: MobileMen
         Rooms &amp; Family Suites
       </a>
       <a
-        href="#tour360"
-        onClick={onClose}
-        className="py-2.5 px-3 rounded-xl text-amber-900 text-sm font-semibold hover:bg-amber-50/70 flex items-center justify-between butter-touch"
-      >
-        <span>360° Panoramic Tour</span>
-        <span className="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">New</span>
-      </a>
-      <a
         href="#gallery"
         onClick={onClose}
         className="block py-2.5 px-3 rounded-xl text-stone-800 text-sm font-medium hover:text-amber-800 hover:bg-stone-50 butter-touch"
