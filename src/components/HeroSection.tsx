@@ -12,10 +12,24 @@ export default function HeroSection({
   onWhatsAppBooking,
 }: HeroSectionProps) {
   return (
-    <section className="relative bg-white border-b border-stone-200/90 py-6 sm:py-8 lg:py-10">
+    <section className="relative bg-white border-b border-stone-200/90 py-5 sm:py-7 lg:py-10">
       <div className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
-          {/* Left Content Column */}
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-12 items-center">
+          
+          {/* Mobile & Tablet Top Image: Only 80ft Great Buddha Statue at the very top */}
+          <div className="lg:hidden flex items-center justify-center pt-1 pb-1 select-none">
+            <Image
+              src="/images/great-buddha-statue-transparent.webp"
+              alt="Sacred 80 Feet Great Buddha Statue in Bodhgaya"
+              width={1024}
+              height={1024}
+              priority
+              sizes="(max-width: 640px) 230px, 280px"
+              className="w-auto h-auto max-w-[210px] sm:max-w-[260px] object-contain pointer-events-none drop-shadow-xs"
+            />
+          </div>
+
+          {/* Content Column: Texts & Actions */}
           <div className="lg:col-span-6 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-[11px] font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -81,18 +95,19 @@ export default function HeroSection({
             </div>
           </div>
 
-          {/* Right Column: Seamless Transparent Mahabodhi Temple & 80 Feet Buddha Artwork */}
-          <div className="lg:col-span-6 flex items-center justify-center relative select-none">
+          {/* Desktop Right Column: Transparent Mahabodhi & 80 Feet Buddha Artwork */}
+          <div className="hidden lg:flex lg:col-span-6 items-center justify-center relative select-none">
             <Image
               src="/images/mahabodhi-buddha-transparent.webp"
               alt="Sacred Mahabodhi Temple spire and 80 Feet Great Buddha statue in Bodhgaya"
               width={1200}
               height={896}
               priority
-              sizes="(max-width: 640px) 94vw, (max-width: 1024px) 50vw, 45vw"
-              className="w-full h-auto max-w-[420px] sm:max-w-[480px] lg:max-w-[540px] xl:max-w-[580px] object-contain pointer-events-none drop-shadow-xs"
+              sizes="(max-width: 1024px) 50vw, 45vw"
+              className="w-full h-auto max-w-[540px] xl:max-w-[580px] object-contain pointer-events-none drop-shadow-xs"
             />
           </div>
+
         </div>
       </div>
     </section>
