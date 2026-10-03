@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import AvatarIcon from "./AvatarIcon";
 import ReviewModal from "./ReviewModal";
 import { ReviewItem } from "@/types/hotel";
+import { reviewService } from "@/services/reviewService";
+import { useCarousel } from "@/hooks/useCarousel";
+import { useToast } from "@/hooks/useToast";
 
 interface ReviewSectionProps {
   initialReviews?: ReviewItem[];
@@ -14,31 +17,29 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Swiper & Scroll Controls
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
+  // Hook for decoupled swiper & drag-to-scroll gesture logic (SRP)
+  const {
+    scrollRef,
+    canScrollLeft,
+    canScrollRight,
+    isDragging,
+    scroll,
+    scrollToStart,
+    handleMouseDown,
+    handleMouseLeave,
+    handleMouseUp,
+    handleMouseMove,
+  } = useCarousel([reviews]);
 
-  // Mouse drag-to-scroll state
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(0);
+  // Hook for feedback toast (SRP)
+  const { toast, showToast } = useToast();
 
-  // Toast feedback
-  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
-
-  const showToast = (message: string, type: "success" | "error" = "success") => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3500);
-  };
-
-  // Fetch live reviews from API
+  // Fetch live reviews from service layer (DIP)
   const fetchReviews = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch("/api/reviews");
-      const data = await res.json();
-      if (res.ok && data.success && Array.isArray(data.reviews)) {
+      const data = await reviewService.getReviews();
+      if (Array.isArray(data.reviews)) {
         setReviews(data.reviews);
       }
     } catch (err) {
@@ -52,70 +53,13 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
     fetchReviews();
   }, []);
 
-  // Update scroll navigation arrow states
-  const checkScrollPosition = () => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    setCanScrollLeft(scrollLeft > 12);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 12);
-  };
-
-  useEffect(() => {
-    checkScrollPosition();
-    const currentRef = scrollRef.current;
-    if (currentRef) {
-      currentRef.addEventListener("scroll", checkScrollPosition, { passive: true });
-    }
-    window.addEventListener("resize", checkScrollPosition);
-    return () => {
-      if (currentRef) {
-        currentRef.removeEventListener("scroll", checkScrollPosition);
-      }
-      window.removeEventListener("resize", checkScrollPosition);
-    };
-  }, [reviews]);
-
-  // Smooth scroll handler for Prev / Next arrows
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const cardWidth = scrollRef.current.clientWidth < 640 ? 300 : 370;
-    const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
-    scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-  };
-
-  // Mouse Drag to Swipe handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollRef.current) return;
-    setIsDragging(true);
-    setStartX(e.pageX - scrollRef.current.offsetLeft);
-    setScrollLeftState(scrollRef.current.scrollLeft);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1.4;
-    scrollRef.current.scrollLeft = scrollLeftState - walk;
-  };
-
   // Add newly created review optimistically
   const handleReviewSubmitted = (newReview: ReviewItem) => {
     setReviews((prev) => [newReview, ...prev]);
     showToast("Thank you! Your review has been added.");
     // Smooth scroll back to front so new review is visible
     setTimeout(() => {
-      if (scrollRef.current) {
-        scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      }
+      scrollToStart();
     }, 100);
   };
 
@@ -131,7 +75,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
           }`}
         >
           <span>{toast.type === "error" ? "⚠️" : "✅"}</span>
-          <span>{toast.message}</span>
+          <span>{toast.text}</span>
         </div>
       )}
 
