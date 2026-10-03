@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import StickyMobileBar from "@/components/StickyMobileBar";
 import LightboxModal from "@/components/LightboxModal";
 import RoomEnquiryModal from "@/components/RoomEnquiryModal";
+import InstallAppModal from "@/components/InstallAppModal";
 
 import {
   DEFAULT_ROOM_CATEGORIES,
@@ -195,6 +196,9 @@ export default function HomePage() {
         onClose={() => setIsEnquiryModalOpen(false)}
         onWhatsAppBooking={handleWhatsAppBooking}
       />
+
+      {/* PWA Install App Popup */}
+      <InstallAppModal />
     </div>
   );
 }
