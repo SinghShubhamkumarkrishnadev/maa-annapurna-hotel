@@ -6,7 +6,6 @@ import HeroSection from "@/components/HeroSection";
 import RoomsSection from "@/components/RoomsSection";
 import GallerySection from "@/components/GallerySection";
 import AmenitiesSection from "@/components/AmenitiesSection";
-import LocationSection from "@/components/LocationSection";
 import ReviewSection from "@/components/ReviewSection";
 import FaqSection from "@/components/FaqSection";
 import ContactSection from "@/components/ContactSection";
@@ -19,7 +18,6 @@ import {
   DEFAULT_ROOM_CATEGORIES,
   HOTEL_IMAGES,
   AMENITIES,
-  NEARBY_PLACES,
   FAQS,
 } from "@/data/hotelData";
 import {
@@ -157,11 +155,6 @@ export default function HomePage() {
         {/* Hotel Amenities Section */}
         <AmenitiesSection amenities={AMENITIES} />
 
-        {/* Location & Pilgrimage Vicinity */}
-        <LocationSection
-          nearbyPlaces={NEARBY_PLACES}
-          onOpenEnquiry={openRoomEnquiry}
-        />
 
         {/* Guest Reviews & Ratings Section */}
         <ReviewSection />

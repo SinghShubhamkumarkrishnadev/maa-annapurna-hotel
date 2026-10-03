@@ -33,13 +33,6 @@ export default function MobileMenu({ isOpen, onClose, onOpenEnquiry }: MobileMen
         Hotel Amenities
       </a>
       <a
-        href="#location"
-        onClick={onClose}
-        className="block py-2.5 px-3 rounded-xl text-stone-800 text-sm font-medium hover:text-amber-800 hover:bg-stone-50 butter-touch"
-      >
-        Location &amp; Vicinity
-      </a>
-      <a
         href="#reviews"
         onClick={onClose}
         className="py-2.5 px-3 rounded-xl text-amber-950 text-sm font-semibold hover:bg-amber-50/70 flex items-center justify-between butter-touch"
