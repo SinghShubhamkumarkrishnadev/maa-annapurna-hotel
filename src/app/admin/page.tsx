@@ -26,11 +26,20 @@ export default function AdminPage() {
   const { toast, showToast } = useToast();
   const [activeTab, setActiveTab] = useState<AdminTab>("rooms");
 
+  const handleLoginSuccess = React.useCallback(() => {
+    showToast("Welcome to Maa Annapurna Host Admin!");
+  }, [showToast]);
+
+  const handleLogoutSuccess = React.useCallback(() => {
+    showToast("Logged out successfully");
+  }, [showToast]);
+
+  const handleDataError = React.useCallback((errMsg: string) => {
+    showToast(errMsg, "error");
+  }, [showToast]);
+
   // Authentication Hook (SRP)
-  const auth = useAdminAuth(
-    () => showToast("Welcome to Maa Annapurna Host Admin!"),
-    () => showToast("Logged out successfully")
-  );
+  const auth = useAdminAuth(handleLoginSuccess, handleLogoutSuccess);
 
   // Data Fetching Hook (SRP / DIP)
   const {
@@ -42,7 +51,7 @@ export default function AdminPage() {
     setReviews,
     isLoading,
     refreshData,
-  } = useAdminData(!!auth.isAuthenticated, (errMsg) => showToast(errMsg, "error"));
+  } = useAdminData(!!auth.isAuthenticated, handleDataError);
 
   // Modals & Forms State
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);

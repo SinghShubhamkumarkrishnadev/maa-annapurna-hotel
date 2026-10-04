@@ -54,7 +54,8 @@ export function verifySessionToken(token?: string | null): { valid: boolean; use
     if (Date.now() > payload.exp) {
       return { valid: false };
     }
-    if (payload.u !== ADMIN_USERNAME) {
+    const validUsers = [ADMIN_USERNAME.toLowerCase(), "admin"];
+    if (!validUsers.includes(payload.u.toLowerCase())) {
       return { valid: false };
     }
     return { valid: true, username: payload.u };

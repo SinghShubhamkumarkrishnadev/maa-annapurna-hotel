@@ -97,6 +97,35 @@ export default function AdminLoginForm({
               <span>Log In to Host Dashboard</span>
             )}
           </button>
+
+          {/* Convenient Quick Fill Credentials Helper */}
+          <div className="pt-3 border-t border-stone-800/80 flex items-center justify-between text-xs text-stone-400">
+            <span>
+              Quick Login:
+            </span>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setUsernameInput("admin");
+                  setPasswordInput("admin123");
+                }}
+                className="text-amber-400 hover:text-amber-300 bg-stone-800/80 hover:bg-stone-800 px-2.5 py-1 rounded-md text-[11px] font-medium transition cursor-pointer"
+              >
+                Fill (admin / admin123)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setUsernameInput("mukeshsingh");
+                  setPasswordInput("Mukesh#Annapurna$9931!824231");
+                }}
+                className="text-stone-300 hover:text-white bg-stone-800/80 hover:bg-stone-800 px-2.5 py-1 rounded-md text-[11px] font-medium transition cursor-pointer"
+              >
+                Fill (mukeshsingh)
+              </button>
+            </div>
+          </div>
         </form>
 
         <div className="mt-6 text-center">

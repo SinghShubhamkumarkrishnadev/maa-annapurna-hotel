@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { authService } from "@/services/authService";
 
 export function useAdminAuth(onLoginSuccess?: () => void, onLogoutSuccess?: () => void) {
@@ -8,6 +8,16 @@ export function useAdminAuth(onLoginSuccess?: () => void, onLogoutSuccess?: () =
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const onLoginSuccessRef = useRef(onLoginSuccess);
+  useEffect(() => {
+    onLoginSuccessRef.current = onLoginSuccess;
+  }, [onLoginSuccess]);
+
+  const onLogoutSuccessRef = useRef(onLogoutSuccess);
+  useEffect(() => {
+    onLogoutSuccessRef.current = onLogoutSuccess;
+  }, [onLogoutSuccess]);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,12 +42,12 @@ export function useAdminAuth(onLoginSuccess?: () => void, onLogoutSuccess?: () =
       try {
         const res = await authService.login({
           username: usernameInput.trim(),
-          password: passwordInput.trim(),
+          password: passwordInput,
         });
 
         if (res.success) {
           setIsAuthenticated(true);
-          onLoginSuccess?.();
+          onLoginSuccessRef.current?.();
         } else {
           setLoginError(res.error || "Invalid username or password");
         }
@@ -48,7 +58,7 @@ export function useAdminAuth(onLoginSuccess?: () => void, onLogoutSuccess?: () =
         setIsLoggingIn(false);
       }
     },
-    [usernameInput, passwordInput, onLoginSuccess]
+    [usernameInput, passwordInput]
   );
 
   const logout = useCallback(async () => {
@@ -58,9 +68,9 @@ export function useAdminAuth(onLoginSuccess?: () => void, onLogoutSuccess?: () =
       setIsAuthenticated(false);
       setUsernameInput("");
       setPasswordInput("");
-      onLogoutSuccess?.();
+      onLogoutSuccessRef.current?.();
     }
-  }, [onLogoutSuccess]);
+  }, []);
 
   return {
     isAuthenticated,

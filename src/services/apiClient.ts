@@ -16,15 +16,25 @@ export async function request<T = unknown>(
   url: string,
   options?: RequestInit
 ): Promise<T> {
-  const defaultHeaders: HeadersInit = {
+  const defaultHeaders: Record<string, string> = {
     "Content-Type": "application/json",
   };
 
+  if (typeof window !== "undefined") {
+    const token =
+      sessionStorage.getItem("admin_auth_token") ||
+      localStorage.getItem("admin_auth_token");
+    if (token) {
+      defaultHeaders["Authorization"] = `Bearer ${token}`;
+    }
+  }
+
   const response = await fetch(url, {
+    credentials: "same-origin",
     ...options,
     headers: {
       ...defaultHeaders,
-      ...options?.headers,
+      ...(options?.headers as Record<string, string> | undefined),
     },
   });
 

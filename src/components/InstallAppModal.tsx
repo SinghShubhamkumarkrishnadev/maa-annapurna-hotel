@@ -16,11 +16,16 @@ export default function InstallAppModal() {
   const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
-    // 1. Register Service Worker for PWA support
+    // 1. Register Service Worker for PWA support and force update to latest sw.js
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
-        // Silently handle if SW registration fails
-      });
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((reg) => {
+          reg.update();
+        })
+        .catch(() => {
+          // Silently handle if SW registration fails
+        });
     }
 
     // 2. Check if already installed and running in standalone mode
@@ -34,10 +39,9 @@ export default function InstallAppModal() {
       return;
     }
 
-    // Clear any previous persistent dismissal block so popup always appears on each refresh/reload
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("maa_install_dismissed_until");
-      localStorage.removeItem("maa_app_installed");
+    // Check if dismissed in this session
+    if (typeof window !== "undefined" && sessionStorage.getItem("maa_install_dismissed")) {
+      return;
     }
 
     // 3. Detect iOS device
@@ -59,10 +63,10 @@ export default function InstallAppModal() {
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleAppInstalled);
 
-    // 5. Open popup on each refresh or hard reload after a smooth entrance delay
+    // 5. Open popup after a smooth entrance delay if not dismissed
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 1200);
+    }, 1500);
 
     return () => {
       clearTimeout(timer);
@@ -73,6 +77,9 @@ export default function InstallAppModal() {
 
   const handleDismiss = () => {
     setIsOpen(false);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("maa_install_dismissed", "true");
+    }
   };
 
   const handleInstallClick = async () => {
