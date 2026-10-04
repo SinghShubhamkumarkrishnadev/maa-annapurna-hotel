@@ -1,6 +1,3 @@
-import fs from "fs/promises";
-import path from "path";
-import os from "os";
 import { getSupabase } from "./supabase";
 
 export interface RoomItem {
@@ -50,61 +47,13 @@ export interface ReviewItem {
   createdAt: string;
 }
 
-// Source paths bundled with application
-const ROOMS_FILE_PATH = path.join(process.cwd(), "src", "data", "rooms.json");
-const PHOTOS_FILE_PATH = path.join(process.cwd(), "src", "data", "photos.json");
-const REVIEWS_FILE_PATH = path.join(process.cwd(), "src", "data", "reviews.json");
-
-// Fallback writable paths for serverless environments (e.g. Vercel)
-const TMP_ROOMS_FILE_PATH = path.join(os.tmpdir(), "maa_rooms.json");
-const TMP_PHOTOS_FILE_PATH = path.join(os.tmpdir(), "maa_photos.json");
-const TMP_REVIEWS_FILE_PATH = path.join(os.tmpdir(), "maa_reviews.json");
-
-// In-memory caching for zero-latency lookups
+// In-memory caching for zero-latency lookups across requests in the active instance
 let cachedRooms: RoomItem[] | null = null;
 let cachedPhotos: PhotoItem[] | null = null;
 let cachedReviews: ReviewItem[] | null = null;
 
-async function readFileSafe<T>(primaryPath: string, tmpPath: string): Promise<T | null> {
-  try {
-    const raw = await fs.readFile(tmpPath, "utf-8");
-    return JSON.parse(raw);
-  } catch {
-    // Fall back to primary bundled file
-  }
-
-  try {
-    const raw = await fs.readFile(primaryPath, "utf-8");
-    return JSON.parse(raw);
-  } catch (err) {
-    console.error(`Failed to read ${primaryPath}:`, err);
-    return null;
-  }
-}
-
-async function writeFileSafe<T>(primaryPath: string, tmpPath: string, data: T): Promise<void> {
-  const serialized = JSON.stringify(data, null, 2);
-
-  // 1. Try writing to repo directory (for local dev)
-  try {
-    const dir = path.dirname(primaryPath);
-    await fs.mkdir(dir, { recursive: true });
-    await fs.writeFile(primaryPath, serialized, "utf-8");
-    return;
-  } catch {
-    // Expected on read-only serverless filesystems (e.g., Vercel Lambda)
-  }
-
-  // 2. Fall back to writing in OS temp directory
-  try {
-    await fs.writeFile(tmpPath, serialized, "utf-8");
-  } catch (tmpErr) {
-    console.warn(`Could not persist to ${tmpPath}:`, tmpErr);
-  }
-}
-
 // ==========================================
-// ROOMS (Supabase + Local Fallback)
+// ROOMS (100% Supabase Database Driven)
 // ==========================================
 export async function getRooms(): Promise<RoomItem[]> {
   const supabase = getSupabase();
@@ -115,41 +64,26 @@ export async function getRooms(): Promise<RoomItem[]> {
         .select("*")
         .order("price", { ascending: true });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         cachedRooms = data as RoomItem[];
         return cachedRooms;
       }
+      if (error) {
+        console.error("Supabase getRooms error:", error.message);
+      }
     } catch (err) {
-      console.warn("Supabase getRooms fallback:", err);
+      console.error("Failed to fetch rooms from Supabase:", err);
     }
   }
 
-  if (cachedRooms && cachedRooms.length > 0) {
-    return cachedRooms;
-  }
-  const localData = await readFileSafe<RoomItem[]>(ROOMS_FILE_PATH, TMP_ROOMS_FILE_PATH);
-  cachedRooms = localData || [];
-
-  // Auto-seed Supabase if empty
-  if (supabase && cachedRooms.length > 0) {
-    (async () => {
-      try {
-        await supabase.from("rooms").upsert(cachedRooms, { onConflict: "id" });
-      } catch {
-        // Ignored
-      }
-    })();
-  }
-
-  return cachedRooms;
+  return cachedRooms || [];
 }
 
 export async function saveRooms(rooms: RoomItem[]): Promise<void> {
   cachedRooms = rooms;
-  await writeFileSafe(ROOMS_FILE_PATH, TMP_ROOMS_FILE_PATH, rooms);
 
   const supabase = getSupabase();
-  if (supabase) {
+  if (supabase && rooms.length > 0) {
     try {
       const { error } = await supabase.from("rooms").upsert(rooms, { onConflict: "id" });
       if (error) {
@@ -162,10 +96,16 @@ export async function saveRooms(rooms: RoomItem[]): Promise<void> {
 }
 
 export async function deleteRoomFromDb(id: string): Promise<void> {
+  if (cachedRooms) {
+    cachedRooms = cachedRooms.filter((r) => r.id !== id);
+  }
   const supabase = getSupabase();
   if (supabase) {
     try {
-      await supabase.from("rooms").delete().eq("id", id);
+      const { error } = await supabase.from("rooms").delete().eq("id", id);
+      if (error) {
+        console.error("Supabase delete room error:", error.message);
+      }
     } catch (err) {
       console.error("Supabase delete room error:", err);
     }
@@ -173,7 +113,7 @@ export async function deleteRoomFromDb(id: string): Promise<void> {
 }
 
 // ==========================================
-// REVIEWS (Supabase + Local Fallback)
+// REVIEWS (100% Supabase Database Driven)
 // ==========================================
 export async function getReviews(): Promise<ReviewItem[]> {
   const supabase = getSupabase();
@@ -184,41 +124,26 @@ export async function getReviews(): Promise<ReviewItem[]> {
         .select("*")
         .order("createdAt", { ascending: false });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         cachedReviews = data as ReviewItem[];
         return cachedReviews;
       }
+      if (error) {
+        console.error("Supabase getReviews error:", error.message);
+      }
     } catch (err) {
-      console.warn("Supabase getReviews fallback:", err);
+      console.error("Failed to fetch reviews from Supabase:", err);
     }
   }
 
-  if (cachedReviews && cachedReviews.length > 0) {
-    return cachedReviews;
-  }
-  const localData = await readFileSafe<ReviewItem[]>(REVIEWS_FILE_PATH, TMP_REVIEWS_FILE_PATH);
-  cachedReviews = localData || [];
-
-  // Auto-seed Supabase if empty
-  if (supabase && cachedReviews.length > 0) {
-    (async () => {
-      try {
-        await supabase.from("reviews").upsert(cachedReviews, { onConflict: "id" });
-      } catch {
-        // Ignored
-      }
-    })();
-  }
-
-  return cachedReviews;
+  return cachedReviews || [];
 }
 
 export async function saveReviews(reviews: ReviewItem[]): Promise<void> {
   cachedReviews = reviews;
-  await writeFileSafe(REVIEWS_FILE_PATH, TMP_REVIEWS_FILE_PATH, reviews);
 
   const supabase = getSupabase();
-  if (supabase) {
+  if (supabase && reviews.length > 0) {
     try {
       const { error } = await supabase.from("reviews").upsert(reviews, { onConflict: "id" });
       if (error) {
@@ -231,10 +156,16 @@ export async function saveReviews(reviews: ReviewItem[]): Promise<void> {
 }
 
 export async function deleteReviewFromDb(id: string): Promise<void> {
+  if (cachedReviews) {
+    cachedReviews = cachedReviews.filter((r) => r.id !== id);
+  }
   const supabase = getSupabase();
   if (supabase) {
     try {
-      await supabase.from("reviews").delete().eq("id", id);
+      const { error } = await supabase.from("reviews").delete().eq("id", id);
+      if (error) {
+        console.error("Supabase delete review error:", error.message);
+      }
     } catch (err) {
       console.error("Supabase delete review error:", err);
     }
@@ -242,7 +173,7 @@ export async function deleteReviewFromDb(id: string): Promise<void> {
 }
 
 // ==========================================
-// PHOTOS (Supabase + Local Fallback)
+// PHOTOS (100% Supabase Database Driven)
 // ==========================================
 export async function getPhotos(): Promise<PhotoItem[]> {
   const supabase = getSupabase();
@@ -253,29 +184,26 @@ export async function getPhotos(): Promise<PhotoItem[]> {
         .select("*")
         .order("id", { ascending: true });
 
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         cachedPhotos = data as PhotoItem[];
         return cachedPhotos;
       }
+      if (error) {
+        console.error("Supabase getPhotos error:", error.message);
+      }
     } catch (err) {
-      console.warn("Supabase getPhotos fallback:", err);
+      console.error("Failed to fetch photos from Supabase:", err);
     }
   }
 
-  if (cachedPhotos && cachedPhotos.length > 0) {
-    return cachedPhotos;
-  }
-  const localData = await readFileSafe<PhotoItem[]>(PHOTOS_FILE_PATH, TMP_PHOTOS_FILE_PATH);
-  cachedPhotos = localData || [];
-  return cachedPhotos;
+  return cachedPhotos || [];
 }
 
 export async function savePhotos(photos: PhotoItem[]): Promise<void> {
   cachedPhotos = photos;
-  await writeFileSafe(PHOTOS_FILE_PATH, TMP_PHOTOS_FILE_PATH, photos);
 
   const supabase = getSupabase();
-  if (supabase) {
+  if (supabase && photos.length > 0) {
     try {
       const { error } = await supabase.from("photos").upsert(photos, { onConflict: "id" });
       if (error) {
@@ -283,6 +211,23 @@ export async function savePhotos(photos: PhotoItem[]): Promise<void> {
       }
     } catch (err) {
       console.error("Failed to persist photos to Supabase:", err);
+    }
+  }
+}
+
+export async function deletePhotoFromDb(id: number): Promise<void> {
+  if (cachedPhotos) {
+    cachedPhotos = cachedPhotos.filter((p) => p.id !== id);
+  }
+  const supabase = getSupabase();
+  if (supabase) {
+    try {
+      const { error } = await supabase.from("photos").delete().eq("id", id);
+      if (error) {
+        console.error("Supabase delete photo error:", error.message);
+      }
+    } catch (err) {
+      console.error("Supabase delete photo error:", err);
     }
   }
 }

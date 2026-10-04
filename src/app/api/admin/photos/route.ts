@@ -1,5 +1,5 @@
 import { isRequestAuthenticated } from "@/lib/auth";
-import { getPhotos, savePhotos, PhotoItem } from "@/lib/data";
+import { getPhotos, savePhotos, deletePhotoFromDb, PhotoItem } from "@/lib/data";
 
 export async function GET() {
   const photos = await getPhotos();
@@ -63,6 +63,7 @@ export async function DELETE(request: Request) {
     }
 
     await savePhotos(filtered);
+    await deletePhotoFromDb(id);
     return Response.json({ success: true, message: "Photo deleted successfully" });
   } catch (error) {
     console.error("Error deleting photo:", error);
