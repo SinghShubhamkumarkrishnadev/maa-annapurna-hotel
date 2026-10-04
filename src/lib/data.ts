@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import os from "os";
 
 export interface RoomItem {
   id: string;
@@ -48,55 +49,98 @@ export interface ReviewItem {
   createdAt: string;
 }
 
+// Source paths bundled with application
 const ROOMS_FILE_PATH = path.join(process.cwd(), "src", "data", "rooms.json");
 const PHOTOS_FILE_PATH = path.join(process.cwd(), "src", "data", "photos.json");
 const REVIEWS_FILE_PATH = path.join(process.cwd(), "src", "data", "reviews.json");
 
-export async function getRooms(): Promise<RoomItem[]> {
+// Fallback writable paths for serverless environments (e.g. Vercel)
+const TMP_ROOMS_FILE_PATH = path.join(os.tmpdir(), "maa_rooms.json");
+const TMP_PHOTOS_FILE_PATH = path.join(os.tmpdir(), "maa_photos.json");
+const TMP_REVIEWS_FILE_PATH = path.join(os.tmpdir(), "maa_reviews.json");
+
+// In-memory caching for zero-latency lookups and resilient serverless writes
+let cachedRooms: RoomItem[] | null = null;
+let cachedPhotos: PhotoItem[] | null = null;
+let cachedReviews: ReviewItem[] | null = null;
+
+async function readFileSafe<T>(primaryPath: string, tmpPath: string): Promise<T | null> {
+  // First try reading from /tmp if updated in this runtime
   try {
-    const raw = await fs.readFile(ROOMS_FILE_PATH, "utf-8");
+    const raw = await fs.readFile(tmpPath, "utf-8");
     return JSON.parse(raw);
-  } catch (error) {
-    console.error("Error reading rooms.json, using empty array fallback:", error);
-    return [];
+  } catch {
+    // Fall back to primary bundled file
   }
+
+  try {
+    const raw = await fs.readFile(primaryPath, "utf-8");
+    return JSON.parse(raw);
+  } catch (err) {
+    console.error(`Failed to read ${primaryPath}:`, err);
+    return null;
+  }
+}
+
+async function writeFileSafe<T>(primaryPath: string, tmpPath: string, data: T): Promise<void> {
+  const serialized = JSON.stringify(data, null, 2);
+
+  // 1. Try writing to repo directory (for local dev)
+  try {
+    const dir = path.dirname(primaryPath);
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(primaryPath, serialized, "utf-8");
+    return;
+  } catch {
+    // Expected on read-only serverless filesystems (e.g., Vercel Lambda)
+  }
+
+  // 2. Fall back to writing in OS temp directory
+  try {
+    await fs.writeFile(tmpPath, serialized, "utf-8");
+  } catch (tmpErr) {
+    console.warn(`Could not persist to ${tmpPath}:`, tmpErr);
+  }
+}
+
+export async function getRooms(): Promise<RoomItem[]> {
+  if (cachedRooms && cachedRooms.length > 0) {
+    return cachedRooms;
+  }
+  const data = await readFileSafe<RoomItem[]>(ROOMS_FILE_PATH, TMP_ROOMS_FILE_PATH);
+  cachedRooms = data || [];
+  return cachedRooms;
 }
 
 export async function saveRooms(rooms: RoomItem[]): Promise<void> {
-  const dir = path.dirname(ROOMS_FILE_PATH);
-  await fs.mkdir(dir, { recursive: true });
-  await fs.writeFile(ROOMS_FILE_PATH, JSON.stringify(rooms, null, 2), "utf-8");
+  cachedRooms = rooms;
+  await writeFileSafe(ROOMS_FILE_PATH, TMP_ROOMS_FILE_PATH, rooms);
 }
 
 export async function getPhotos(): Promise<PhotoItem[]> {
-  try {
-    const raw = await fs.readFile(PHOTOS_FILE_PATH, "utf-8");
-    return JSON.parse(raw);
-  } catch (error) {
-    console.error("Error reading photos.json, using empty array fallback:", error);
-    return [];
+  if (cachedPhotos && cachedPhotos.length > 0) {
+    return cachedPhotos;
   }
+  const data = await readFileSafe<PhotoItem[]>(PHOTOS_FILE_PATH, TMP_PHOTOS_FILE_PATH);
+  cachedPhotos = data || [];
+  return cachedPhotos;
 }
 
 export async function savePhotos(photos: PhotoItem[]): Promise<void> {
-  const dir = path.dirname(PHOTOS_FILE_PATH);
-  await fs.mkdir(dir, { recursive: true });
-  await fs.writeFile(PHOTOS_FILE_PATH, JSON.stringify(photos, null, 2), "utf-8");
+  cachedPhotos = photos;
+  await writeFileSafe(PHOTOS_FILE_PATH, TMP_PHOTOS_FILE_PATH, photos);
 }
 
 export async function getReviews(): Promise<ReviewItem[]> {
-  try {
-    const raw = await fs.readFile(REVIEWS_FILE_PATH, "utf-8");
-    return JSON.parse(raw);
-  } catch (error) {
-    console.error("Error reading reviews.json, using empty array fallback:", error);
-    return [];
+  if (cachedReviews && cachedReviews.length > 0) {
+    return cachedReviews;
   }
+  const data = await readFileSafe<ReviewItem[]>(REVIEWS_FILE_PATH, TMP_REVIEWS_FILE_PATH);
+  cachedReviews = data || [];
+  return cachedReviews;
 }
 
 export async function saveReviews(reviews: ReviewItem[]): Promise<void> {
-  const dir = path.dirname(REVIEWS_FILE_PATH);
-  await fs.mkdir(dir, { recursive: true });
-  await fs.writeFile(REVIEWS_FILE_PATH, JSON.stringify(reviews, null, 2), "utf-8");
+  cachedReviews = reviews;
+  await writeFileSafe(REVIEWS_FILE_PATH, TMP_REVIEWS_FILE_PATH, reviews);
 }
-
