@@ -97,7 +97,7 @@ export default function HomePage() {
     if (bookingDetails.checkIn) text += `• Check-in: ${bookingDetails.checkIn}\n`;
     if (bookingDetails.checkOut) text += `• Check-out: ${bookingDetails.checkOut}\n`;
     text += `• Guests: ${bookingDetails.guests}\n`;
-    if (bookingDetails.needPickDrop) text += `• Pick & Drop Service: Yes (Airport / Railway Station)\n`;
+    if (bookingDetails.needPickDrop) text += `• Pick & Drop Service: Yes (Airport / Railway Station - may cost additional charges)\n`;
     if (bookingDetails.needTours) text += `• Tours & Travels Facility: Yes (Bodhgaya / Rajgir / Nalanda)\n`;
     if (bookingDetails.guestName) text += `• Name: ${bookingDetails.guestName}\n`;
     if (bookingDetails.guestPhone) text += `• Phone: ${bookingDetails.guestPhone}\n`;

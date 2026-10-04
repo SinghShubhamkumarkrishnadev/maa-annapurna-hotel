@@ -256,7 +256,7 @@ export const AMENITIES: AmenityItem[] = [
       </svg>
     ),
     title: "Pick & Drop Service",
-    desc: "Prompt pickup and drop facility for Gaya International Airport (GAY) & Gaya Junction Railway Station",
+    desc: "Prompt pickup and drop facility for Gaya International Airport (GAY) & Gaya Junction Railway Station (may cost additional charges)",
   },
   {
     icon: (
@@ -340,7 +340,7 @@ export const FAQS: FaqItem[] = [
   },
   {
     q: "Do you offer airport/railway station pick and drop service and tour packages?",
-    a: "Yes! We provide dedicated 24/7 pick and drop service for Gaya International Airport (GAY) and Gaya Junction Railway Station. We also provide a full tours and travels facility organizing local Bodhgaya temple visits as well as day trips to Rajgir, Nalanda, and Dungeshwari Cave temples.",
+    a: "Yes! We provide dedicated 24/7 pick and drop service for Gaya International Airport (GAY) and Gaya Junction Railway Station (may cost additional charges depending on vehicle and timing). We also provide a full tours and travels facility organizing local Bodhgaya temple visits as well as day trips to Rajgir, Nalanda, and Dungeshwari Cave temples.",
   },
   {
     q: "Is Maa Annapurna Home Stay & Hotel open 24 hours (24/7) for check-in and assistance?",

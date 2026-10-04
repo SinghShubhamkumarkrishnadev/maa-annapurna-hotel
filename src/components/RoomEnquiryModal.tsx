@@ -138,14 +138,19 @@ export default function RoomEnquiryModal({
           </div>
 
           <div className="pt-1 flex flex-col gap-2 text-xs text-stone-700">
-            <label className="flex items-center gap-2 cursor-pointer select-none">
+            <label className="flex items-start sm:items-center gap-2 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={!!bookingDetails.needPickDrop}
                 onChange={(e) => onUpdateBookingDetails({ needPickDrop: e.target.checked })}
-                className="w-4 h-4 rounded text-amber-700 focus:ring-amber-600 border-stone-300"
+                className="w-4 h-4 mt-0.5 sm:mt-0 rounded text-amber-700 focus:ring-amber-600 border-stone-300"
               />
-              <span>Need Airport / Railway Pick &amp; Drop</span>
+              <span className="leading-snug">
+                Need Airport / Railway Pick &amp; Drop{" "}
+                <span className="inline-block text-[10.5px] font-semibold text-amber-900 bg-amber-100/90 border border-amber-200/90 px-1.5 py-0.5 rounded">
+                  (May cost additional charges)
+                </span>
+              </span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer select-none">
               <input
