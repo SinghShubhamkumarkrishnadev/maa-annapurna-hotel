@@ -1,6 +1,7 @@
 import { PhotoItem, RoomItem, FaqItem } from "@/types/hotel";
 
 export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maa-annapurna-hotel.vercel.app";
   return {
     "@context": "https://schema.org",
     "@type": ["Hotel", "BedAndBreakfast", "LodgingBusiness"],
@@ -13,7 +14,7 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
     ],
     "description":
       "Peaceful, clean AC home stay and hotel in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
-    "url": "https://maaannapurnahotel.com",
+    "url": siteUrl,
     "telephone": "+919931924027",
     "priceRange": "₹₹",
     "currenciesAccepted": "INR",
@@ -32,7 +33,7 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
       "longitude": 84.9759,
     },
     "hasMap": "https://share.google/u28zYVIFglv8XWTyZ",
-    "image": hotelImages.map((img) => `https://maaannapurnahotel.com${img.src}`),
+    "image": hotelImages.map((img) => `${siteUrl}${img.src}`),
     "checkinTime": "12:00:00",
     "checkoutTime": "11:00:00",
     "numberOfRooms": 10,
@@ -100,6 +101,7 @@ export function getFaqSchema(faqs: FaqItem[]) {
 }
 
 export function getBreadcrumbSchema() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maa-annapurna-hotel.vercel.app";
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -108,19 +110,19 @@ export function getBreadcrumbSchema() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://maaannapurnahotel.com",
+        "item": siteUrl,
       },
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Hotels in Bodhgaya",
-        "item": "https://maaannapurnahotel.com/#rooms",
+        "name": "Home Stay & Hotels in Bodhgaya",
+        "item": `${siteUrl}/#rooms`,
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Maa Annapurna Home Stay & Hotel",
-        "item": "https://maaannapurnahotel.com",
+        "item": siteUrl,
       },
     ],
   };
