@@ -1,5 +1,5 @@
 import { isRequestAuthenticated, ADMIN_PASSWORD } from "@/lib/auth";
-import { getReviews, saveReviews, ReviewItem } from "@/lib/data";
+import { getReviews, saveReviews, deleteReviewFromDb, ReviewItem } from "@/lib/data";
 
 export async function GET() {
   try {
@@ -120,6 +120,7 @@ export async function DELETE(request: Request) {
     }
 
     await saveReviews(filtered);
+    await deleteReviewFromDb(reviewId);
 
     return Response.json({
       success: true,

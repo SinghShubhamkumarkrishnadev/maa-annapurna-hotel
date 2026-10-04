@@ -1,5 +1,5 @@
 import { isRequestAuthenticated } from "@/lib/auth";
-import { getRooms, saveRooms, RoomItem } from "@/lib/data";
+import { getRooms, saveRooms, deleteRoomFromDb, RoomItem } from "@/lib/data";
 
 export async function GET() {
   const rooms = await getRooms();
@@ -136,6 +136,7 @@ export async function DELETE(request: Request) {
     }
 
     await saveRooms(filtered);
+    await deleteRoomFromDb(id);
     return Response.json({ success: true, message: "Room deleted successfully" });
   } catch (error) {
     console.error("Error deleting room:", error);
