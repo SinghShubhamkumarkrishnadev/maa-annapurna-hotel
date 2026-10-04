@@ -18,6 +18,58 @@ const STAY_TYPES = [
   "Business & Leisure",
 ];
 
+interface ReviewTemplate {
+  id: string;
+  label: string;
+  badge: string;
+  stayType: string;
+  rating: number;
+  text: string;
+}
+
+const REVIEW_TEMPLATES: ReviewTemplate[] = [
+  {
+    id: "family",
+    label: "Family & Darshan",
+    badge: "Most Popular",
+    stayType: "Family Pilgrimage",
+    rating: 5,
+    text: "Wonderful and peaceful homestay in Bodhgaya! Mukesh ji is a very caring host. The AC room was spotless, 24/7 hot water geyser worked perfectly, and it's just 5 minutes to Mahabodhi Temple. Highly recommended!",
+  },
+  {
+    id: "clean-budget",
+    label: "Clean & Budget",
+    badge: "Short & Sweet",
+    stayType: "Couple Stay",
+    rating: 5,
+    text: "Best budget homestay in Bodhgaya. Very clean AC rooms, quiet location on Sujata Road, and excellent hospitality from the host. Will definitely stay here again!",
+  },
+  {
+    id: "pickup-service",
+    label: "Pick & Drop / Travel",
+    badge: "Helpful Host",
+    stayType: "Solo Traveler",
+    rating: 5,
+    text: "Exceptional hospitality! Mukesh ji helped arrange on-time pickup from Gaya station and private conveyance for temple darshan. Safe, comfortable, and truly feels like home.",
+  },
+  {
+    id: "spiritual",
+    label: "Spiritual Retreat",
+    badge: "Peaceful",
+    stayType: "Buddhist Monk / Spiritual Retreat",
+    rating: 5,
+    text: "Extremely clean, quiet and spiritually peaceful homestay in Bodhgaya. Safe for solo travelers, near all monasteries, with great Wi-Fi and 24/7 hot water.",
+  },
+  {
+    id: "hindi",
+    label: "हिंदी (दर्शन एवं विश्राम)",
+    badge: "Hindi",
+    stayType: "Mahabodhi Temple Darshan",
+    rating: 5,
+    text: "बोधगया में महाबोधि मंदिर के पास बहुत ही शांत और साफ होमस्टे। मुकेश जी का व्यवहार बहुत अच्छा है और 24 घंटे गर्म पानी और एसी की सुविधा बढ़िया है। 5/5!",
+  },
+];
+
 export default function ReviewModal({
   isOpen,
   onClose,
@@ -29,9 +81,22 @@ export default function ReviewModal({
   const [comment, setComment] = useState("");
   const [avatar, setAvatar] = useState("zen");
   const [stayType, setStayType] = useState(STAY_TYPES[0]);
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState(false);
+
+  const handleSelectTemplate = (tmpl: ReviewTemplate) => {
+    if (selectedTemplate === tmpl.id && comment === tmpl.text) {
+      setSelectedTemplate(null);
+      setComment("");
+      return;
+    }
+    setSelectedTemplate(tmpl.id);
+    setComment(tmpl.text);
+    setRating(tmpl.rating);
+    setStayType(tmpl.stayType);
+  };
 
   if (!isOpen) return null;
 
@@ -76,6 +141,7 @@ export default function ReviewModal({
           setSuccessMsg(false);
           setName("");
           setComment("");
+          setSelectedTemplate(null);
           setRating(5);
           setAvatar("zen");
           onClose();
@@ -276,6 +342,66 @@ export default function ReviewModal({
                   </option>
                 ))}
               </select>
+            </div>
+
+            {/* Quick 1-Tap Review Templates */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-bold text-stone-800 uppercase tracking-wider flex items-center gap-1.5">
+                  <span>✨ 1-Tap Quick Templates</span>
+                  <span className="text-amber-700 bg-amber-100/80 px-2 py-0.5 rounded-full text-[10px] font-semibold normal-case">
+                    Tap to auto-fill
+                  </span>
+                </label>
+                {selectedTemplate && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedTemplate(null);
+                      setComment("");
+                    }}
+                    className="text-[11px] text-stone-500 hover:text-rose-600 transition flex items-center gap-1 font-medium cursor-pointer"
+                  >
+                    ✕ Clear template
+                  </button>
+                )}
+              </div>
+
+              {/* Responsive Container: Horizontal swipe on mobile, flex-wrap on tablet/desktop */}
+              <div className="flex sm:flex-wrap items-center gap-2 overflow-x-auto pb-1.5 sm:pb-0 no-scrollbar -mx-1 px-1">
+                {REVIEW_TEMPLATES.map((tmpl) => {
+                  const isSelected = selectedTemplate === tmpl.id;
+                  return (
+                    <button
+                      key={tmpl.id}
+                      type="button"
+                      onClick={() => handleSelectTemplate(tmpl)}
+                      className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition cursor-pointer border ${
+                        isSelected
+                          ? "bg-amber-600 text-white border-amber-600 shadow-sm ring-2 ring-amber-500/30 scale-[1.02]"
+                          : "bg-amber-50/70 text-stone-800 border-amber-200/80 hover:bg-amber-100 hover:border-amber-300"
+                      }`}
+                    >
+                      <span className="text-[11px]">{isSelected ? "✓" : "⚡"}</span>
+                      <span className="font-semibold">{tmpl.label}</span>
+                      <span
+                        className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tight ${
+                          isSelected
+                            ? "bg-white/20 text-white"
+                            : "bg-amber-200/70 text-amber-900"
+                        }`}
+                      >
+                        {tmpl.badge}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-[11px] text-stone-500 mt-1">
+                {selectedTemplate
+                  ? "✓ Template inserted! You can customize or add your personal words below."
+                  : "Pick a pre-written template above to save time, or write your own below."}
+              </p>
             </div>
 
             {/* Optional Comment / Text Message */}
