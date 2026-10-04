@@ -94,13 +94,42 @@ export async function PUT(request: Request) {
       ? data.discount
       : `${Math.max(0, Math.round(((originalPrice - price) / originalPrice) * 100))}% OFF`;
 
+    const availableUnits = data.availableUnits !== undefined ? Number(data.availableUnits) : current.availableUnits;
+    const isSoldOut = availableUnits === 0 || data.isAvailable === false || data.statusType === "sold_out";
+
+    let status = data.status || current.status;
+    let statusType = data.statusType || current.statusType;
+    let isAvailable = data.isAvailable !== undefined ? data.isAvailable : current.isAvailable;
+    let availabilityText = data.availabilityText || current.availabilityText;
+
+    if (isSoldOut) {
+      status = "Sold Out";
+      statusType = "sold_out";
+      isAvailable = false;
+      availabilityText = "All Units Booked for Today";
+    } else if (availableUnits === 1) {
+      status = data.status || "High Demand";
+      statusType = data.statusType || "limited";
+      isAvailable = true;
+      availabilityText = "Only 1 Room Left for Today";
+    } else {
+      status = data.status || "Available Today";
+      statusType = data.statusType || "available";
+      isAvailable = true;
+      availabilityText = `${availableUnits} Rooms Available Today`;
+    }
+
     const updatedRoom: RoomItem = {
       ...current,
       ...data,
       price,
       originalPrice,
       discount,
-      availableUnits: data.availableUnits !== undefined ? Number(data.availableUnits) : current.availableUnits,
+      availableUnits,
+      status,
+      statusType,
+      isAvailable,
+      availabilityText,
       totalUnits: data.totalUnits !== undefined ? Number(data.totalUnits) : current.totalUnits,
       bookedToday: data.bookedToday !== undefined ? Number(data.bookedToday) : current.bookedToday,
     };

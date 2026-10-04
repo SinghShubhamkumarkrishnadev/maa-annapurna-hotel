@@ -80,6 +80,10 @@ export default function HomePage() {
   const [modalRoomTitle, setModalRoomTitle] = useState("Deluxe AC Double Room");
 
   const openRoomEnquiry = (roomTitle: string) => {
+    const roomObj = rooms.find((r) => r.name === roomTitle);
+    if (roomObj && (Number(roomObj.availableUnits) === 0 || roomObj.statusType === "sold_out")) {
+      return;
+    }
     setModalRoomTitle(roomTitle);
     updateBookingDetails({ roomName: roomTitle });
     setIsEnquiryModalOpen(true);
@@ -89,6 +93,9 @@ export default function HomePage() {
   const handleWhatsAppBooking = (roomNameOverride?: string) => {
     const targetRoom = roomNameOverride || bookingDetails.roomName;
     const roomObj = rooms.find((r) => r.name === targetRoom);
+    if (roomObj && (Number(roomObj.availableUnits) === 0 || roomObj.statusType === "sold_out")) {
+      return;
+    }
     const phone = "919931924027";
 
     let text = `Hello Maa Annapurna Home Stay & Hotel! I would like to enquire about room availability & booking:\n\n`;
