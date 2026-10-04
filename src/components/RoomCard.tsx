@@ -28,45 +28,39 @@ export default function RoomCard({
     <article
       className={`rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col group ${
         isSoldOut
-          ? "bg-stone-50/90 border-stone-300 shadow-xs"
+          ? "bg-gray-200 border-gray-300 shadow-sm"
           : "bg-white border-stone-200/90 shadow-md hover:shadow-xl"
       }`}
     >
-      {/* Room Image Container */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-stone-100">
+      {/* Room Image Container - Grayscaled with no button on top so image is 100% visible */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-300">
         <Image
           src={room.image}
           alt={room.alt}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className={`object-cover transition duration-500 ${
-            isSoldOut ? "grayscale-[70%] contrast-95 brightness-90" : "group-hover:scale-105"
+          className={`w-full h-full object-cover transition duration-500 ${
+            isSoldOut ? "grayscale contrast-90 brightness-95" : "group-hover:scale-105"
           }`}
         />
 
-        {/* Zomato / Swiggy Style Sold Out Overlay */}
-        {isSoldOut && (
-          <div className="absolute inset-0 bg-stone-950/60 backdrop-blur-[2px] flex flex-col items-center justify-center p-3 text-center z-10 select-none">
-            <span className="text-2xl sm:text-3xl mb-1">🚫</span>
-            <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-white px-3.5 py-1 rounded-full bg-rose-600 border border-rose-400 shadow-md">
-              Sold Out for Today
-            </span>
-            <span className="text-[10.5px] text-stone-300 mt-1 font-medium">
-              All units are booked for today
-            </span>
+        {/* Zomato Top Tag: Currently Sold Out when closed/empty, or room badge when available */}
+        {isSoldOut ? (
+          <div className="absolute top-4 left-4 z-20 bg-gray-900/90 text-white backdrop-blur-md px-3 py-1.5 rounded-md text-xs font-bold tracking-wide uppercase flex items-center shadow-lg border border-gray-700 select-none">
+            <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse mr-2"></span>
+            Currently Sold Out
+          </div>
+        ) : (
+          <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur text-stone-900 text-xs font-bold px-3 py-1 rounded-full shadow-xs">
+            {room.badge}
           </div>
         )}
 
-        {/* Room Badge */}
-        <div className="absolute top-4 left-4 z-20 bg-white/95 backdrop-blur text-stone-900 text-xs font-bold px-3 py-1 rounded-full shadow-xs">
-          {room.badge}
-        </div>
-
         {/* Live Room Status Pill on Image */}
         <div
-          className={`absolute top-4 right-4 z-20 backdrop-blur-md text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 border ${
+          className={`absolute top-4 right-4 z-20 backdrop-blur-md text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 border select-none ${
             isSoldOut
-              ? "bg-rose-950/90 text-rose-300 border-rose-500/50"
+              ? "bg-gray-900/80 text-gray-300 border-gray-700"
               : room.statusType === "available"
               ? "bg-emerald-950/90 text-emerald-300 border-emerald-500/40"
               : "bg-amber-950/90 text-amber-300 border-amber-500/40"
@@ -75,7 +69,7 @@ export default function RoomCard({
           <span
             className={`w-2 h-2 rounded-full ${
               isSoldOut
-                ? "bg-rose-500"
+                ? "bg-red-500"
                 : room.statusType === "available"
                 ? "bg-emerald-400 animate-pulse"
                 : "bg-amber-400 animate-pulse"
@@ -89,23 +83,27 @@ export default function RoomCard({
         </div>
       </div>
 
-      {/* Room Details */}
-      <div className={`p-5 sm:p-6 flex-1 flex flex-col justify-between ${isSoldOut ? "bg-stone-50/70" : ""}`}>
+      {/* Room Details Body */}
+      <div className={`p-5 sm:p-6 flex-1 flex flex-col justify-between ${isSoldOut ? "bg-gray-200" : "bg-white"}`}>
         <div>
           {/* Title and Pricing Header */}
           <div className="flex items-start justify-between gap-3 mb-2">
             <div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <h3 className={`font-serif text-lg sm:text-2xl font-bold leading-snug ${isSoldOut ? "text-stone-700" : "text-stone-900"}`}>
+              <div className="flex items-center gap-2.5 flex-wrap">
+                <h3
+                  className={`font-serif text-lg sm:text-2xl font-bold leading-snug ${
+                    isSoldOut ? "text-gray-700" : "text-stone-900"
+                  }`}
+                >
                   {room.name}
                 </h3>
                 {isSoldOut && (
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-rose-700 bg-rose-100/90 border border-rose-200 px-2 py-0.5 rounded-full shrink-0">
+                  <span className="bg-gray-300 text-gray-700 text-[10.5px] font-bold px-2 py-0.5 rounded border border-gray-400 uppercase tracking-wide">
                     Sold Out
                   </span>
                 )}
               </div>
-              <div className="flex items-center gap-2 mt-1 text-xs text-stone-500">
+              <div className={`flex items-center gap-2 mt-1 text-xs ${isSoldOut ? "text-gray-500" : "text-stone-500"}`}>
                 <span>🛏️ {room.beds}</span>
                 <span>•</span>
                 <span>👥 {room.guests}</span>
@@ -115,35 +113,41 @@ export default function RoomCard({
             {/* Actual Price & Discount */}
             <div className="text-right shrink-0">
               <div className="flex items-baseline gap-1.5 justify-end">
-                <span className="text-xs text-stone-400 line-through">
+                <span className={`text-xs line-through ${isSoldOut ? "text-gray-400" : "text-stone-400"}`}>
                   ₹{room.originalPrice.toLocaleString("en-IN")}
                 </span>
-                <span className={`font-serif text-xl sm:text-2xl font-bold ${isSoldOut ? "text-stone-600" : "text-stone-900"}`}>
+                <span
+                  className={`font-serif text-xl sm:text-2xl font-bold ${
+                    isSoldOut ? "text-gray-600" : "text-stone-900"
+                  }`}
+                >
                   ₹{room.price.toLocaleString("en-IN")}
                 </span>
               </div>
               <div className="flex items-center gap-1 justify-end mt-0.5">
-                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${
-                  isSoldOut
-                    ? "bg-stone-200 text-stone-600 border-stone-300"
-                    : "text-emerald-700 bg-emerald-50 border-emerald-200"
-                }`}>
+                <span
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${
+                    isSoldOut
+                      ? "bg-gray-300 text-gray-600 border-gray-400"
+                      : "text-emerald-700 bg-emerald-50 border-emerald-200"
+                  }`}
+                >
                   {room.discount}
                 </span>
-                <span className="text-[10.5px] text-stone-500">/ night</span>
+                <span className={`text-[10.5px] ${isSoldOut ? "text-gray-500" : "text-stone-500"}`}>/ night</span>
               </div>
             </div>
           </div>
 
-          <p className="hidden sm:block text-stone-600 text-xs sm:text-sm leading-relaxed mb-4">
+          <p className={`hidden sm:block text-xs sm:text-sm leading-relaxed mb-4 ${isSoldOut ? "text-gray-600" : "text-stone-600"}`}>
             {room.description}
           </p>
 
-          {/* Dedicated Currently Available / Booked Section */}
+          {/* Currently Available / Booked Section */}
           <div
             className={`p-2.5 sm:p-3 rounded-xl border mb-3 sm:mb-4 ${
               isSoldOut
-                ? "bg-rose-50/80 border-rose-200 text-rose-950"
+                ? "bg-gray-100 border-gray-300 text-gray-700"
                 : room.statusType === "available"
                 ? "bg-emerald-50/70 border-emerald-200/90 text-emerald-950"
                 : "bg-amber-50/70 border-amber-200/90 text-amber-950"
@@ -154,7 +158,7 @@ export default function RoomCard({
                 <span
                   className={`w-2 h-2 rounded-full ${
                     isSoldOut
-                      ? "bg-rose-500"
+                      ? "bg-red-500"
                       : room.statusType === "available"
                       ? "bg-emerald-500 animate-pulse"
                       : "bg-amber-500 animate-pulse"
@@ -163,7 +167,7 @@ export default function RoomCard({
                 <span
                   className={
                     isSoldOut
-                      ? "text-rose-900 font-bold"
+                      ? "text-gray-800 font-bold"
                       : room.statusType === "available"
                       ? "text-emerald-900 font-bold"
                       : "text-amber-950 font-bold"
@@ -172,17 +176,27 @@ export default function RoomCard({
                   {displayStatus}
                 </span>
               </div>
-              <span className="text-[11px] px-2 py-0.5 rounded-md bg-white/90 border border-stone-200/80 font-medium text-stone-700 shadow-2xs">
+              <span
+                className={`text-[11px] px-2 py-0.5 rounded-md border font-medium ${
+                  isSoldOut
+                    ? "bg-gray-200 border-gray-300 text-gray-600"
+                    : "bg-white/90 border-stone-200/80 text-stone-700 shadow-2xs"
+                }`}
+              >
                 {room.bookedToday || (isSoldOut ? room.totalUnits : 0)} Booked Today
               </span>
             </div>
 
             {/* Visual Capacity Progress Bar */}
-            <div className="mt-2 sm:mt-2.5 w-full bg-white/80 border border-stone-200/60 h-2 rounded-full overflow-hidden flex">
+            <div
+              className={`mt-2 sm:mt-2.5 w-full border h-2 rounded-full overflow-hidden flex ${
+                isSoldOut ? "bg-gray-300 border-gray-300" : "bg-white/80 border-stone-200/60"
+              }`}
+            >
               <div
                 className={`h-full transition-all duration-500 ${
                   isSoldOut
-                    ? "bg-rose-500"
+                    ? "bg-gray-400"
                     : room.statusType === "available"
                     ? "bg-emerald-500"
                     : "bg-amber-500"
@@ -191,13 +205,13 @@ export default function RoomCard({
               ></div>
             </div>
 
-            <div className="flex justify-between items-center text-[10.5px] text-stone-600 mt-1.5 font-medium">
+            <div className={`flex justify-between items-center text-[10.5px] mt-1.5 font-medium ${isSoldOut ? "text-gray-500" : "text-stone-600"}`}>
               <span>
-                <strong className={isSoldOut ? "text-rose-700" : "text-stone-900"}>{room.availableUnits}</strong> of {room.totalUnits} units available
+                <strong className={isSoldOut ? "text-gray-700" : "text-stone-900"}>{room.availableUnits}</strong> of {room.totalUnits} units available
               </span>
               {isSoldOut ? (
-                <span className="text-rose-700 font-semibold flex items-center gap-1">
-                  ✕ All Units Booked Today
+                <span className="text-red-600 font-semibold flex items-center gap-1">
+                  ✕ Not Accepting Bookings Today
                 </span>
               ) : (
                 <span className="hidden sm:flex items-center gap-1 text-emerald-700 font-semibold">
@@ -215,9 +229,18 @@ export default function RoomCard({
             {room.features.map((feat, idx) => (
               <span
                 key={idx}
-                className={`${idx >= 3 ? "hidden sm:inline-flex" : "inline-flex"} items-center text-[11px] font-medium text-stone-700 bg-stone-100 px-2 py-0.5 rounded-md`}
+                className={`${idx >= 3 ? "hidden sm:inline-flex" : "inline-flex"} items-center text-[11px] font-medium px-2 py-0.5 rounded-md border ${
+                  isSoldOut
+                    ? "bg-gray-300 text-gray-700 border-gray-400/50"
+                    : "bg-stone-100 text-stone-700 border-stone-200/60"
+                }`}
               >
-                <svg className="w-3 h-3 text-amber-700 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  className={`w-3 h-3 mr-1 ${isSoldOut ? "text-gray-500" : "text-amber-700"}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                 </svg>
                 {feat}
@@ -226,15 +249,15 @@ export default function RoomCard({
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="pt-3 border-t border-stone-200/80 flex items-center gap-2.5 sm:gap-3">
+        {/* Actions Row */}
+        <div className={`pt-3 border-t flex items-center gap-2.5 sm:gap-3 ${isSoldOut ? "border-gray-300" : "border-stone-200/80"}`}>
           {isSoldOut ? (
             <div className="flex-1 flex items-center gap-2.5 select-none">
               <button
                 type="button"
                 disabled
                 aria-disabled="true"
-                className="flex-1 py-2.5 px-3 sm:px-4 rounded-xl bg-stone-200 text-stone-500 font-bold text-xs sm:text-sm text-center cursor-not-allowed border border-stone-300 shadow-none flex items-center justify-center gap-1.5"
+                className="flex-1 py-2.5 px-3 sm:px-4 rounded-xl bg-gray-300 text-gray-500 font-bold text-xs sm:text-sm text-center cursor-not-allowed border border-gray-400 shadow-none flex items-center justify-center gap-1.5"
               >
                 <span>🚫 Sold Out for Today</span>
               </button>
@@ -242,10 +265,10 @@ export default function RoomCard({
                 type="button"
                 disabled
                 aria-disabled="true"
-                className="py-2.5 px-3.5 sm:px-4 rounded-xl bg-stone-100 text-stone-400 border border-stone-200 font-semibold text-xs sm:text-sm cursor-not-allowed flex items-center justify-center gap-1.5 shrink-0"
-                title="Room is currently sold out"
+                className="py-2.5 px-3.5 sm:px-4 rounded-xl bg-gray-300 text-gray-500 border border-gray-400 font-semibold text-xs sm:text-sm cursor-not-allowed flex items-center justify-center gap-1.5 shrink-0"
+                title="Booking is locked for this room"
               >
-                <span>Unavailable</span>
+                <span className="bg-gray-400 text-gray-800 text-[10px] px-1.5 py-0.5 rounded uppercase font-bold">Locked</span>
               </button>
             </div>
           ) : (
