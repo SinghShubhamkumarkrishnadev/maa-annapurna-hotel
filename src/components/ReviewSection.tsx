@@ -88,7 +88,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100/90 border border-amber-300 text-amber-900 text-[10.5px] font-bold tracking-wider uppercase">
                   <span>⭐</span>
-                  <span>Guest Experiences</span>
+                  <span>Home Stay &amp; Hotel Reviews</span>
                 </span>
                 <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                   <span>★ 4.9</span>
@@ -96,7 +96,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                 </span>
               </div>
               <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-bold text-stone-900 tracking-tight">
-                Loved by Pilgrims &amp; Travelers
+                Loved by Pilgrims &amp; Homestay Guests
               </h2>
             </div>
 

@@ -131,7 +131,7 @@ export default function InstallAppModal() {
               <div className="relative w-12 h-12 rounded-2xl overflow-hidden shadow-xs border border-amber-900/15 shrink-0 bg-stone-50 p-1 flex items-center justify-center">
                 <Image
                   src="/icon.svg"
-                  alt="Maa Annapurna Hotel App"
+                  alt="Maa Annapurna Home Stay &amp; Hotel App"
                   width={40}
                   height={40}
                   className="w-full h-full object-contain"
@@ -147,7 +147,7 @@ export default function InstallAppModal() {
                   id="install-modal-title"
                   className="font-serif text-lg sm:text-xl font-bold text-stone-900 tracking-tight leading-tight mt-0.5"
                 >
-                  Install Maa Annapurna App
+                  Install Maa Annapurna Home Stay App
                 </h3>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function InstallAppModal() {
               <span className="w-5 h-5 rounded-lg bg-amber-100 text-amber-900 flex items-center justify-center text-xs shrink-0 font-bold">
                 🛕
               </span>
-              <span>Offline hotel address (5 mins to Mahabodhi Temple)</span>
+              <span>Offline homestay address (5 mins to Mahabodhi Temple)</span>
             </div>
             <div className="flex items-center gap-2.5 text-xs text-stone-700">
               <span className="w-5 h-5 rounded-lg bg-amber-100 text-amber-900 flex items-center justify-center text-xs shrink-0 font-bold">

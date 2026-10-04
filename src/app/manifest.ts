@@ -3,8 +3,8 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Maa Annapurna Home Stay & Hotel Bodhgaya",
-    short_name: "Maa Annapurna Hotel",
-    description: "Comfortable AC rooms & family suites near Mahabodhi Temple, Bodhgaya.",
+    short_name: "Maa Annapurna Home Stay",
+    description: "Comfortable AC rooms & family suites at Maa Annapurna Home Stay & Hotel near Mahabodhi Temple, Bodhgaya.",
     start_url: "/",
     display: "standalone",
     background_color: "#FFFFFF",

@@ -17,13 +17,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://maaannapurnahotel.com"),
   title: {
-    default: "Maa Annapurna Home Stay & Hotel | 24/7 Open • Pick & Drop • Best AC Hotel in Bodhgaya",
+    default: "Maa Annapurna Home Stay & Hotel | 24/7 Open • Pick & Drop • Best AC Homestay & Hotel in Bodhgaya",
     template: "%s | Maa Annapurna Home Stay & Hotel Bodhgaya",
   },
   description:
-    "Looking for the best hotel in Bodhgaya? 24/7 Open Maa Annapurna Home Stay offers clean AC rooms, family suites with kitchenette, attached modern baths, free Wi-Fi, airport/railway pick & drop service, and tours & travels packages. 5 mins from Mahabodhi Temple. Book direct!",
-  applicationName: "Maa Annapurna Home Stay Bodhgaya",
-  authors: [{ name: "Maa Annapurna Home Stay", url: "https://maaannapurnahotel.com" }],
+    "Looking for the best homestay & hotel in Bodhgaya? 24/7 Open Maa Annapurna Home Stay & Hotel offers clean AC rooms, family suites with kitchenette, attached modern baths, free Wi-Fi, airport/railway pick & drop service, and tours & travels packages. 5 mins from Mahabodhi Temple. Book direct!",
+  applicationName: "Maa Annapurna Home Stay & Hotel Bodhgaya",
+  authors: [{ name: "Maa Annapurna Home Stay & Hotel", url: "https://maaannapurnahotel.com" }],
   generator: "Next.js",
   keywords: [
     "hotel in bodhgaya",

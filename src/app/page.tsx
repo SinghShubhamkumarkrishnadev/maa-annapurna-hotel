@@ -86,7 +86,7 @@ export default function HomePage() {
     const roomObj = rooms.find((r) => r.name === targetRoom);
     const phone = "919931924027";
 
-    let text = `Hello Maa Annapurna Home Stay! I would like to enquire about room availability & booking:\n\n`;
+    let text = `Hello Maa Annapurna Home Stay & Hotel! I would like to enquire about room availability & booking:\n\n`;
     text += `• Room: ${targetRoom}`;
     if (roomObj) {
       text += ` (Special Rate: ₹${roomObj.price.toLocaleString("en-IN")}/night)\n`;

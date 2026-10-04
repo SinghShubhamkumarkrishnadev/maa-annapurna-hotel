@@ -44,18 +44,21 @@ export default function HeroSection({
 
             {/* Single targeted H1 */}
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.45rem] font-bold tracking-tight text-stone-900 leading-[1.2]">
-              Peaceful Hotel &amp; Home Stay in Bodhgaya Near Mahabodhi Temple
+              Peaceful Home Stay &amp; Hotel in Bodhgaya Near Mahabodhi Temple
             </h1>
 
             <p className="hidden sm:block text-stone-600 text-xs sm:text-sm lg:text-[14.5px] leading-relaxed max-w-xl">
-              Authentic pilgrimage hospitality at Maa Annapurna Home Stay. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette options, 24/7 front desk, and prompt airport/station pick &amp; drop service.
+              Experience the warmth of family-run homestay hospitality with modern hotel comfort at <strong className="text-stone-800 font-semibold">Maa Annapurna Home Stay &amp; Hotel</strong>. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette suites, 24/7 front desk, and prompt airport/station pick &amp; drop service.
             </p>
             <p className="sm:hidden text-stone-600 text-xs leading-relaxed">
-              Clean AC rooms &amp; family suites just 5 mins from Mahabodhi Temple with 24/7 front desk &amp; travel service.
+              Peaceful homestay &amp; hotel just 5 mins from Mahabodhi Temple with 24/7 front desk, clean AC rooms &amp; travel service.
             </p>
 
             {/* Highlights Pill Row */}
             <div className="flex flex-wrap gap-2 text-[11px] sm:text-xs text-stone-700 font-medium">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50/90 border border-amber-200 text-amber-950 font-semibold shadow-2xs">
+                <span>🏡</span> Homestay Hospitality
+              </span>
               <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200/90 shadow-2xs">
                 <span className="text-emerald-600 font-bold">✓</span> 24 Hours Open (24/7)
               </span>

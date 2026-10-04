@@ -12,7 +12,7 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
       "Maa Annapurna Hotel",
     ],
     "description":
-      "Peaceful, clean AC hotel and homestay in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
+      "Peaceful, clean AC home stay and hotel in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
     "url": "https://maaannapurnahotel.com",
     "telephone": "+919931924027",
     "priceRange": "₹₹",
