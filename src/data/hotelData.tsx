@@ -256,7 +256,7 @@ export const AMENITIES: AmenityItem[] = [
       </svg>
     ),
     title: "Pick & Drop Service",
-    desc: "Prompt pickup and drop facility for Gaya International Airport (GAY) & Gaya Junction Railway Station (may cost additional charges)",
+    desc: "Prompt pickup and drop facility for Gaya International Airport & Gaya Junction Railway Station (may cost additional charges)",
   },
   {
     icon: (
@@ -329,7 +329,7 @@ export const NEARBY_PLACES: NearbyPlace[] = [
   { name: "Great Buddha Statue (80ft Daijokyo)", distance: "6 mins (~2.5 km)", icon: "☸️" },
   { name: "Thai, Japanese, Bhutanese & Tibetan Monasteries", distance: "5 mins (~2 km)", icon: "🌸" },
   { name: "Bodhgaya Main Market & Pilgrim Cafes", distance: "4 mins (~1.5 km)", icon: "🛍️" },
-  { name: "Gaya International Airport (GAY)", distance: "15-18 mins (~9 km)", icon: "✈️" },
+  { name: "Gaya International Airport", distance: "15-18 mins (~9 km)", icon: "✈️" },
   { name: "Gaya Junction Railway Station", distance: "25-30 mins (~14 km)", icon: "🚆" },
 ];
 
@@ -340,7 +340,7 @@ export const FAQS: FaqItem[] = [
   },
   {
     q: "Do you offer airport/railway station pick and drop service and tour packages?",
-    a: "Yes! We provide dedicated 24/7 pick and drop service for Gaya International Airport (GAY) and Gaya Junction Railway Station (may cost additional charges depending on vehicle and timing). We also provide a full tours and travels facility organizing local Bodhgaya temple visits as well as day trips to Rajgir, Nalanda, and Dungeshwari Cave temples.",
+    a: "Yes! We provide dedicated 24/7 pick and drop service for Gaya International Airport and Gaya Junction Railway Station (may cost additional charges depending on vehicle and timing). We also provide a full tours and travels facility organizing local Bodhgaya temple visits as well as day trips to Rajgir, Nalanda, and Dungeshwari Cave temples.",
   },
   {
     q: "Is Maa Annapurna Home Stay & Hotel open 24 hours (24/7) for check-in and assistance?",
