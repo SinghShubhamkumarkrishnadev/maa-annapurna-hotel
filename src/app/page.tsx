@@ -16,8 +16,6 @@ import RoomEnquiryModal from "@/components/RoomEnquiryModal";
 import InstallAppModal from "@/components/InstallAppModal";
 
 import {
-  DEFAULT_ROOM_CATEGORIES,
-  HOTEL_IMAGES,
   AMENITIES,
   FAQS,
 } from "@/data/hotelData";
@@ -26,7 +24,7 @@ import {
   getFaqSchema,
   getBreadcrumbSchema,
 } from "@/lib/seoSchemas";
-import { BookingDetails } from "@/types/hotel";
+import { BookingDetails, RoomItem, PhotoItem } from "@/types/hotel";
 
 export default function HomePage() {
   // Booking inquiry state
@@ -45,28 +43,35 @@ export default function HomePage() {
     setBookingDetails((prev) => ({ ...prev, ...updates }));
   };
 
-  // Dynamic rooms & gallery state synced with admin API updates
-  const [rooms, setRooms] = useState(DEFAULT_ROOM_CATEGORIES);
-  const [hotelImages, setHotelImages] = useState(HOTEL_IMAGES);
+  // Dynamic rooms & gallery state synced 100% with Supabase database API
+  const [rooms, setRooms] = useState<RoomItem[]>([]);
+  const [isLoadingRooms, setIsLoadingRooms] = useState(true);
+  const [hotelImages, setHotelImages] = useState<PhotoItem[]>([]);
+  const [isLoadingImages, setIsLoadingImages] = useState(true);
 
   useEffect(() => {
     fetch("/api/rooms")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && Array.isArray(data.rooms) && data.rooms.length > 0) {
+        if (data.success && Array.isArray(data.rooms)) {
           setRooms(data.rooms);
+          if (data.rooms.length > 0 && !bookingDetails.roomName) {
+            setBookingDetails((prev) => ({ ...prev, roomName: data.rooms[0].name }));
+          }
         }
       })
-      .catch(() => {});
+      .catch((err) => console.error("Error loading rooms:", err))
+      .finally(() => setIsLoadingRooms(false));
 
     fetch("/api/admin/photos")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && Array.isArray(data.photos) && data.photos.length > 0) {
+        if (data.success && Array.isArray(data.photos)) {
           setHotelImages(data.photos);
         }
       })
-      .catch(() => {});
+      .catch((err) => console.error("Error loading photos:", err))
+      .finally(() => setIsLoadingImages(false));
   }, []);
 
   // Modal & Lightbox states
@@ -142,6 +147,7 @@ export default function HomePage() {
         {/* Room Showcase Section */}
         <RoomsSection
           rooms={rooms}
+          isLoading={isLoadingRooms}
           onOpenEnquiry={openRoomEnquiry}
           onWhatsAppBooking={handleWhatsAppBooking}
         />
@@ -149,6 +155,7 @@ export default function HomePage() {
         {/* Photo Gallery Section */}
         <GallerySection
           images={hotelImages}
+          isLoading={isLoadingImages}
           onSelectImage={setLightboxIndex}
         />
 

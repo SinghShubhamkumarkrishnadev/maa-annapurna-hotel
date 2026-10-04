@@ -7,10 +7,11 @@ import ScrollReveal from "./ScrollReveal";
 
 interface GallerySectionProps {
   images: PhotoItem[];
+  isLoading?: boolean;
   onSelectImage: (index: number) => void;
 }
 
-export default function GallerySection({ images, onSelectImage }: GallerySectionProps) {
+export default function GallerySection({ images, isLoading = false, onSelectImage }: GallerySectionProps) {
   const [filter, setFilter] = useState<"all" | "rooms" | "bathrooms">("all");
 
   const filteredImages = images.filter((img) =>
@@ -72,35 +73,48 @@ export default function GallerySection({ images, onSelectImage }: GallerySection
         </ScrollReveal>
 
         {/* Gallery Bento Grid with smooth staggered scale reveals */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-          {filteredImages.map((image, idx) => (
-            <ScrollReveal
-              as="figure"
-              key={image.id}
-              variant="scale"
-              delayMs={(idx % 4) * 75}
-              onClick={() => {
-                const originalIndex = images.findIndex((img) => img.id === image.id);
-                onSelectImage(originalIndex >= 0 ? originalIndex : 0);
-              }}
-              className={`relative rounded-xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 group cursor-pointer border border-stone-200 bg-stone-100 butter-touch ${
-                image.height > image.width ? "aspect-[9/16] row-span-2" : "aspect-[16/10]"
-              }`}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className="object-cover group-hover:scale-105 transition duration-500"
-              />
-              <div className="absolute inset-0 bg-stone-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 text-white">
-                <figcaption className="text-xs font-semibold line-clamp-1">{image.title}</figcaption>
-                <span className="text-[10px] text-stone-300">Tap to expand HD</span>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
+        {isLoading || filteredImages.length === 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 animate-pulse">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <div
+                key={i}
+                className={`rounded-xl bg-stone-200 ${
+                  i % 3 === 0 ? "aspect-[9/16] row-span-2" : "aspect-[16/10]"
+                }`}
+              ></div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            {filteredImages.map((image, idx) => (
+              <ScrollReveal
+                as="figure"
+                key={image.id}
+                variant="scale"
+                delayMs={(idx % 4) * 75}
+                onClick={() => {
+                  const originalIndex = images.findIndex((img) => img.id === image.id);
+                  onSelectImage(originalIndex >= 0 ? originalIndex : 0);
+                }}
+                className={`relative rounded-xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 group cursor-pointer border border-stone-200 bg-stone-100 butter-touch ${
+                  image.height > image.width ? "aspect-[9/16] row-span-2" : "aspect-[16/10]"
+                }`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-stone-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 text-white">
+                  <figcaption className="text-xs font-semibold line-clamp-1">{image.title}</figcaption>
+                  <span className="text-[10px] text-stone-300">Tap to expand HD</span>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -84,11 +84,15 @@ export default function ContactSection({
                 onChange={(e) => onUpdateBookingDetails({ roomName: e.target.value })}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-stone-900 bg-stone-50/50"
               >
-                {activeRooms.map((r) => (
-                  <option key={r.id} value={r.name}>
-                    {r.name}
-                  </option>
-                ))}
+                {activeRooms.length === 0 ? (
+                  <option value="">Loading available rooms...</option>
+                ) : (
+                  activeRooms.map((r) => (
+                    <option key={r.id} value={r.name}>
+                      {r.name} (₹{r.price.toLocaleString("en-IN")}/night)
+                    </option>
+                  ))
+                )}
               </select>
             </div>
 
