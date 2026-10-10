@@ -44,6 +44,11 @@ export default function Room360Viewer({
     stateRef.current.autoRotate = autoRotate;
   }, [autoRotate]);
 
+  // Reset interaction state on image change so hint shows on new room tour
+  useEffect(() => {
+    setHasInteracted(false);
+  }, [imageSrc]);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -301,12 +306,23 @@ export default function Room360Viewer({
         </div>
       </div>
 
-      {/* Interactive Helper Hint - Desktop only */}
+      {/* Interactive Helper Hint for Mobile & Desktop - Dismisses instantly on touch/drag/swipe */}
       {!hasInteracted && !isLoading && (
-        <div className="hidden sm:flex absolute inset-x-0 bottom-14 justify-center pointer-events-none z-10 animate-bounce duration-1000">
-          <div className="bg-black/75 text-white text-[11px] font-medium px-3.5 py-1.5 rounded-full backdrop-blur-md shadow-lg border border-white/20 flex items-center gap-2">
-            <span className="text-sm">👆</span>
-            <span>Drag or swipe anywhere to rotate 360°</span>
+        <div
+          onClick={() => setHasInteracted(true)}
+          onTouchStart={() => setHasInteracted(true)}
+          className="absolute inset-x-0 bottom-6 sm:bottom-12 flex justify-center pointer-events-auto z-20 px-3 cursor-pointer animate-in fade-in slide-in-from-bottom-2 duration-300 select-none"
+        >
+          <div className="bg-stone-950/85 hover:bg-stone-950 text-white text-[11px] sm:text-xs font-medium px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full backdrop-blur-md shadow-xl border border-white/20 flex items-center gap-2 active:scale-95 transition-all">
+            <span className="text-sm animate-pulse">👆</span>
+            <span className="sm:hidden">Swipe or drag to rotate 360°</span>
+            <span className="hidden sm:inline">Click &amp; drag to explore 360°</span>
+            <span
+              className="text-stone-400 hover:text-white text-[10px] ml-1 bg-white/10 px-1.5 py-0.5 rounded-full"
+              title="Dismiss hint"
+            >
+              ✕
+            </span>
           </div>
         </div>
       )}
