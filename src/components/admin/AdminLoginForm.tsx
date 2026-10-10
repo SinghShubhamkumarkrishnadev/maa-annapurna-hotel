@@ -35,7 +35,7 @@ export default function AdminLoginForm({
             Host Administration
           </h1>
           <p className="text-xs text-stone-400 mt-1">
-            Maa Annapurna Home Stay &amp; Hotel • Bodhgaya
+            Maa Annapurna Home Stay • Bodhgaya
           </p>
         </div>
 

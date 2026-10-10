@@ -17,12 +17,12 @@ export default function Header({ onOpenEnquiry }: HeaderProps) {
           <a
             href="#"
             className="flex items-center gap-2.5 shrink-0 group py-1 pr-4 lg:pr-6"
-            title="Maa Annapurna Home Stay & Hotel Bodhgaya"
+            title="Maa Annapurna Home Stay Bodhgaya"
           >
             <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden shrink-0 shadow-2xs border border-amber-900/10 group-hover:scale-105 transition-transform duration-300">
               <Image
                 src="/icon.svg"
-                alt="Maa Annapurna Hotel Emblem"
+                alt="Maa Annapurna Home Stay Emblem"
                 width={36}
                 height={36}
                 className="w-full h-full object-cover"
@@ -34,7 +34,7 @@ export default function Header({ onOpenEnquiry }: HeaderProps) {
                 Maa Annapurna
               </span>
               <span className="text-[9px] sm:text-[9.5px] tracking-[0.2em] uppercase font-semibold text-amber-800/80 leading-none mt-0.5 whitespace-nowrap">
-                Home Stay &amp; Hotel • Bodhgaya
+                Home Stay • Bodhgaya
               </span>
             </div>
           </a>

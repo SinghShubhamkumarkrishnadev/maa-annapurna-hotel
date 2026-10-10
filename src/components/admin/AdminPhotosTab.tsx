@@ -20,7 +20,7 @@ export default function AdminPhotosTab({
       <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-stone-200">
         <div>
           <h3 className="font-serif text-base font-bold text-stone-900">
-            Hotel Gallery Photos ({photos.length})
+            Home Stay Gallery Photos ({photos.length})
           </h3>
           <p className="text-xs text-stone-500">
             Photos displayed on the public visual tour and available for room assignment.

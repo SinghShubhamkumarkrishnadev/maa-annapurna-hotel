@@ -27,7 +27,7 @@ export default function GallerySection({ images, isLoading = false, onSelectImag
               Visual Tour
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-stone-900 mt-1">
-              Inside Maa Annapurna Home Stay &amp; Hotel Bodhgaya
+              Inside Maa Annapurna Home Stay Bodhgaya
             </h2>
             <p className="hidden sm:block text-stone-500 text-sm mt-2">
               Browse authentic photographs of our AC bedrooms, attached modern bathrooms, kitchenette facilities, and clean interiors.

@@ -13,21 +13,21 @@ export default function Footer() {
                 <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-amber-600/30">
                   <Image
                     src="/icon.svg"
-                    alt="Maa Annapurna Hotel Emblem"
+                    alt="Maa Annapurna Home Stay Emblem"
                     width={32}
                     height={32}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <span className="font-serif text-lg font-bold text-white tracking-wide">
-                  Maa Annapurna Home Stay &amp; Hotel
+                  Maa Annapurna Home Stay
                 </span>
               </div>
               <p className="hidden sm:block mt-2 text-stone-400 leading-relaxed text-xs">
-                A serene family-run home stay and hotel in Bodhgaya open 24 hours (24/7) offering airport &amp; railway station pick &amp; drop service, tours and travels packages, fully air-conditioned rooms, attached modern bathrooms, kitchenette amenities, and heartfelt service for temple pilgrims, yatras, and world travelers.
+                A serene family-run home stay in Bodhgaya open 24 hours (24/7) offering airport &amp; railway station pick &amp; drop service, tours and travels packages, fully air-conditioned rooms, attached modern bathrooms, kitchenette amenities, and heartfelt service for temple pilgrims, yatras, and world travelers.
               </p>
               <p className="sm:hidden mt-2 text-stone-400 leading-relaxed text-xs">
-                Peaceful home stay &amp; hotel in Bodhgaya near Mahabodhi Temple with 24/7 front desk &amp; travel service.
+                Peaceful home stay in Bodhgaya near Mahabodhi Temple with 24/7 front desk &amp; travel service.
               </p>
             </div>
 
@@ -36,7 +36,7 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-2 text-stone-400">
                 <a href="#rooms" className="hover:text-white transition">Rooms &amp; Suites</a>
                 <a href="#gallery" className="hover:text-white transition">Photo Tour</a>
-                <a href="#amenities" className="hover:text-white transition">Home Stay &amp; Hotel Amenities</a>
+                <a href="#amenities" className="hover:text-white transition">Home Stay Amenities</a>
                 <a href="#reviews" className="hover:text-white transition">Guest Reviews</a>
                 <a href="#faq" className="hover:text-white transition">Travel FAQs</a>
                 <a href="#contact" className="hover:text-white transition">Direct Booking</a>
@@ -45,7 +45,7 @@ export default function Footer() {
 
             <div>
               <h5 className="font-bold text-white uppercase tracking-wider text-[11px] mb-2.5 sm:mb-3">Contact &amp; Address (NAP)</h5>
-              <p className="text-stone-400 font-medium">Maa Annapurna Home Stay &amp; Hotel</p>
+              <p className="text-stone-400 font-medium">Maa Annapurna Home Stay</p>
               <p className="text-stone-400">Sujata Rd, opposite Nagina Palace and Hotel Star, Bodhgaya, Bihar 824231, India</p>
               <p className="mt-2">
                 Direct Phone:{" "}
@@ -59,7 +59,7 @@ export default function Footer() {
           </div>
 
           <div className="pt-5 sm:pt-6 flex flex-col sm:flex-row items-center justify-between text-stone-500 gap-2">
-            <p>© {new Date().getFullYear()} Maa Annapurna Home Stay &amp; Hotel Bodhgaya. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Maa Annapurna Home Stay Bodhgaya. All rights reserved.</p>
             <p className="text-[11px] hidden sm:inline">100% SEO Optimized • Fast &amp; Lightweight Experience</p>
           </div>
         </ScrollReveal>

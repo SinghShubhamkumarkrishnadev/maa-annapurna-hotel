@@ -34,18 +34,18 @@ export default function RoomsSection({
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-12">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
-                Home Stay &amp; Hotel Accommodation in Bodhgaya
+                Home Stay Accommodation in Bodhgaya
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-stone-900 mt-1 sm:mt-1.5">
                 AC Homestay Rooms &amp; Family Suites Near Mahabodhi Temple
               </h2>
               <p className="hidden sm:block text-stone-500 text-sm sm:text-base mt-2 max-w-xl">
-                Every room at Maa Annapurna Home Stay &amp; Hotel is equipped with a private attached bathroom, hot water geyser, and split air conditioning.
+                Every room at Maa Annapurna Home Stay is equipped with a private attached bathroom, hot water geyser, and split air conditioning.
               </p>
             </div>
             <div className="hidden sm:block mt-4 md:mt-0">
               <span className="text-xs text-stone-500 bg-stone-100 px-3 py-1.5 rounded-full font-medium">
-                ✓ 100% Genuine Photos of Home Stay &amp; Hotel
+                ✓ 100% Genuine Photos of Home Stay
               </span>
             </div>
           </div>

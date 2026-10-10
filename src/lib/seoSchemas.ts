@@ -5,12 +5,14 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": ["Hotel", "BedAndBreakfast", "LodgingBusiness"],
-    "name": "Maa Annapurna Home Stay & Hotel Bodhgaya",
+    "name": "Maa Annapurna Home Stay Bodhgaya",
     "alternateName": [
+      "Maa Annapurna Home Stay & Hotel Bodhgaya",
       "Maa Annapurna Hotel Bodhgaya",
+      "Maa Annapurna Hotel",
       "Maa Annapurna Home Stay",
       "Maa Annapurna Guest House Bodhgaya",
-      "Maa Annapurna Hotel",
+      "Hotel Maa Annapurna Bodhgaya",
     ],
     "description":
       "Peaceful, clean AC home stay and hotel in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
@@ -121,7 +123,7 @@ export function getBreadcrumbSchema() {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Maa Annapurna Home Stay & Hotel",
+        "name": "Maa Annapurna Home Stay",
         "item": siteUrl,
       },
     ],

@@ -30,7 +30,7 @@ export default function MobileMenu({ isOpen, onClose, onOpenEnquiry }: MobileMen
         onClick={onClose}
         className="block py-2.5 px-3 rounded-xl text-stone-800 text-sm font-medium hover:text-amber-800 hover:bg-stone-50 butter-touch"
       >
-        Hotel Amenities
+        Home Stay Amenities
       </a>
       <a
         href="#reviews"

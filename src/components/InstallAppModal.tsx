@@ -131,7 +131,7 @@ export default function InstallAppModal() {
               <div className="relative w-12 h-12 rounded-2xl overflow-hidden shadow-xs border border-amber-900/15 shrink-0 bg-stone-50 p-1 flex items-center justify-center">
                 <Image
                   src="/icon.svg"
-                  alt="Maa Annapurna Home Stay &amp; Hotel App"
+                  alt="Maa Annapurna Home Stay App"
                   width={40}
                   height={40}
                   className="w-full h-full object-contain"

@@ -175,7 +175,7 @@ export default function ReviewModal({
                 Rate Your Experience
               </h2>
               <p className="text-[11px] text-stone-500">
-                Maa Annapurna Home Stay &amp; Hotel • Bodhgaya
+                Maa Annapurna Home Stay • Bodhgaya
               </p>
             </div>
           </div>

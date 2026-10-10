@@ -14,13 +14,13 @@ export default function AmenitiesSection({ amenities }: AmenitiesSectionProps) {
         <ScrollReveal variant="up">
           <div className="text-center max-w-xl mx-auto mb-6 sm:mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
-              Homestay Warmth &amp; Hotel Comforts
+              Homestay Warmth &amp; Modern Comforts
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-stone-900 mt-1">
-              Home Stay &amp; Hotel Amenities in Bodhgaya
+              Home Stay Amenities in Bodhgaya
             </h2>
             <p className="hidden sm:block text-stone-500 text-sm mt-2">
-              Combining heartfelt family-run homestay care with modern AC hotel comforts to ensure every pilgrim and traveler feels at home.
+              Combining heartfelt family-run homestay care with modern AC comforts to ensure every pilgrim and traveler feels at home.
             </p>
           </div>
         </ScrollReveal>

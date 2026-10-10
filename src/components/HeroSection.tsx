@@ -44,14 +44,14 @@ export default function HeroSection({
 
             {/* Single targeted H1 */}
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.45rem] font-bold tracking-tight text-stone-900 leading-[1.2]">
-              Peaceful Home Stay &amp; Hotel in Bodhgaya Near Mahabodhi Temple
+              Peaceful Home Stay in Bodhgaya Near Mahabodhi Temple
             </h1>
 
             <p className="hidden sm:block text-stone-600 text-xs sm:text-sm lg:text-[14.5px] leading-relaxed max-w-xl">
-              Experience the warmth of family-run homestay hospitality with modern hotel comfort at <strong className="text-stone-800 font-semibold">Maa Annapurna Home Stay &amp; Hotel</strong>. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette suites, 24/7 front desk, and prompt airport/station pick &amp; drop service.
+              Experience the warmth of family-run homestay hospitality with modern comfort at <strong className="text-stone-800 font-semibold">Maa Annapurna Home Stay</strong>. Clean AC rooms, private attached hot-water bathrooms, in-room kitchenette suites, 24/7 front desk, and prompt airport/station pick &amp; drop service.
             </p>
             <p className="sm:hidden text-stone-600 text-xs leading-relaxed">
-              Peaceful homestay &amp; hotel just 5 mins from Mahabodhi Temple with 24/7 front desk, clean AC rooms &amp; travel service.
+              Peaceful homestay just 5 mins from Mahabodhi Temple with 24/7 front desk, clean AC rooms &amp; travel service.
             </p>
 
             {/* Highlights Pill Row */}

@@ -38,7 +38,7 @@ export default function RoomEnquiryModal({
         </button>
 
         <span className="text-[11px] font-bold uppercase tracking-wider text-amber-800">
-          Direct Home Stay &amp; Hotel Inquiry
+          Direct Home Stay Inquiry
         </span>
         <h3 className="font-serif text-xl sm:text-2xl font-bold text-stone-900 mt-1">
           Book {roomTitle}

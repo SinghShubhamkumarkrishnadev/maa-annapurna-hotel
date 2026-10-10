@@ -101,35 +101,35 @@ export const NEARBY_PLACES: NearbyPlace[] = [
 
 export const FAQS: FaqItem[] = [
   {
-    q: "How far is Maa Annapurna Home Stay & Hotel from the Mahabodhi Temple in Bodhgaya?",
-    a: "Maa Annapurna Home Stay & Hotel is located approximately 2.2 km from the UNESCO World Heritage Mahabodhi Temple, which is just a 5 to 7 minute drive or quick e-rickshaw ride away. It offers the perfect quiet retreat away from bustling traffic while remaining easily accessible to all major shrines.",
+    q: "How far is Maa Annapurna Home Stay from the Mahabodhi Temple in Bodhgaya?",
+    a: "Maa Annapurna Home Stay is located approximately 2.2 km from the UNESCO World Heritage Mahabodhi Temple, which is just a 5 to 7 minute drive or quick e-rickshaw ride away. It offers the perfect quiet retreat away from bustling traffic while remaining easily accessible to all major shrines.",
   },
   {
     q: "Do you offer airport/railway station pick and drop service and tour packages?",
     a: "Yes! We provide dedicated 24/7 pick and drop service for Gaya International Airport and Gaya Junction Railway Station (may cost additional charges depending on vehicle and timing). We also provide a full tours and travels facility organizing local Bodhgaya temple visits as well as day trips to Rajgir, Nalanda, and Dungeshwari Cave temples.",
   },
   {
-    q: "Is Maa Annapurna Home Stay & Hotel open 24 hours (24/7) for check-in and assistance?",
-    a: "Yes, Maa Annapurna Home Stay & Hotel is open 24 hours (24/7 front desk). Our host and team are available round-the-clock to assist with late-night check-ins, early-morning departures, travel guidance, and any guest requirements.",
+    q: "Is Maa Annapurna Home Stay open 24 hours (24/7) for check-in and assistance?",
+    a: "Yes, Maa Annapurna Home Stay is open 24 hours (24/7 front desk). Our host and team are available round-the-clock to assist with late-night check-ins, early-morning departures, travel guidance, and any guest requirements.",
   },
   {
-    q: "What amenities are included in the rooms at Maa Annapurna Home Stay & Hotel?",
-    a: "Every room at Maa Annapurna Home Stay & Hotel is equipped with split air conditioning (AC), an attached private bathroom with 24/7 hot water geyser, high-speed Wi-Fi, clean sanitized linens, and dressing furniture. Select rooms also feature a convenient in-room kitchenette counter and sink.",
+    q: "What amenities are included in the rooms at Maa Annapurna Home Stay?",
+    a: "Every room at Maa Annapurna Home Stay is equipped with split air conditioning (AC), an attached private bathroom with 24/7 hot water geyser, high-speed Wi-Fi, clean sanitized linens, and dressing furniture. Select rooms also feature a convenient in-room kitchenette counter and sink.",
   },
   {
     q: "Are family rooms and kitchenette suites available for groups?",
     a: "Yes! We specialize in comfortable accommodations for families and pilgrimage groups with spacious Triple Bed Rooms with kitchenette and Executive Family Suites accommodating 3 to 6 guests comfortably.",
   },
   {
-    q: "How can I book a room directly at Maa Annapurna Home Stay & Hotel for the best rate?",
+    q: "How can I book a room directly at Maa Annapurna Home Stay for the best rate?",
     a: "You can book directly by sending a WhatsApp message or calling our host directly at +91 99319 24027. Direct bookings enjoy zero platform commissions, instant confirmation, and flexible check-in assistance.",
   },
   {
-    q: "Is vehicle parking available at Maa Annapurna Home Stay & Hotel Bodhgaya?",
+    q: "Is vehicle parking available at Maa Annapurna Home Stay Bodhgaya?",
     a: "Yes, safe vehicle parking space is available for guests traveling by car or private tourist taxi to Bodhgaya.",
   },
   {
-    q: "What are the room tariffs and prices at Maa Annapurna Home Stay & Hotel Bodhgaya?",
+    q: "What are the room tariffs and prices at Maa Annapurna Home Stay Bodhgaya?",
     a: "Direct booking tariffs start from ₹1,199/night for Classic Twin AC Rooms, ₹1,299/night for Deluxe AC Double Rooms, ₹1,899/night for Triple Bed Rooms with Kitchenette, and ₹2,499/night for Executive Family Suites (4 to 6 guests). Direct booking guarantees 25% to 35% savings compared to standard OTAs with no hidden commissions.",
   },
   {

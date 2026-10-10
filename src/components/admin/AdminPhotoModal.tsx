@@ -41,9 +41,9 @@ export default function AdminPhotoModal({
 
     onSave({
       url: newPhotoUrl.trim(),
-      title: newPhotoTitle.trim() || "Maa Annapurna Hotel View",
+      title: newPhotoTitle.trim() || "Maa Annapurna Home Stay View",
       category: newPhotoCategory,
-      caption: newPhotoCaption.trim() || newPhotoTitle.trim() || "Guest room view at Maa Annapurna Hotel Bodhgaya",
+      caption: newPhotoCaption.trim() || newPhotoTitle.trim() || "Guest room view at Maa Annapurna Home Stay Bodhgaya",
     });
   };
 
@@ -61,7 +61,7 @@ export default function AdminPhotoModal({
           Gallery Media
         </span>
         <h2 className="font-serif text-xl font-bold text-stone-900 mt-1">
-          Add New Hotel Photo
+          Add New Home Stay Photo
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-3.5 mt-5">
@@ -81,7 +81,7 @@ export default function AdminPhotoModal({
 
           {/* Preset buttons */}
           <div className="space-y-1">
-            <span className="text-[10.5px] text-stone-500 font-semibold block">Pick from Hotel Assets:</span>
+            <span className="text-[10.5px] text-stone-500 font-semibold block">Pick from Home Stay Assets:</span>
             <div className="flex flex-wrap gap-1 max-h-24 overflow-y-auto p-1 bg-stone-50 rounded-lg border border-stone-200">
               {PRESET_GALLERY_IMAGES.map((img, i) => (
                 <button
@@ -120,7 +120,7 @@ export default function AdminPhotoModal({
             >
               <option value="rooms">Rooms &amp; Suites</option>
               <option value="bathrooms">Modern Attached Bathrooms</option>
-              <option value="exterior">Hotel Exterior &amp; Front Desk</option>
+              <option value="exterior">Home Stay Exterior &amp; Front Desk</option>
             </select>
           </div>
 

@@ -16,7 +16,7 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="font-serif text-lg font-bold text-stone-900 leading-none">
-                Maa Annapurna Hotel
+                Maa Annapurna Home Stay
               </h1>
               <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                 Host Admin

@@ -19,13 +19,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maa-annapurna-hotel
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Maa Annapurna Home Stay & Hotel | 24/7 Open • Pick & Drop • Best AC Homestay & Hotel in Bodhgaya",
-    template: "%s | Maa Annapurna Home Stay & Hotel Bodhgaya",
+    default: "Maa Annapurna Home Stay | 24/7 Open • Pick & Drop • Best AC Homestay in Bodhgaya",
+    template: "%s | Maa Annapurna Home Stay Bodhgaya",
   },
   description:
-    "Looking for the best homestay & hotel in Bodhgaya? 24/7 Open Maa Annapurna Home Stay & Hotel offers clean AC rooms, family suites with kitchenette, attached modern baths, free Wi-Fi, airport/railway pick & drop service, and tours & travels packages. 5 mins from Mahabodhi Temple. Book direct!",
-  applicationName: "Maa Annapurna Home Stay & Hotel Bodhgaya",
-  authors: [{ name: "Maa Annapurna Home Stay & Hotel", url: siteUrl }],
+    "Looking for the best homestay & hotel in Bodhgaya? 24/7 Open Maa Annapurna Home Stay offers clean AC rooms, family suites with kitchenette, attached modern baths, free Wi-Fi, airport/railway pick & drop service, and tours & travels packages. 5 mins from Mahabodhi Temple. Book direct!",
+  applicationName: "Maa Annapurna Home Stay Bodhgaya",
+  authors: [{ name: "Maa Annapurna Home Stay", url: siteUrl }],
   generator: "Next.js",
   keywords: [
     "hotel in bodhgaya",
@@ -78,11 +78,11 @@ export const metadata: Metadata = {
     apple: "/apple-icon.svg",
   },
   openGraph: {
-    title: "Maa Annapurna Home Stay & Hotel | 24/7 Open • Pick & Drop • Near Mahabodhi Temple Bodhgaya",
+    title: "Maa Annapurna Home Stay | 24/7 Open • Pick & Drop • Near Mahabodhi Temple Bodhgaya",
     description:
-      "24/7 Open hotel in Bodhgaya with airport/railway pick & drop service, tours & travels desk, clean AC rooms, kitchenette suites, Wi-Fi & attached baths. 5 mins to Mahabodhi Temple.",
+      "24/7 Open hotel & AC homestay in Bodhgaya with airport/railway pick & drop service, tours & travels desk, clean rooms, kitchenette suites, Wi-Fi & attached baths. 5 mins to Mahabodhi Temple.",
     url: siteUrl,
-    siteName: "Maa Annapurna Home Stay & Hotel Bodhgaya",
+    siteName: "Maa Annapurna Home Stay Bodhgaya",
     images: [
       {
         url: "/images/room-triple-kitchenette.jpg",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
         url: "/images/deluxe-room-dressing-table.jpg",
         width: 1600,
         height: 738,
-        alt: "Deluxe AC Bedroom at Maa Annapurna Hotel Bodhgaya",
+        alt: "Deluxe AC Bedroom at Maa Annapurna Home Stay & Hotel Bodhgaya",
       },
     ],
     locale: "en_IN",
@@ -102,9 +102,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Maa Annapurna Home Stay & Hotel | 24/7 Open • Pick & Drop • Bodhgaya",
+    title: "Maa Annapurna Home Stay | 24/7 Open • Pick & Drop • Bodhgaya",
     description:
-      "24 Hours Open hotel in Bodhgaya with airport & railway pick & drop, tours and travels packages, clean AC rooms, and kitchenette suites near Mahabodhi Temple. Book direct!",
+      "24 Hours Open hotel & homestay in Bodhgaya with airport & railway pick & drop, tours and travels packages, clean AC rooms, and kitchenette suites near Mahabodhi Temple. Book direct!",
     images: ["/images/room-triple-kitchenette.jpg"],
   },
   robots: {

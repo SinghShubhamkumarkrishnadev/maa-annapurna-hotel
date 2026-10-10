@@ -24,13 +24,13 @@ export default function ContactSection({
           <div className="bg-white rounded-2xl sm:rounded-3xl border border-stone-200 p-5 sm:p-10 shadow-sm">
           <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
             <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
-              Direct Home Stay &amp; Hotel Enquiry
+              Direct Home Stay Enquiry
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-stone-900 mt-1">
-              Plan Your Home Stay &amp; Hotel Visit in Bodhgaya
+              Plan Your Home Stay Visit in Bodhgaya
             </h2>
             <p className="hidden sm:block text-stone-500 text-xs sm:text-sm mt-1.5">
-              Send us your dates and room requirements. Experience genuine homestay hospitality with hotel comfort at the best direct host rates.
+              Send us your dates and room requirements. Experience genuine homestay hospitality with modern comfort at the best direct host rates.
             </p>
           </div>
 
