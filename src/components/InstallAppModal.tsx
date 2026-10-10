@@ -128,12 +128,12 @@ export default function InstallAppModal() {
           {/* Header Row: Logo & Close Button */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 rounded-2xl overflow-hidden shadow-xs border border-amber-900/15 shrink-0 bg-stone-50 p-1 flex items-center justify-center">
+              <div className="relative w-14 h-14 rounded-2xl overflow-hidden shadow-xs border border-amber-900/15 shrink-0 bg-stone-50 p-1 flex items-center justify-center">
                 <Image
-                  src="/icon.svg"
+                  src="/images/logo.png"
                   alt="Maa Annapurna Home Stay App"
-                  width={40}
-                  height={40}
+                  width={48}
+                  height={48}
                   className="w-full h-full object-contain"
                   priority
                 />

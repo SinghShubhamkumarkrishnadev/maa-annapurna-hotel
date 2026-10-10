@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface AdminHeaderProps {
   onLogout: () => void;
@@ -10,8 +11,14 @@ export default function AdminHeader({ onLogout }: AdminHeaderProps) {
     <header className="sticky top-0 z-40 bg-white border-b border-stone-200 shadow-2xs">
       <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-stone-900 text-white flex items-center justify-center font-serif font-bold text-sm">
-            MA
+          <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0 border border-stone-200">
+            <Image
+              src="/images/logo.png"
+              alt="Maa Annapurna Home Stay Logo"
+              width={36}
+              height={36}
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <div className="flex items-center gap-2">

@@ -10,12 +10,12 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-stone-800">
             <div>
               <div className="flex items-center gap-2.5 mb-2">
-                <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-amber-600/30">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-amber-500/30">
                   <Image
-                    src="/icon.svg"
+                    src="/images/logo.png"
                     alt="Maa Annapurna Home Stay Emblem"
-                    width={32}
-                    height={32}
+                    width={40}
+                    height={40}
                     className="w-full h-full object-cover"
                   />
                 </div>

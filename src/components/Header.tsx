@@ -19,12 +19,12 @@ export default function Header({ onOpenEnquiry }: HeaderProps) {
             className="flex items-center gap-2.5 shrink-0 group py-1 pr-4 lg:pr-6"
             title="Maa Annapurna Home Stay Bodhgaya"
           >
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl overflow-hidden shrink-0 shadow-2xs border border-amber-900/10 group-hover:scale-105 transition-transform duration-300">
+            <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 shadow-xs border border-amber-800/20 group-hover:scale-105 transition-transform duration-300">
               <Image
-                src="/icon.svg"
+                src="/images/logo.png"
                 alt="Maa Annapurna Home Stay Emblem"
-                width={36}
-                height={36}
+                width={40}
+                height={40}
                 className="w-full h-full object-cover"
                 priority
               />
