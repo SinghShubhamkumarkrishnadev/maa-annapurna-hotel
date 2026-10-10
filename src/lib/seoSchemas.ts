@@ -19,17 +19,22 @@ export function getHotelSchema(hotelImages: PhotoItem[] = [], rooms: RoomItem[] 
   return {
     "@context": "https://schema.org",
     "@type": ["Hotel", "BedAndBreakfast", "LodgingBusiness"],
-    "name": "Maa Annapurna Home Stay Bodhgaya",
+    "name": "Maa Annapurna Home Stay & Hotel Bodhgaya",
     "alternateName": [
-      "Maa Annapurna Home Stay & Hotel Bodhgaya",
       "Maa Annapurna Hotel Bodhgaya",
       "Maa Annapurna Hotel",
-      "Maa Annapurna Home Stay",
-      "Maa Annapurna Guest House Bodhgaya",
       "Hotel Maa Annapurna Bodhgaya",
+      "Hotel Maa Annapurna",
+      "Maa Annapurna Home Stay",
+      "Maa Annapurna Home Stay Bodhgaya",
+      "Maa Annapurna Guest House Bodhgaya",
+      "Best Hotel in Bodhgaya Maa Annapurna",
+      "Hotel in Bodhgaya Maa Annapurna",
     ],
+    "keywords":
+      "hotel in bodhgaya, best hotel in bodhgaya, budget hotel in bodhgaya, cheap hotel in bodhgaya, hotel near mahabodhi temple, 24 hours open hotel in bodhgaya, maa annapurna hotel bodhgaya, hotel maa annapurna, homestay in bodhgaya, rooms in bodhgaya",
     "description":
-      "Peaceful, clean AC home stay and hotel in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
+      "Peaceful, clean AC hotel and homestay in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
     "url": siteUrl,
     "logo": `${siteUrl}/images/logo.png`,
     "telephone": "+919931924027",
@@ -81,6 +86,36 @@ export function getHotelSchema(hotelImages: PhotoItem[] = [], rooms: RoomItem[] 
       "lowPrice": "1199",
       "highPrice": "2499",
       "offerCount": "10",
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Bodhgaya Hotel Room Tariffs & Stays",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Deluxe AC Double Room - Hotel in Bodhgaya",
+          "price": "1299",
+          "priceCurrency": "INR",
+        },
+        {
+          "@type": "Offer",
+          "name": "Triple Bed Room with Kitchenette - Hotel in Bodhgaya",
+          "price": "1899",
+          "priceCurrency": "INR",
+        },
+        {
+          "@type": "Offer",
+          "name": "Classic Twin Bed Room - Hotel in Bodhgaya",
+          "price": "1199",
+          "priceCurrency": "INR",
+        },
+        {
+          "@type": "Offer",
+          "name": "Executive Family Suite - Hotel in Bodhgaya",
+          "price": "2499",
+          "priceCurrency": "INR",
+        },
+      ],
     },
     "amenityFeature": [
       { "@type": "LocationFeatureSpecification", "name": "24-Hour Front Desk (24/7 Open)", "value": true },
@@ -155,8 +190,13 @@ export function getWebSiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Maa Annapurna Home Stay Bodhgaya",
-    "alternateName": "Maa Annapurna Hotel Bodhgaya",
+    "name": "Maa Annapurna Home Stay & Hotel Bodhgaya",
+    "alternateName": [
+      "Maa Annapurna Hotel Bodhgaya",
+      "Maa Annapurna Hotel",
+      "Hotel Maa Annapurna Bodhgaya",
+      "Maa Annapurna Home Stay Bodhgaya",
+    ],
     "url": siteUrl,
   };
 }
@@ -166,10 +206,17 @@ export function getOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Maa Annapurna Home Stay",
-    "alternateName": "Maa Annapurna Hotel Bodhgaya",
+    "name": "Maa Annapurna Home Stay & Hotel",
+    "alternateName": [
+      "Maa Annapurna Hotel Bodhgaya",
+      "Maa Annapurna Hotel",
+      "Hotel Maa Annapurna Bodhgaya",
+      "Maa Annapurna Home Stay",
+    ],
     "url": siteUrl,
     "logo": `${siteUrl}/images/logo.png`,
+    "description":
+      "Premier hotel and AC homestay accommodation in Bodhgaya near Mahabodhi Temple offering 24/7 front desk, airport pick & drop service, and clean rooms.",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+919931924027",

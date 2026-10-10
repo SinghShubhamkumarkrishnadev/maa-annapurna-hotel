@@ -31,7 +31,7 @@ export const DEFAULT_ROOM_CATEGORIES: RoomItem[] = [
       "High-Speed Wi-Fi",
     ],
     description: "Quiet, well-ventilated AC room in Bodhgaya with dressing area, split AC, and a spotlessly clean private attached bathroom. Perfect for couples and pilgrims.",
-    alt: "Deluxe AC double room at Maa Annapurna Home Stay Bodhgaya",
+    alt: "Deluxe AC double room at Maa Annapurna Hotel & Home Stay Bodhgaya",
   },
   {
     id: "triple-kitchenette",
@@ -60,7 +60,7 @@ export const DEFAULT_ROOM_CATEGORIES: RoomItem[] = [
       "Spacious Floor Area",
     ],
     description: "Ideal for families or longer pilgrimage stays in Bodhgaya. Includes a dedicated kitchenette counter and sink for pantry convenience and multiple beds.",
-    alt: "Triple bed AC room with private kitchenette at Maa Annapurna Home Stay Bodhgaya",
+    alt: "Triple bed AC room with private kitchenette at Maa Annapurna Hotel & Home Stay Bodhgaya",
   },
   {
     id: "classic-twin",
@@ -89,7 +89,7 @@ export const DEFAULT_ROOM_CATEGORIES: RoomItem[] = [
       "Tiled Flooring",
     ],
     description: "Features two separate single beds with warm wooden paneling. Perfect for fellow pilgrims, friends, or traveling companions seeking peaceful comfort.",
-    alt: "Classic twin single bed room at Maa Annapurna Home Stay Bodhgaya",
+    alt: "Classic twin single bed room at Maa Annapurna Hotel & Home Stay Bodhgaya",
   },
   {
     id: "family-suite",
@@ -118,7 +118,7 @@ export const DEFAULT_ROOM_CATEGORIES: RoomItem[] = [
       "Daily Housekeeping",
     ],
     description: "Extra-large suite designed for family groups and pilgrimage yatras visiting Bodhgaya together with generous space, fresh linens, and full AC cooling.",
-    alt: "Executive family suite at Maa Annapurna Home Stay Bodhgaya",
+    alt: "Executive family suite at Maa Annapurna Hotel & Home Stay Bodhgaya",
   },
 ];
 
