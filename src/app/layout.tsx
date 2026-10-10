@@ -145,6 +145,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "s0Vtn74CDFXAfEEhkvj6J7dRP6BWaBLTJLpQry79Wkw",
+  },
   category: "travel",
 };
 
