@@ -44,7 +44,7 @@ export default function HeroSection({
 
             {/* Single targeted H1 */}
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-[2.2rem] xl:text-[2.45rem] font-bold tracking-tight text-stone-900 leading-[1.2]">
-              Peaceful Home Stay in Bodhgaya Near Mahabodhi Temple
+              Maa Annapurna Home Stay in Bodhgaya Near Mahabodhi Temple
             </h1>
 
             <p className="hidden sm:block text-stone-600 text-xs sm:text-sm lg:text-[14.5px] leading-relaxed max-w-xl">

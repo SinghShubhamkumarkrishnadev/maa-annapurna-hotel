@@ -11,36 +11,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 1.0,
       images: [
-        `${baseUrl}/images/room-triple-kitchenette.jpg`,
-        `${baseUrl}/images/deluxe-room-dressing-table.jpg`,
-        `${baseUrl}/images/family-suite-blue-linens.jpg`,
-        `${baseUrl}/images/room-twin-wooden-paneling.jpg`,
-        `${baseUrl}/images/bathroom-full-view.jpg`,
+        `${baseUrl}/images/rooms/deluxe-double-main.jpg`,
+        `${baseUrl}/images/rooms/triple-room-main.jpg`,
+        `${baseUrl}/images/rooms/twin-room-main.jpg`,
+        `${baseUrl}/images/rooms/family-suite-main.jpg`,
+        `${baseUrl}/images/rooms/bathroom-modern.jpg`,
+        `${baseUrl}/images/bodhgaya-landmarks-hero.webp`,
+        `${baseUrl}/images/logo.png`,
       ],
-    },
-    {
-      url: `${baseUrl}/#rooms`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#gallery`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#amenities`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 0.9,
     },
   ];
 }

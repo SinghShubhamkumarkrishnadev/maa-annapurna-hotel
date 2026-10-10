@@ -1,7 +1,21 @@
 import { PhotoItem, RoomItem, FaqItem } from "@/types/hotel";
 
-export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
+export function getHotelSchema(hotelImages: PhotoItem[] = [], rooms: RoomItem[] = []) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maa-annapurna-hotel.vercel.app";
+
+  const defaultImages = [
+    `${siteUrl}/images/rooms/deluxe-double-main.jpg`,
+    `${siteUrl}/images/rooms/triple-room-main.jpg`,
+    `${siteUrl}/images/rooms/twin-room-main.jpg`,
+    `${siteUrl}/images/rooms/family-suite-main.jpg`,
+    `${siteUrl}/images/rooms/bathroom-modern.jpg`,
+    `${siteUrl}/images/logo.png`,
+  ];
+
+  const dynamicImages = hotelImages.length > 0
+    ? hotelImages.map((img) => (img.src.startsWith("http") ? img.src : `${siteUrl}${img.src}`))
+    : defaultImages;
+
   return {
     "@context": "https://schema.org",
     "@type": ["Hotel", "BedAndBreakfast", "LodgingBusiness"],
@@ -17,6 +31,7 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
     "description":
       "Peaceful, clean AC home stay and hotel in Bodhgaya open 24 hours (24/7) near Mahabodhi Temple. Offering airport/railway pick & drop service, customized tours and travels packages, private attached bathrooms, kitchenette options, 24/7 hot water geyser, and high-speed Wi-Fi.",
     "url": siteUrl,
+    "logo": `${siteUrl}/images/logo.png`,
     "telephone": "+919931924027",
     "priceRange": "₹₹",
     "currenciesAccepted": "INR",
@@ -35,10 +50,25 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
       "longitude": 84.9759,
     },
     "hasMap": "https://share.google/u28zYVIFglv8XWTyZ",
-    "image": hotelImages.map((img) => `${siteUrl}${img.src}`),
+    "image": dynamicImages,
     "checkinTime": "12:00:00",
     "checkoutTime": "11:00:00",
     "numberOfRooms": 10,
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "00:00",
+        "closes": "23:59",
+      },
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+919931924027",
+      "contactType": "reservations",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Hindi"],
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
@@ -64,7 +94,40 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
       { "@type": "LocationFeatureSpecification", "name": "Daily Housekeeping", "value": true },
       { "@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true },
     ],
-    "containsPlace": rooms.map((room) => ({
+    "containsPlace": (rooms.length > 0 ? rooms : [
+      {
+        id: "deluxe-double",
+        name: "Deluxe AC Double Room",
+        description: "Quiet, well-ventilated AC room in Bodhgaya with dressing area and modern attached bath.",
+        guests: "2 Guests",
+        beds: "1 Queen / Double Bed",
+        price: 1299,
+      },
+      {
+        id: "triple-kitchenette",
+        name: "Triple Bed Room with Kitchenette",
+        description: "Ideal for families or longer pilgrimage stays in Bodhgaya with dedicated kitchenette sink.",
+        guests: "3 - 4 Guests",
+        beds: "3 Comfortable Beds",
+        price: 1899,
+      },
+      {
+        id: "classic-twin",
+        name: "Twin Bed Room",
+        description: "Features two separate single beds with wooden paneling for pilgrims and friends.",
+        guests: "2 Guests",
+        beds: "2 Single Beds",
+        price: 1199,
+      },
+      {
+        id: "family-suite",
+        name: "Executive Family Suite",
+        description: "Extra-large suite designed for family groups and pilgrimage yatras visiting Bodhgaya.",
+        guests: "4 - 6 Guests",
+        beds: "Multi-Bed Setup (4-6 Guests)",
+        price: 2499,
+      },
+    ]).map((room) => ({
       "@type": "HotelRoom",
       "name": room.name,
       "description": room.description,
@@ -84,6 +147,39 @@ export function getHotelSchema(hotelImages: PhotoItem[], rooms: RoomItem[]) {
         "priceValidUntil": "2027-12-31",
       },
     })),
+  };
+}
+
+export function getWebSiteSchema() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maa-annapurna-hotel.vercel.app";
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Maa Annapurna Home Stay Bodhgaya",
+    "alternateName": "Maa Annapurna Hotel Bodhgaya",
+    "url": siteUrl,
+  };
+}
+
+export function getOrganizationSchema() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maa-annapurna-hotel.vercel.app";
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Maa Annapurna Home Stay",
+    "alternateName": "Maa Annapurna Hotel Bodhgaya",
+    "url": siteUrl,
+    "logo": `${siteUrl}/images/logo.png`,
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+919931924027",
+      "contactType": "reservations",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Hindi"],
+    },
+    "sameAs": [
+      "https://share.google/u28zYVIFglv8XWTyZ",
+    ],
   };
 }
 
@@ -117,7 +213,7 @@ export function getBreadcrumbSchema() {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Home Stay & Hotels in Bodhgaya",
+        "name": "Rooms & Suites in Bodhgaya",
         "item": `${siteUrl}/#rooms`,
       },
       {

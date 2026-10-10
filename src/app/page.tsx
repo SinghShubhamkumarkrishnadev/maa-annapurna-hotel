@@ -24,6 +24,8 @@ import {
   getHotelSchema,
   getFaqSchema,
   getBreadcrumbSchema,
+  getWebSiteSchema,
+  getOrganizationSchema,
 } from "@/lib/seoSchemas";
 import { BookingDetails, RoomItem, PhotoItem } from "@/types/hotel";
 
@@ -153,10 +155,12 @@ export default function HomePage() {
     window.open(`https://wa.me/${phone}?text=${encoded}`, "_blank");
   };
 
-  // Structured Data (JSON-LD) for Local Business & Hotel
+  // Structured Data (JSON-LD) for Local Business, Hotel, Organization & WebSite
   const hotelSchema = getHotelSchema(hotelImages, rooms);
   const faqSchema = getFaqSchema(FAQS);
   const breadcrumbSchema = getBreadcrumbSchema();
+  const websiteSchema = getWebSiteSchema();
+  const organizationSchema = getOrganizationSchema();
 
   return (
     <div className="min-h-screen bg-white text-stone-900 flex flex-col font-sans selection:bg-amber-100 selection:text-amber-950">
@@ -164,6 +168,14 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(hotelSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       <script
         type="application/ld+json"
