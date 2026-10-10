@@ -259,11 +259,13 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
     hasDraggedFar.current = false;
   };
 
-  // Click card to bring it to center
-  const handleCardClick = (index: number) => {
+  // Click card: if already centered, open full review modal; if side card, bring to center
+  const handleCardClick = (index: number, review: ReviewItem) => {
     if (hasDraggedFar.current) return;
     if (index !== activeIndex) {
       setActiveIndex(index);
+    } else {
+      setSelectedReviewForModal(review);
     }
   };
 
@@ -471,9 +473,24 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                   return (
                     <article
                       key={review.id}
-                      onClick={() => handleCardClick(index)}
+                      onClick={() => handleCardClick(index, review)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleCardClick(index, review);
+                        }
+                      }}
+                      title={
+                        isActive
+                          ? "Click card to view full review"
+                          : `Click to view ${review.name}'s review`
+                      }
                       aria-current={isActive ? "true" : undefined}
-                      aria-label={`Review by ${review.name}`}
+                      aria-label={`Review by ${review.name}${
+                        isActive ? " - click to view full review" : ""
+                      }`}
                       style={{
                         position: "absolute",
                         width: metrics.cardWidth,
@@ -488,10 +505,10 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                           ? "none"
                           : "transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease, box-shadow 420ms ease",
                       }}
-                      className={`rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between transition-colors duration-200 ${
+                      className={`group rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between transition-all duration-200 cursor-pointer select-none ${
                         isActive
-                          ? "bg-white border border-stone-200/90 shadow-[0_14px_34px_-10px_rgba(28,25,23,0.12),0_4px_12px_-4px_rgba(28,25,23,0.06)] ring-1 ring-amber-900/5 cursor-default"
-                          : "bg-white/95 border border-stone-200/70 shadow-2xs hover:border-amber-400/60 cursor-pointer"
+                          ? "bg-white border border-stone-200/90 shadow-[0_14px_34px_-10px_rgba(28,25,23,0.12),0_4px_12px_-4px_rgba(28,25,23,0.06)] ring-1 ring-amber-900/5 hover:border-amber-400/80 hover:shadow-[0_18px_38px_-10px_rgba(28,25,23,0.16)]"
+                          : "bg-white/95 border border-stone-200/70 shadow-2xs hover:border-amber-400/60"
                       }`}
                     >
                       <div className="min-w-0">
@@ -569,7 +586,8 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                               e.stopPropagation();
                               setSelectedReviewForModal(review);
                             }}
-                            className="text-amber-800 hover:text-amber-950 font-semibold text-[9.5px] sm:text-[10px] uppercase tracking-wider flex items-center gap-0.5 cursor-pointer"
+                            className="text-amber-800 group-hover:text-amber-950 font-semibold text-[9.5px] sm:text-[10px] uppercase tracking-wider flex items-center gap-0.5 cursor-pointer bg-amber-50 group-hover:bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200/70 transition-colors"
+                            title="Read full review"
                           >
                             <span>Full</span>
                             <span>↗</span>
@@ -585,7 +603,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
             {/* Compact Pagination Controls */}
             <div className="flex items-center justify-between gap-3 mt-3 px-1 text-[11px] text-stone-400">
               <div className="hidden sm:inline">
-                <span>Swipe or tap side cards to explore • </span>
+                <span>Swipe or tap side cards to explore • Click card to view full • </span>
                 <span className="font-semibold text-stone-600">
                   {activeIndex + 1} of {numReviews}
                 </span>
