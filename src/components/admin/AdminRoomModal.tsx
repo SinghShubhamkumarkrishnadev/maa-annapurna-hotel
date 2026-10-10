@@ -25,17 +25,22 @@ const DEFAULT_FEATURE_OPTIONS = [
 ];
 
 const PRESET_GALLERY_IMAGES = [
+  "/images/rooms/deluxe-double-main.jpg",
+  "/images/rooms/triple-room-main.jpg",
+  "/images/rooms/twin-room-main.jpg",
+  "/images/rooms/twin-room-angle2.jpg",
+  "/images/rooms/family-suite-main.jpg",
+  "/images/rooms/family-suite-wide.jpg",
+  "/images/rooms/deluxe-detail.jpg",
+  "/images/rooms/triple-kitchenette.jpg",
+  "/images/rooms/bathroom-modern.jpg",
   "/images/deluxe-room-dressing-table.jpg",
   "/images/room-triple-kitchenette.jpg",
   "/images/room-twin-wooden-paneling.jpg",
   "/images/family-suite-blue-linens.jpg",
-  "/images/room-bedside-table-ac.jpg",
-  "/images/room-double-single-beds.jpg",
-  "/images/room-window-ac.jpg",
   "/images/bathroom-full-view.jpg",
   "/images/bathroom-shower-tiled.jpg",
   "/images/bathroom-wash-basin.jpg",
-  "/images/hotel-building-facade.jpg",
 ];
 
 export default function AdminRoomModal({

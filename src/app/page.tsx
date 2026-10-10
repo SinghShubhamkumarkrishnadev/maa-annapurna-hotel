@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import StickyMobileBar from "@/components/StickyMobileBar";
 import LightboxModal from "@/components/LightboxModal";
 import RoomEnquiryModal from "@/components/RoomEnquiryModal";
+import RoomDetailModal from "@/components/RoomDetailModal";
 import InstallAppModal from "@/components/InstallAppModal";
 
 import {
@@ -78,6 +79,39 @@ export default function HomePage() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
   const [modalRoomTitle, setModalRoomTitle] = useState("Deluxe AC Double Room");
+  const [selectedRoomForVisit, setSelectedRoomForVisit] = useState<RoomItem | null>(null);
+
+  const openRoomVisit = (room: RoomItem) => {
+    setSelectedRoomForVisit(room);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `#room-${room.id}`);
+    }
+  };
+
+  const closeRoomVisit = () => {
+    setSelectedRoomForVisit(null);
+    if (typeof window !== "undefined" && window.location.hash.startsWith("#room-")) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  };
+
+  // URL hash navigation listener for direct room visit links (e.g. #room-deluxe-double)
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window !== "undefined" && window.location.hash.startsWith("#room-")) {
+        const roomId = window.location.hash.replace("#room-", "");
+        const matched = rooms.find((r) => r.id === roomId);
+        if (matched) {
+          setSelectedRoomForVisit(matched);
+        }
+      }
+    };
+    if (rooms.length > 0) {
+      handleHash();
+    }
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, [rooms]);
 
   const openRoomEnquiry = (roomTitle: string) => {
     const roomObj = rooms.find((r) => r.name === roomTitle);
@@ -157,6 +191,7 @@ export default function HomePage() {
           isLoading={isLoadingRooms}
           onOpenEnquiry={openRoomEnquiry}
           onWhatsAppBooking={handleWhatsAppBooking}
+          onViewRoom={openRoomVisit}
         />
 
         {/* Photo Gallery Section */}
@@ -208,6 +243,17 @@ export default function HomePage() {
         bookingDetails={bookingDetails}
         onUpdateBookingDetails={updateBookingDetails}
         onClose={() => setIsEnquiryModalOpen(false)}
+        onWhatsAppBooking={handleWhatsAppBooking}
+      />
+
+      {/* Room Detail & Visit Modal (E-Commerce Product Page & Full Gallery) */}
+      <RoomDetailModal
+        room={selectedRoomForVisit}
+        allRooms={rooms}
+        isOpen={!!selectedRoomForVisit}
+        onClose={closeRoomVisit}
+        onSelectAnotherRoom={openRoomVisit}
+        onOpenEnquiry={openRoomEnquiry}
         onWhatsAppBooking={handleWhatsAppBooking}
       />
 

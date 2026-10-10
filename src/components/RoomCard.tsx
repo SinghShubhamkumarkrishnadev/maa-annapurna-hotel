@@ -6,12 +6,14 @@ interface RoomCardProps {
   room: RoomItem;
   onOpenEnquiry: (roomTitle: string) => void;
   onWhatsAppBooking: (roomTitle?: string) => void;
+  onViewRoom: (room: RoomItem) => void;
 }
 
 export default function RoomCard({
   room,
   onOpenEnquiry,
   onWhatsAppBooking,
+  onViewRoom,
 }: RoomCardProps) {
   const isSoldOut =
     Number(room.availableUnits) === 0 ||
@@ -32,17 +34,28 @@ export default function RoomCard({
           : "bg-white border-stone-200/90 shadow-md hover:shadow-xl"
       }`}
     >
-      {/* Room Image Container - Grayscaled with no button on top so image is 100% visible */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-300">
+      {/* Room Image Container - Click to open Room Visit & Gallery */}
+      <div
+        onClick={() => onViewRoom(room)}
+        className="relative aspect-[16/9] w-full overflow-hidden bg-gray-300 cursor-pointer group/img"
+        title="Click to view room photos & full details"
+      >
         <Image
           src={room.image}
           alt={room.alt}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           className={`w-full h-full object-cover transition duration-500 ${
-            isSoldOut ? "grayscale contrast-90 brightness-95" : "group-hover:scale-105"
+            isSoldOut ? "grayscale contrast-90 brightness-95" : "group-hover/img:scale-105"
           }`}
         />
+
+        {/* Hover overlay hint */}
+        <div className="absolute inset-0 bg-stone-950/20 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+          <span className="bg-white/95 text-stone-900 font-bold text-xs px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
+            <span>📸</span> View Room Visit &amp; Photos
+          </span>
+        </div>
 
         {/* Zomato Top Tag: Currently Sold Out when closed/empty, or room badge when available */}
         {isSoldOut ? (
@@ -91,9 +104,11 @@ export default function RoomCard({
             <div>
               <div className="flex items-center gap-2.5 flex-wrap">
                 <h3
-                  className={`font-serif text-lg sm:text-2xl font-bold leading-snug ${
+                  onClick={() => onViewRoom(room)}
+                  className={`font-serif text-lg sm:text-2xl font-bold leading-snug cursor-pointer transition hover:text-amber-800 ${
                     isSoldOut ? "text-gray-700" : "text-stone-900"
                   }`}
+                  title="Click to view room details"
                 >
                   {room.name}
                 </h3>
@@ -248,6 +263,22 @@ export default function RoomCard({
             ))}
           </div>
         </div>
+
+        {/* View Room Visit & Full Gallery Button (E-Commerce Product View) */}
+        <button
+          type="button"
+          onClick={() => onViewRoom(room)}
+          className="w-full mb-3 py-2 px-3.5 rounded-xl bg-amber-50/90 hover:bg-amber-100/90 text-amber-950 border border-amber-300/80 font-semibold text-xs flex items-center justify-between butter-touch cursor-pointer transition shadow-2xs hover:shadow-xs group-hover:border-amber-400"
+        >
+          <span className="flex items-center gap-1.5">
+            <span className="text-sm">📸</span>
+            <span>View Room Visit &amp; Full Gallery</span>
+          </span>
+          <span className="text-[10px] bg-amber-200/90 text-amber-950 px-2 py-0.5 rounded-md font-bold uppercase tracking-wider flex items-center gap-1">
+            <span>Explore</span>
+            <span>➔</span>
+          </span>
+        </button>
 
         {/* Actions Row */}
         <div className={`pt-3 border-t flex items-center gap-2.5 sm:gap-3 ${isSoldOut ? "border-gray-300" : "border-stone-200/80"}`}>

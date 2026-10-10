@@ -8,6 +8,7 @@ interface RoomsSectionProps {
   isLoading?: boolean;
   onOpenEnquiry: (roomTitle: string) => void;
   onWhatsAppBooking: (roomTitle?: string) => void;
+  onViewRoom: (room: RoomItem) => void;
 }
 
 export default function RoomsSection({
@@ -15,6 +16,7 @@ export default function RoomsSection({
   isLoading = false,
   onOpenEnquiry,
   onWhatsAppBooking,
+  onViewRoom,
 }: RoomsSectionProps) {
   const activeRooms = rooms.filter((r) => r.isActive !== false);
 
@@ -164,6 +166,7 @@ export default function RoomsSection({
                   room={room}
                   onOpenEnquiry={onOpenEnquiry}
                   onWhatsAppBooking={onWhatsAppBooking}
+                  onViewRoom={onViewRoom}
                 />
               </ScrollReveal>
             ))}
