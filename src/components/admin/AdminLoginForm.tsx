@@ -45,7 +45,7 @@ export default function AdminLoginForm({
           </div>
         )}
 
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form onSubmit={onSubmit} autoComplete="off" className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-stone-300 mb-1.5">
               Host Username
@@ -53,9 +53,10 @@ export default function AdminLoginForm({
             <input
               type="text"
               required
+              autoComplete="username"
               value={usernameInput}
               onChange={(e) => setUsernameInput(e.target.value)}
-              placeholder="e.g. mukeshsingh"
+              placeholder="Enter host username"
               className="w-full px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-800 text-sm text-white placeholder-stone-600 focus:outline-none focus:ring-2 focus:ring-amber-500/60 focus:border-amber-500 transition"
             />
           </div>
@@ -68,9 +69,10 @@ export default function AdminLoginForm({
               <input
                 type={showPassword ? "text" : "password"}
                 required
+                autoComplete="current-password"
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
-                placeholder="Enter admin password"
+                placeholder="Enter host password"
                 className="w-full px-3.5 py-2.5 pr-10 rounded-xl bg-stone-950 border border-stone-800 text-sm text-white placeholder-stone-600 focus:outline-none focus:ring-2 focus:ring-amber-500/60 focus:border-amber-500 transition"
               />
               <button
@@ -97,35 +99,6 @@ export default function AdminLoginForm({
               <span>Log In to Host Dashboard</span>
             )}
           </button>
-
-          {/* Convenient Quick Fill Credentials Helper */}
-          <div className="pt-3 border-t border-stone-800/80 flex items-center justify-between text-xs text-stone-400">
-            <span>
-              Quick Login:
-            </span>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setUsernameInput("admin");
-                  setPasswordInput("admin123");
-                }}
-                className="text-amber-400 hover:text-amber-300 bg-stone-800/80 hover:bg-stone-800 px-2.5 py-1 rounded-md text-[11px] font-medium transition cursor-pointer"
-              >
-                Fill (admin / admin123)
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setUsernameInput("mukeshsingh");
-                  setPasswordInput("Mukesh#Annapurna$9931!824231");
-                }}
-                className="text-stone-300 hover:text-white bg-stone-800/80 hover:bg-stone-800 px-2.5 py-1 rounded-md text-[11px] font-medium transition cursor-pointer"
-              >
-                Fill (mukeshsingh)
-              </button>
-            </div>
-          </div>
         </form>
 
         <div className="mt-6 text-center">
