@@ -166,17 +166,37 @@ button, a, input, select {
 
 .cloud-layer-1 {
   will-change: transform;
-  animation: cloud-drift-rtl-1 65s linear infinite;
+  animation: cloud-drift-rtl-1 55s linear infinite;
+  animation-delay: -20s;
 }
 
 .cloud-layer-2 {
   will-change: transform;
-  animation: cloud-drift-rtl-2 80s linear infinite;
-  animation-delay: -32s;
+  animation: cloud-drift-rtl-2 70s linear infinite;
+  animation-delay: -35s;
 }
 
 .cloud-layer-3 {
   will-change: transform;
-  animation: cloud-drift-rtl-3 95s linear infinite;
-  animation-delay: -58s;
+  animation: cloud-drift-rtl-3 85s linear infinite;
+  animation-delay: -52s;
 }
+
+/* Mobile: Faster, immediate smooth drifting so user sees motion immediately upon landing */
+@media (max-width: 768px) {
+  .cloud-layer-1 {
+    animation-duration: 22s;
+    animation-delay: -9s;
+  }
+
+  .cloud-layer-2 {
+    animation-duration: 30s;
+    animation-delay: -18s;
+  }
+
+  .cloud-layer-3 {
+    animation-duration: 38s;
+    animation-delay: -6s;
+  }
+}
+
