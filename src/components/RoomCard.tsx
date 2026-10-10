@@ -52,8 +52,8 @@ export default function RoomCard({
 
         {/* Hover overlay hint */}
         <div className="absolute inset-0 bg-stone-950/20 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-          <span className="bg-white/95 text-stone-900 font-bold text-xs px-3.5 py-1.5 rounded-full shadow-lg flex items-center gap-1.5">
-            <span>📸</span> View Room Visit &amp; Photos
+          <span className="bg-white/95 text-stone-900 font-semibold text-xs px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+            <span>📸</span> View Photos
           </span>
         </div>
 
@@ -264,20 +264,14 @@ export default function RoomCard({
           </div>
         </div>
 
-        {/* View Room Visit & Full Gallery Button (E-Commerce Product View) */}
+        {/* View Photos & Details Button */}
         <button
           type="button"
           onClick={() => onViewRoom(room)}
-          className="w-full mb-3 py-2 px-3.5 rounded-xl bg-amber-50/90 hover:bg-amber-100/90 text-amber-950 border border-amber-300/80 font-semibold text-xs flex items-center justify-between butter-touch cursor-pointer transition shadow-2xs hover:shadow-xs group-hover:border-amber-400"
+          className="w-full mb-3 py-2 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-xs flex items-center justify-center gap-1.5 butter-touch cursor-pointer transition"
         >
-          <span className="flex items-center gap-1.5">
-            <span className="text-sm">📸</span>
-            <span>View Room Visit &amp; Full Gallery</span>
-          </span>
-          <span className="text-[10px] bg-amber-200/90 text-amber-950 px-2 py-0.5 rounded-md font-bold uppercase tracking-wider flex items-center gap-1">
-            <span>Explore</span>
-            <span>➔</span>
-          </span>
+          <span>📸</span>
+          <span>View Photos &amp; Details</span>
         </button>
 
         {/* Actions Row */}
