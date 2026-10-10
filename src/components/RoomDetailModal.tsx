@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { RoomItem } from "@/types/hotel";
 import { getRoomExtendedData, RoomGalleryPhoto } from "@/data/roomGalleries";
+import Room360Viewer from "@/components/Room360Viewer";
 
 interface RoomDetailModalProps {
   room: RoomItem | null;
@@ -85,13 +86,14 @@ export default function RoomDetailModal({
     setActivePhotoIndex((prev) => (prev < photos.length - 1 ? prev + 1 : 0));
   };
 
-  // Touch swipe support for mobile
+  // Touch swipe support for mobile (only when not in 360 viewer, as 360 uses touch for rotation)
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (activePhoto.is360) return;
     touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
+    if (activePhoto.is360 || touchStartX.current === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX;
     if (Math.abs(diff) > 40) {
@@ -108,6 +110,8 @@ export default function RoomDetailModal({
     Number(room.availableUnits) === 0 ||
     room.statusType === "sold_out" ||
     room.isAvailable === false;
+
+  const idx360 = photos.findIndex((p) => p.is360);
 
   return (
     <>
@@ -135,6 +139,12 @@ export default function RoomDetailModal({
                     {room.badge}
                   </span>
                 )}
+                {idx360 !== -1 && (
+                  <span className="bg-amber-100 text-amber-950 border border-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 hidden sm:inline-flex items-center gap-1">
+                    <span>🔄</span>
+                    <span>360° Available</span>
+                  </span>
+                )}
               </div>
               <p className="text-xs text-stone-500 truncate sm:hidden">
                 {room.beds} • {room.guests}
@@ -156,66 +166,89 @@ export default function RoomDetailModal({
           <div className="overflow-y-auto overscroll-contain p-4 sm:p-6 flex-1">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
               
-              {/* LEFT: Photo Gallery (7 cols on lg) */}
+              {/* LEFT: Photo Gallery & 360 Viewer (7 cols on lg) */}
               <div className="lg:col-span-7 flex flex-col space-y-3">
-                {/* Main Hero Photo */}
+                {/* Main Hero Container */}
                 <div
-                  className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-stone-100 border border-stone-200 select-none group"
+                  className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-stone-900 border border-stone-200 select-none group"
                   onTouchStart={handleTouchStart}
                   onTouchEnd={handleTouchEnd}
                 >
-                  <Image
-                    src={activePhoto.src}
-                    alt={activePhoto.alt}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 55vw"
-                    className="w-full h-full object-cover"
-                  />
-
-                  {/* Photo Counter */}
-                  <span className="absolute bottom-2.5 right-2.5 z-10 bg-stone-950/75 text-white px-2.5 py-0.5 rounded-full font-mono text-[11px] backdrop-blur-xs">
-                    {activePhotoIndex + 1} / {photos.length}
-                  </span>
-
-                  {/* Fullscreen Expand Icon */}
-                  <button
-                    onClick={() => setIsLightboxOpen(true)}
-                    className="absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-stone-950/60 hover:bg-stone-950/80 text-white flex items-center justify-center transition cursor-pointer backdrop-blur-xs"
-                    title="Fullscreen"
-                    aria-label="View fullscreen photo"
-                  >
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                    </svg>
-                  </button>
-
-                  {/* Arrows */}
-                  {photos.length > 1 && (
+                  {/* If active photo is 360, render interactive 360 Three.js viewer */}
+                  {activePhoto.is360 ? (
+                    <Room360Viewer
+                      imageSrc={activePhoto.src}
+                      roomName={room.name}
+                      onExit360={() => setActivePhotoIndex(0)}
+                    />
+                  ) : (
                     <>
+                      <Image
+                        src={activePhoto.src}
+                        alt={activePhoto.alt}
+                        fill
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 55vw"
+                        className="w-full h-full object-cover"
+                      />
+
+                      {/* Photo Counter */}
+                      <span className="absolute bottom-2.5 right-2.5 z-10 bg-stone-950/75 text-white px-2.5 py-0.5 rounded-full font-mono text-[11px] backdrop-blur-xs">
+                        {activePhotoIndex + 1} / {photos.length}
+                      </span>
+
+                      {/* Direct 360 Tour Launcher Pill - Desktop only */}
+                      {idx360 !== -1 && (
+                        <button
+                          onClick={() => setActivePhotoIndex(idx360)}
+                          className="hidden sm:flex absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-full bg-stone-900/85 hover:bg-stone-900 text-amber-300 border border-amber-400/40 text-[11px] font-bold shadow-md backdrop-blur-xs items-center gap-1.5 transition cursor-pointer"
+                          title="View 360 degree interactive room tour"
+                        >
+                          <span className="animate-spin text-xs" style={{ animationDuration: "5s" }}>🔄</span>
+                          <span>360° Virtual Tour</span>
+                        </button>
+                      )}
+
+                      {/* Fullscreen Expand Icon */}
                       <button
-                        onClick={handlePrevPhoto}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md flex items-center justify-center transition cursor-pointer"
-                        aria-label="Previous photo"
+                        onClick={() => setIsLightboxOpen(true)}
+                        className="absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full bg-stone-950/60 hover:bg-stone-950/80 text-white flex items-center justify-center transition cursor-pointer backdrop-blur-xs"
+                        title="Fullscreen"
+                        aria-label="View fullscreen photo"
                       >
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                         </svg>
                       </button>
-                      <button
-                        onClick={handleNextPhoto}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md flex items-center justify-center transition cursor-pointer"
-                        aria-label="Next photo"
-                      >
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
+
+                      {/* Previous / Next Arrows */}
+                      {photos.length > 1 && (
+                        <>
+                          <button
+                            onClick={handlePrevPhoto}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md flex items-center justify-center transition cursor-pointer"
+                            aria-label="Previous photo"
+                          >
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                            </svg>
+                          </button>
+                          <button
+                            onClick={handleNextPhoto}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md flex items-center justify-center transition cursor-pointer"
+                            aria-label="Next photo"
+                          >
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        </>
+                      )}
                     </>
                   )}
                 </div>
 
-                {/* Thumbnail Strip */}
+                {/* Thumbnails Strip */}
                 {photos.length > 1 && (
                   <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
                     {photos.map((photo, idx) => (
@@ -224,7 +257,7 @@ export default function RoomDetailModal({
                         onClick={() => setActivePhotoIndex(idx)}
                         className={`relative w-16 sm:w-20 aspect-[16/10] rounded-lg overflow-hidden shrink-0 border-2 transition cursor-pointer ${
                           activePhotoIndex === idx
-                            ? "border-stone-900 ring-2 ring-stone-900/20 shadow-xs"
+                            ? "border-amber-600 ring-2 ring-amber-500/25 shadow-xs"
                             : "border-stone-200 opacity-70 hover:opacity-100"
                         }`}
                       >
@@ -235,6 +268,15 @@ export default function RoomDetailModal({
                           sizes="80px"
                           className="w-full h-full object-cover"
                         />
+                        {/* 360 Overlay Badge on Thumbnail */}
+                        {photo.is360 && (
+                          <div className="absolute inset-0 bg-stone-950/45 flex items-center justify-center">
+                            <span className="bg-amber-400 text-stone-950 font-black text-[9px] px-1.5 py-0.5 rounded-full shadow-xs flex items-center gap-0.5 tracking-tight">
+                              <span>🔄</span>
+                              <span>360°</span>
+                            </span>
+                          </div>
+                        )}
                       </button>
                     ))}
                   </div>
@@ -386,8 +428,13 @@ export default function RoomDetailModal({
         >
           {/* Lightbox Header */}
           <div className="flex items-center justify-between text-white z-10" onClick={(e) => e.stopPropagation()}>
-            <div className="min-w-0 pr-3">
+            <div className="min-w-0 pr-3 flex items-center gap-2">
               <h3 className="font-serif text-sm sm:text-base font-bold truncate">{room.name}</h3>
+              {activePhoto.is360 && (
+                <span className="bg-amber-500 text-stone-950 text-[10px] font-black px-2 py-0.5 rounded-full">
+                  360° Panorama
+                </span>
+              )}
             </div>
             <div className="flex items-center gap-3 shrink-0">
               <span className="text-xs font-mono text-stone-400">
@@ -403,24 +450,33 @@ export default function RoomDetailModal({
             </div>
           </div>
 
-          {/* Lightbox Image */}
+          {/* Lightbox Image or 360 Viewer */}
           <div
             className="relative flex-1 flex items-center justify-center my-3"
             onClick={(e) => e.stopPropagation()}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
-            <div className="relative w-full h-full max-w-4xl max-h-[75vh]">
-              <Image
-                src={activePhoto.src}
-                alt={activePhoto.alt}
-                fill
-                sizes="100vw"
-                className="w-full h-full object-contain"
-              />
-            </div>
+            {activePhoto.is360 ? (
+              <div className="w-full h-full max-w-5xl max-h-[78vh] rounded-2xl overflow-hidden border border-stone-800 shadow-2xl">
+                <Room360Viewer
+                  imageSrc={activePhoto.src}
+                  roomName={room.name}
+                />
+              </div>
+            ) : (
+              <div className="relative w-full h-full max-w-4xl max-h-[75vh]">
+                <Image
+                  src={activePhoto.src}
+                  alt={activePhoto.alt}
+                  fill
+                  sizes="100vw"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            )}
 
-            {photos.length > 1 && (
+            {!activePhoto.is360 && photos.length > 1 && (
               <>
                 <button
                   onClick={handlePrevPhoto}
@@ -455,6 +511,11 @@ export default function RoomDetailModal({
                 }`}
               >
                 <Image src={p.src} alt={p.alt} fill sizes="64px" className="object-cover" />
+                {p.is360 && (
+                  <div className="absolute inset-0 bg-stone-950/45 flex items-center justify-center">
+                    <span className="text-[8px] bg-amber-400 text-black px-1 rounded font-black">360°</span>
+                  </div>
+                )}
               </button>
             ))}
           </div>

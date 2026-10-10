@@ -91,6 +91,12 @@ export default function RoomCard({
           <span>{isSoldOut ? "0 Available" : `${room.availableUnits} Available`}</span>
         </div>
 
+        {/* 360 View Badge - Desktop only */}
+        <div className="hidden sm:flex absolute bottom-4 left-4 z-20 bg-stone-900/85 backdrop-blur-xs text-amber-300 border border-amber-400/30 text-[11px] font-bold px-2.5 py-0.5 rounded-full items-center gap-1 shadow-sm select-none">
+          <span className="text-xs">🔄</span>
+          <span>360° View</span>
+        </div>
+
         <div className="absolute bottom-4 right-4 z-20 bg-stone-900/80 backdrop-blur text-white text-xs font-medium px-3 py-1 rounded-full">
           {room.guests}
         </div>
@@ -271,7 +277,8 @@ export default function RoomCard({
           className="w-full mb-3 py-2 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-xs flex items-center justify-center gap-1.5 butter-touch cursor-pointer transition"
         >
           <span>📸</span>
-          <span>View Photos &amp; Details</span>
+          <span className="sm:hidden">View Photos &amp; Details</span>
+          <span className="hidden sm:inline">View Photos &amp; 360° Tour</span>
         </button>
 
         {/* Actions Row */}

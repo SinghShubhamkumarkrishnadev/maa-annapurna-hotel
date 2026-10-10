@@ -3,6 +3,7 @@ export interface RoomGalleryPhoto {
   alt: string;
   caption: string;
   tag?: string;
+  is360?: boolean;
 }
 
 export interface RoomDetailSpec {
@@ -20,6 +21,7 @@ export interface RoomExtendedData {
   id: string;
   title: string;
   tagline: string;
+  panorama360?: string;
   photos: RoomGalleryPhoto[];
   specs: RoomDetailSpec;
   amenities: { icon: string; name: string; desc: string }[];
@@ -32,12 +34,20 @@ export const ROOM_GALLERIES: Record<string, RoomExtendedData> = {
     id: "deluxe-double",
     title: "Deluxe AC Double Room",
     tagline: "Serene, well-ventilated private room with wooden fluted headboard, split AC & modern attached bath",
+    panorama360: "/images/rooms/deluxe-double-360.jpg",
     photos: [
       {
         src: "/images/rooms/deluxe-double-main.jpg",
         alt: "Deluxe AC Double Room with wooden paneling and cozy bedding at Maa Annapurna Home Stay",
         caption: "Master Double Bed with fluted wooden headboard, sanitized white linens, and wooden flooring.",
         tag: "Real Guest Room Photo",
+      },
+      {
+        src: "/images/rooms/deluxe-double-360.jpg",
+        alt: "Deluxe AC Double Room 360 Degree Virtual Panorama Tour",
+        caption: "Interactive 360° View: Full room perspective with double bed, AC, and dressing vanity",
+        tag: "360° Virtual Tour",
+        is360: true,
       },
       {
         src: "/images/rooms/deluxe-detail.jpg",
@@ -101,12 +111,20 @@ export const ROOM_GALLERIES: Record<string, RoomExtendedData> = {
     id: "triple-kitchenette",
     title: "Triple Bed Room with Kitchenette",
     tagline: "Spacious 3-bed family suite with in-room pantry sink, split AC & ensuite hot water bath",
+    panorama360: "/images/rooms/triple-room-360.jpg",
     photos: [
       {
         src: "/images/rooms/triple-room-main.jpg",
         alt: "Triple Bed Room with three beds in a row at Maa Annapurna Home Stay Bodhgaya",
         caption: "Spacious layout with three comfortable beds in a row, wooden headboard, and split air conditioning.",
         tag: "Real Guest Room Photo",
+      },
+      {
+        src: "/images/rooms/triple-room-360.jpg",
+        alt: "Triple Bed Room with Kitchenette 360 Degree Virtual Panorama Tour",
+        caption: "Interactive 360° View: Full room perspective with 3 beds and kitchenette pantry",
+        tag: "360° Virtual Tour",
+        is360: true,
       },
       {
         src: "/images/rooms/triple-kitchenette.jpg",
@@ -165,12 +183,20 @@ export const ROOM_GALLERIES: Record<string, RoomExtendedData> = {
     id: "classic-twin",
     title: "Twin Bed Room",
     tagline: "Two separate single beds with warm wooden paneling, split cooling & ensuite bathroom",
+    panorama360: "/images/rooms/twin-room-360.jpg",
     photos: [
       {
         src: "/images/rooms/twin-room-main.jpg",
         alt: "Twin Bed AC Room with two single beds at Maa Annapurna Home Stay Bodhgaya",
         caption: "Two separate single beds with wooden fluted headboard paneling, red blankets, and window AC.",
         tag: "Real Guest Room Photo",
+      },
+      {
+        src: "/images/rooms/twin-room-360.jpg",
+        alt: "Twin Bed Room 360 Degree Virtual Panorama Tour",
+        caption: "Interactive 360° View: Full room perspective with twin beds, tea table, and vanity",
+        tag: "360° Virtual Tour",
+        is360: true,
       },
       {
         src: "/images/rooms/twin-room-angle2.jpg",
@@ -228,12 +254,20 @@ export const ROOM_GALLERIES: Record<string, RoomExtendedData> = {
     id: "family-suite",
     title: "Executive Family Suite",
     tagline: "Extra-large multi-bed suite with rich maroon drapes, split AC, dressing lounge & attached modern bath",
+    panorama360: "/images/rooms/family-suite-360.jpg",
     photos: [
       {
         src: "/images/rooms/family-suite-main.jpg",
         alt: "Executive Family Suite with two large double beds at Maa Annapurna Home Stay Bodhgaya",
         caption: "Spacious layout featuring two large double beds, maroon window curtains, and split air conditioning.",
         tag: "Real Guest Room Photo",
+      },
+      {
+        src: "/images/rooms/family-suite-360.jpg",
+        alt: "Executive Family Suite 360 Degree Virtual Panorama Tour",
+        caption: "Interactive 360° View: Full suite perspective with multi-bed setup, AC, and living space",
+        tag: "360° Virtual Tour",
+        is360: true,
       },
       {
         src: "/images/rooms/family-suite-wide.jpg",
