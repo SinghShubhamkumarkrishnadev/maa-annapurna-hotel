@@ -69,20 +69,20 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
     const width = stageRef.current.clientWidth;
 
     if (width < 360) {
-      // Small mobile (320px - 359px): card takes ~68% of screen, leaving ~51px on each side for stack cards
+      // Small mobile (320px - 359px): compact card
       const cardWidth = Math.round(width * 0.68);
       setMetrics({
         cardWidth,
         step: Math.round(cardWidth * 0.70),
-        cardHeight: 225,
+        cardHeight: 172,
       });
     } else if (width < 440) {
-      // Standard mobile (360px - 439px): card takes ~65% of screen, leaving ~65px on each side for stack cards
+      // Standard mobile (360px - 439px): compact card
       const cardWidth = Math.round(width * 0.65);
       setMetrics({
         cardWidth,
         step: Math.round(cardWidth * 0.72),
-        cardHeight: 228,
+        cardHeight: 176,
       });
     } else if (width < 640) {
       // Large mobile (440px - 639px)
@@ -90,7 +90,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
       setMetrics({
         cardWidth,
         step: Math.round(cardWidth * 0.74),
-        cardHeight: 228,
+        cardHeight: 182,
       });
     } else if (width < 768) {
       // Phablet (640px - 767px)
@@ -98,7 +98,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
       setMetrics({
         cardWidth,
         step: 230,
-        cardHeight: 225,
+        cardHeight: 190,
       });
     } else if (width < 1024) {
       // Tablet (768px - 1023px)
@@ -106,7 +106,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
       setMetrics({
         cardWidth,
         step: 255,
-        cardHeight: 225,
+        cardHeight: 195,
       });
     } else if (width < 1440) {
       // Laptop & Desktop (1024px - 1439px)
@@ -114,7 +114,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
       setMetrics({
         cardWidth,
         step: 270,
-        cardHeight: 225,
+        cardHeight: 200,
       });
     } else {
       // Wide Screen (1440px+)
@@ -122,7 +122,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
       setMetrics({
         cardWidth,
         step: 280,
-        cardHeight: 230,
+        cardHeight: 205,
       });
     }
   }, []);
@@ -505,7 +505,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                           ? "none"
                           : "transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease, box-shadow 420ms ease",
                       }}
-                      className={`group rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between transition-all duration-200 cursor-pointer select-none ${
+                      className={`group rounded-2xl p-3 sm:p-4.5 flex flex-col justify-between transition-all duration-200 cursor-pointer select-none ${
                         isActive
                           ? "bg-white border border-stone-200/90 shadow-[0_14px_34px_-10px_rgba(28,25,23,0.12),0_4px_12px_-4px_rgba(28,25,23,0.06)] ring-1 ring-amber-900/5 hover:border-amber-400/80 hover:shadow-[0_18px_38px_-10px_rgba(28,25,23,0.16)]"
                           : "bg-white/95 border border-stone-200/70 shadow-2xs hover:border-amber-400/60"
@@ -513,7 +513,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                     >
                       <div className="min-w-0">
                         {/* Top: Avatar, Name, Verified Badge & Date */}
-                        <div className="flex items-start gap-2.5 sm:gap-3 mb-2 sm:mb-2.5">
+                        <div className="flex items-start gap-2 sm:gap-2.5 mb-1.5 sm:mb-2">
                           <AvatarIcon avatarId={review.avatar} size="sm" showBadge={false} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap">
@@ -522,7 +522,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                               </h4>
                               {review.verified !== false && (
                                 <span
-                                  className="inline-flex items-center gap-0.5 text-[9px] sm:text-[9.5px] font-semibold text-emerald-800 bg-emerald-50 px-1.5 py-0.2 rounded-full border border-emerald-200 shrink-0"
+                                  className="inline-flex items-center gap-0.5 text-[8.5px] sm:text-[9.5px] font-semibold text-emerald-800 bg-emerald-50 px-1.5 py-0.2 rounded-full border border-emerald-200 shrink-0"
                                   title="Verified Guest Stay"
                                 >
                                   <span>✓</span>
@@ -530,7 +530,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                                 </span>
                               )}
                             </div>
-                            <div className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[10.5px] text-stone-500 mt-0.5 truncate">
+                            <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] text-stone-500 mt-0.5 truncate">
                               <span>{review.date}</span>
                               {review.stayType && (
                                 <>
@@ -545,7 +545,7 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                         </div>
 
                         {/* Rating Stars */}
-                        <div className="flex items-center gap-0.5 sm:gap-1 text-amber-500 text-[11px] sm:text-xs mb-1.5 sm:mb-2">
+                        <div className="flex items-center gap-0.5 sm:gap-1 text-amber-500 text-[10px] sm:text-xs mb-1 sm:mb-1.5">
                           {Array.from({ length: 5 }).map((_, i) => (
                             <span
                               key={i}
@@ -554,45 +554,37 @@ export default function ReviewSection({ initialReviews = [] }: ReviewSectionProp
                               ★
                             </span>
                           ))}
-                          <span className="text-[10px] sm:text-[10.5px] font-bold text-stone-700 ml-1">
+                          <span className="text-[9.5px] sm:text-[10px] font-bold text-stone-700 ml-1">
                             {numRating}.0
                           </span>
                         </div>
 
                         {/* Comment Message */}
                         {review.comment ? (
-                          <p className="text-[11px] sm:text-xs text-stone-700 leading-snug sm:leading-relaxed italic pl-2 sm:pl-2.5 border-l-2 border-amber-200 line-clamp-3">
+                          <p className="text-[10.5px] sm:text-xs text-stone-700 leading-snug italic pl-2 border-l-2 border-amber-200 line-clamp-2 sm:line-clamp-3">
                             &ldquo;{review.comment}&rdquo;
                           </p>
                         ) : (
-                          <p className="text-[11px] sm:text-xs text-stone-400 italic pl-2 sm:pl-2.5 border-l-2 border-amber-100">
+                          <p className="text-[10.5px] sm:text-xs text-stone-400 italic pl-2 border-l-2 border-amber-100">
                             Rating submitted with 5-star host recommendation.
                           </p>
                         )}
                       </div>
 
                       {/* Card Footer */}
-                      <div className="mt-2 pt-1.5 sm:mt-2.5 sm:pt-2 border-t border-stone-100 flex items-center justify-between text-[9.5px] sm:text-[10.5px] text-stone-400">
-                        <span className="flex items-center gap-1 truncate">
-                          <span>📍</span> Bodhgaya
-                        </span>
-                        <div className="flex items-center gap-2 shrink-0">
-                          <span className="text-amber-800 font-medium truncate">
-                            Maa Annapurna
-                          </span>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedReviewForModal(review);
-                            }}
-                            className="text-amber-800 group-hover:text-amber-950 font-semibold text-[9.5px] sm:text-[10px] uppercase tracking-wider flex items-center gap-0.5 cursor-pointer bg-amber-50 group-hover:bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200/70 transition-colors"
-                            title="Read full review"
-                          >
-                            <span>Full</span>
-                            <span>↗</span>
-                          </button>
-                        </div>
+                      <div className="mt-1 pt-1 sm:mt-1.5 sm:pt-1.5 border-t border-stone-100/90 flex items-center justify-end">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedReviewForModal(review);
+                          }}
+                          className="text-amber-800 group-hover:text-amber-950 font-semibold text-[9px] sm:text-[9.5px] uppercase tracking-wider flex items-center gap-0.5 cursor-pointer bg-amber-50 group-hover:bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200/70 transition-colors"
+                          title="Read full review"
+                        >
+                          <span>Full</span>
+                          <span>↗</span>
+                        </button>
                       </div>
                     </article>
                   );
