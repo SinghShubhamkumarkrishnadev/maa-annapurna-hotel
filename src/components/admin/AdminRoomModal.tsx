@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { RoomItem, RoomFormData } from "@/types/admin";
+import { RoomItem, RoomFormData, PhotoItem } from "@/types/admin";
+import { photoService } from "@/services/photoService";
 
 interface AdminRoomModalProps {
   isOpen: boolean;
   editingRoom: RoomItem | null;
   isSaving: boolean;
+  galleryPhotos?: PhotoItem[];
   onClose: () => void;
   onSave: (formData: RoomFormData) => void | Promise<void>;
 }
@@ -47,6 +49,7 @@ export default function AdminRoomModal({
   isOpen,
   editingRoom,
   isSaving,
+  galleryPhotos = [],
   onClose,
   onSave,
 }: AdminRoomModalProps) {
@@ -75,6 +78,38 @@ export default function AdminRoomModal({
     "High-Speed Wi-Fi",
   ]);
   const [newFeatureText, setNewFeatureText] = useState("");
+
+  // Room Image Upload & Gallery Selection States
+  const [isRoomImgUploading, setIsRoomImgUploading] = useState(false);
+  const [isRoomImgDragOver, setIsRoomImgDragOver] = useState(false);
+  const [isGalleryPickerOpen, setIsGalleryPickerOpen] = useState(false);
+  const [roomImgUploadError, setRoomImgUploadError] = useState("");
+  const [showManualUrlInput, setShowManualUrlInput] = useState(false);
+  const roomFileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleRoomImageUpload = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      setRoomImgUploadError("Please select a valid image file");
+      return;
+    }
+    setRoomImgUploadError("");
+    setIsRoomImgUploading(true);
+    try {
+      const res = await photoService.uploadPhoto(file, {
+        category: "rooms",
+        title: `${formName || "Room"} Feature Photo`,
+        addToGallery: true,
+      });
+      if (res.url) {
+        setFormImage(res.url);
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to upload image";
+      setRoomImgUploadError(msg);
+    } finally {
+      setIsRoomImgUploading(false);
+    }
+  };
 
   useEffect(() => {
     if (editingRoom) {
@@ -369,37 +404,202 @@ export default function AdminRoomModal({
             </div>
           </div>
 
-          {/* Photo Selector */}
-          <div>
-            <label className="block text-xs font-semibold text-stone-700 mb-1">
-              Room Featured Photo Path
-            </label>
-            <div className="flex gap-2 mb-2">
-              <input
-                type="text"
-                value={formImage}
-                onChange={(e) => setFormImage(e.target.value)}
-                placeholder="/images/deluxe-room-dressing-table.jpg"
-                className="flex-1 px-3 py-2 rounded-xl border border-stone-300 text-xs"
-              />
+          {/* Room Photo Manager */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-semibold text-stone-800">
+                Room Featured Photo *
+              </label>
+              <button
+                type="button"
+                onClick={() => setShowManualUrlInput(!showManualUrlInput)}
+                className="text-[11px] text-stone-500 hover:text-stone-800 underline font-medium cursor-pointer"
+              >
+                {showManualUrlInput ? "Hide Direct Path" : "Edit Path Manually"}
+              </button>
             </div>
 
-            {/* Preset quick pick */}
+            {roomImgUploadError && (
+              <p className="text-[11px] text-rose-600 bg-rose-50 p-2 rounded-lg border border-rose-200">
+                ⚠️ {roomImgUploadError}
+              </p>
+            )}
+
+            {/* Current Image Preview & Upload Dropzone */}
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                setIsRoomImgDragOver(true);
+              }}
+              onDragLeave={(e) => {
+                e.preventDefault();
+                setIsRoomImgDragOver(false);
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                setIsRoomImgDragOver(false);
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                  handleRoomImageUpload(e.dataTransfer.files[0]);
+                }
+              }}
+              className={`relative rounded-2xl border-2 transition overflow-hidden ${
+                isRoomImgDragOver
+                  ? "border-emerald-600 bg-emerald-50/70 shadow-md"
+                  : "border-stone-200 bg-stone-50/60 hover:border-stone-300"
+              }`}
+            >
+              <input
+                ref={roomFileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files.length > 0) {
+                    handleRoomImageUpload(e.target.files[0]);
+                  }
+                }}
+                className="hidden"
+              />
+
+              {formImage ? (
+                <div className="flex flex-col sm:flex-row items-center gap-3.5 p-3">
+                  <div className="relative w-full sm:w-36 aspect-[16/10] rounded-xl overflow-hidden bg-stone-200 shrink-0 border border-stone-300 shadow-2xs">
+                    <Image
+                      src={formImage}
+                      alt="Room Preview"
+                      fill
+                      className="object-cover"
+                    />
+                    {isRoomImgUploading && (
+                      <div className="absolute inset-0 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center text-white text-xs font-semibold gap-1.5">
+                        <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <span>Uploading...</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex-1 w-full space-y-2">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                        Live Preview
+                      </span>
+                      <p className="text-xs font-mono text-stone-600 truncate mt-1">
+                        {formImage}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        onClick={() => roomFileInputRef.current?.click()}
+                        disabled={isRoomImgUploading}
+                        className="px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-[11px] font-bold cursor-pointer transition shadow-2xs flex items-center gap-1.5 disabled:opacity-50"
+                      >
+                        <span>📁 Upload Raw Image</span>
+                      </button>
+
+                      {galleryPhotos.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setIsGalleryPickerOpen(true)}
+                          className="px-3 py-1.5 rounded-xl bg-white hover:bg-stone-100 text-stone-800 border border-stone-300 text-[11px] font-semibold cursor-pointer transition shadow-2xs"
+                        >
+                          <span>🖼️ Pick from Gallery ({galleryPhotos.length})</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  onClick={() => roomFileInputRef.current?.click()}
+                  className="p-6 text-center cursor-pointer"
+                >
+                  <div className="mx-auto w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 text-lg mb-2">
+                    📷
+                  </div>
+                  <p className="text-xs font-bold text-stone-800">
+                    Drag and drop room photo here
+                  </p>
+                  <p className="text-[11px] text-stone-500 mt-0.5">
+                    or <span className="underline font-semibold text-amber-800">browse raw image from PC</span>
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Optional Manual Path Input */}
+            {showManualUrlInput && (
+              <div className="animate-in fade-in duration-150">
+                <input
+                  type="text"
+                  value={formImage}
+                  onChange={(e) => setFormImage(e.target.value)}
+                  placeholder="/images/rooms/... or https://..."
+                  className="w-full px-3 py-1.5 rounded-xl border border-stone-300 text-xs bg-white font-mono"
+                />
+              </div>
+            )}
+
+            {/* Quick Pick Presets */}
             <div className="flex items-center gap-2 overflow-x-auto py-1">
-              <span className="text-[10px] text-stone-500 font-semibold shrink-0">Quick Pick:</span>
-              {PRESET_GALLERY_IMAGES.slice(0, 6).map((img, idx) => (
+              <span className="text-[10px] text-stone-500 font-semibold shrink-0">Quick Assets:</span>
+              {(galleryPhotos.length > 0
+                ? galleryPhotos.slice(0, 8).map((p) => p.src)
+                : PRESET_GALLERY_IMAGES.slice(0, 8)
+              ).map((img, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setFormImage(img)}
-                  className={`relative w-10 h-7 rounded border overflow-hidden shrink-0 transition ${
-                    formImage === img ? "ring-2 ring-stone-900" : "opacity-70 hover:opacity-100"
+                  className={`relative w-11 h-8 rounded-lg border overflow-hidden shrink-0 transition cursor-pointer ${
+                    formImage === img ? "ring-2 ring-stone-900 border-stone-900" : "opacity-75 hover:opacity-100 border-stone-200"
                   }`}
+                  title={img}
                 >
                   <Image src={img} alt="preset" fill className="object-cover" />
                 </button>
               ))}
             </div>
+
+            {/* In-Modal Gallery Picker Popup */}
+            {isGalleryPickerOpen && (
+              <div className="p-3 bg-stone-100 rounded-2xl border border-stone-300 space-y-2 animate-in fade-in zoom-in-95 duration-150">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-stone-900">
+                    Choose from Hotel Gallery
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setIsGalleryPickerOpen(false)}
+                    className="text-stone-400 hover:text-stone-700 text-xs font-bold cursor-pointer"
+                  >
+                    ✕ Close
+                  </button>
+                </div>
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-48 overflow-y-auto p-1">
+                  {galleryPhotos.map((photo) => (
+                    <div
+                      key={photo.id}
+                      onClick={() => {
+                        setFormImage(photo.src);
+                        setIsGalleryPickerOpen(false);
+                      }}
+                      className={`relative aspect-[16/10] rounded-xl overflow-hidden cursor-pointer border transition hover:scale-105 shadow-2xs group ${
+                        formImage === photo.src ? "ring-2 ring-emerald-600 border-emerald-600" : "border-stone-300"
+                      }`}
+                      title={photo.title}
+                    >
+                      <Image src={photo.src} alt={photo.title} fill className="object-cover" />
+                      <div className="absolute inset-0 bg-stone-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center p-1">
+                        <span className="text-[10px] bg-white text-stone-900 font-bold px-1.5 py-0.5 rounded">
+                          Select
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Features Tags */}

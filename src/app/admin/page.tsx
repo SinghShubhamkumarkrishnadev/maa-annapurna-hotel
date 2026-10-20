@@ -60,6 +60,7 @@ export default function AdminPage() {
 
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [isSavingPhoto, setIsSavingPhoto] = useState(false);
+  const [isUploadingPhotos, setIsUploadingPhotos] = useState(false);
 
   const [deleteModalConfig, setDeleteModalConfig] = useState<DeleteModalConfig | null>(null);
 
@@ -165,15 +166,54 @@ export default function AdminPage() {
   const handleSavePhoto = async (formData: PhotoFormData) => {
     setIsSavingPhoto(true);
     try {
-      const photo = await photoService.addPhoto(formData);
+      let photo: PhotoItem;
+      if (formData.file) {
+        const res = await photoService.uploadPhoto(formData.file, {
+          category: formData.category,
+          title: formData.title,
+          caption: formData.caption,
+          addToGallery: true,
+        });
+        if (!res.photo) throw new Error("Upload did not return photo record");
+        photo = res.photo;
+      } else if (formData.url) {
+        photo = await photoService.addPhoto(formData);
+      } else {
+        throw new Error("No photo file or URL provided");
+      }
       setPhotos((prev) => [...prev, photo]);
-      showToast("Photo added to gallery successfully!");
+      showToast("Photo uploaded & added to gallery successfully!");
       setIsPhotoModalOpen(false);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to add photo";
       showToast(msg, "error");
     } finally {
       setIsSavingPhoto(false);
+    }
+  };
+
+  const handleUploadPhotos = async (
+    files: File[],
+    category: "rooms" | "bathrooms" | "exterior"
+  ) => {
+    setIsUploadingPhotos(true);
+    try {
+      const res = await photoService.uploadMultiplePhotos(files, {
+        category,
+        addToGallery: true,
+      });
+      if (res.photos && res.photos.length > 0) {
+        setPhotos((prev) => [...prev, ...res.photos]);
+        showToast(`Successfully uploaded ${res.photos.length} photo(s) directly to gallery!`);
+      } else if (res.photo) {
+        setPhotos((prev) => [...prev, res.photo!]);
+        showToast("Photo uploaded successfully!");
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to upload photos";
+      showToast(msg, "error");
+    } finally {
+      setIsUploadingPhotos(false);
     }
   };
 
@@ -267,6 +307,8 @@ export default function AdminPage() {
               showToast("Photo path copied!");
             }}
             onRequestDeletePhoto={onRequestDeletePhoto}
+            onUploadPhotos={handleUploadPhotos}
+            isUploading={isUploadingPhotos}
           />
         )}
 
@@ -284,6 +326,7 @@ export default function AdminPage() {
         isOpen={isRoomModalOpen}
         editingRoom={editingRoom}
         isSaving={isSavingRoom}
+        galleryPhotos={photos}
         onClose={() => setIsRoomModalOpen(false)}
         onSave={handleSaveRoom}
       />

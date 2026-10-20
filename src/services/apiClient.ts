@@ -16,9 +16,10 @@ export async function request<T = unknown>(
   url: string,
   options?: RequestInit
 ): Promise<T> {
-  const defaultHeaders: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
+  const isFormData = typeof FormData !== "undefined" && options?.body instanceof FormData;
+  const defaultHeaders: Record<string, string> = isFormData
+    ? {}
+    : { "Content-Type": "application/json" };
 
   if (typeof window !== "undefined") {
     const token =

@@ -34,7 +34,8 @@ export interface RoomFormData {
 }
 
 export interface PhotoFormData {
-  url: string;
+  url?: string;
+  file?: File;
   title: string;
   category: "rooms" | "bathrooms" | "exterior";
   caption: string;

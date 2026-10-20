@@ -1,5 +1,6 @@
 import { isRequestAuthenticated } from "@/lib/auth";
 import { getPhotos, savePhotos, deletePhotoFromDb, PhotoItem } from "@/lib/data";
+import { deleteStoredImage } from "@/lib/storage";
 
 export async function GET() {
   const photos = await getPhotos();
@@ -56,10 +57,19 @@ export async function DELETE(request: Request) {
     }
 
     const photos = await getPhotos();
+    const photoToDelete = photos.find((p) => p.id === id);
     const filtered = photos.filter((p) => p.id !== id);
 
     if (filtered.length === photos.length) {
       return Response.json({ error: "Photo not found" }, { status: 404 });
+    }
+
+    if (photoToDelete?.src) {
+      try {
+        await deleteStoredImage(photoToDelete.src);
+      } catch (storageErr) {
+        console.warn("Storage delete failed:", storageErr);
+      }
     }
 
     await savePhotos(filtered);
