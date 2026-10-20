@@ -9,6 +9,7 @@ interface AdminPhotosTabProps {
   onRequestDeletePhoto: (photo: PhotoItem) => void;
   onUploadPhotos?: (files: File[], category: "rooms" | "bathrooms" | "exterior") => Promise<void>;
   isUploading?: boolean;
+  deletingPhotoId?: number | null;
 }
 
 export default function AdminPhotosTab({
@@ -18,6 +19,7 @@ export default function AdminPhotosTab({
   onRequestDeletePhoto,
   onUploadPhotos,
   isUploading = false,
+  deletingPhotoId,
 }: AdminPhotosTabProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -421,10 +423,18 @@ export default function AdminPhotosTab({
 
                     <button
                       type="button"
+                      disabled={deletingPhotoId === photo.id}
                       onClick={() => onRequestDeletePhoto(photo)}
-                      className="text-[10.5px] text-rose-600 hover:text-rose-800 font-bold cursor-pointer hover:underline flex items-center gap-1"
+                      className="text-[10.5px] text-rose-600 hover:text-rose-800 font-bold cursor-pointer hover:underline flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <span>🗑️ Delete</span>
+                      {deletingPhotoId === photo.id ? (
+                        <>
+                          <span className="w-3 h-3 border-2 border-rose-600/30 border-t-rose-600 rounded-full animate-spin" />
+                          <span>Deleting...</span>
+                        </>
+                      ) : (
+                        <span>🗑️ Delete</span>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -480,14 +490,22 @@ export default function AdminPhotosTab({
                 </button>
                 <button
                   type="button"
+                  disabled={deletingPhotoId === previewPhoto.id}
                   onClick={() => {
                     const target = previewPhoto;
                     setPreviewPhoto(null);
                     onRequestDeletePhoto(target);
                   }}
-                  className="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold cursor-pointer"
+                  className="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
                 >
-                  Delete Photo
+                  {deletingPhotoId === previewPhoto.id ? (
+                    <>
+                      <span className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span>Deleting...</span>
+                    </>
+                  ) : (
+                    <span>Delete Photo</span>
+                  )}
                 </button>
               </div>
             </div>

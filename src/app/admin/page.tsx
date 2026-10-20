@@ -61,6 +61,7 @@ export default function AdminPage() {
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [isSavingPhoto, setIsSavingPhoto] = useState(false);
   const [isUploadingPhotos, setIsUploadingPhotos] = useState(false);
+  const [deletingPhotoId, setDeletingPhotoId] = useState<number | null>(null);
 
   const [deleteModalConfig, setDeleteModalConfig] = useState<DeleteModalConfig | null>(null);
 
@@ -147,8 +148,10 @@ export default function AdminPage() {
       title: `Delete ${room.name}?`,
       message: `Are you sure you want to delete "${room.name}"? This action cannot be reversed.`,
       confirmLabel: "Delete Room",
+      isProcessing: false,
       onCancel: () => setDeleteModalConfig(null),
       onConfirm: async () => {
+        setDeleteModalConfig((prev) => (prev ? { ...prev, isProcessing: true } : null));
         try {
           await roomService.deleteRoom(room.id);
           setRooms((prev) => prev.filter((r) => r.id !== room.id));
@@ -223,8 +226,13 @@ export default function AdminPage() {
       title: "Delete Photo?",
       message: `Are you sure you want to delete "${photo.title}" from the gallery?`,
       confirmLabel: "Delete Photo",
-      onCancel: () => setDeleteModalConfig(null),
+      isProcessing: false,
+      onCancel: () => {
+        if (!deletingPhotoId) setDeleteModalConfig(null);
+      },
       onConfirm: async () => {
+        setDeletingPhotoId(photo.id);
+        setDeleteModalConfig((prev) => (prev ? { ...prev, isProcessing: true } : null));
         try {
           await photoService.deletePhoto(photo.id);
           setPhotos((prev) => prev.filter((p) => p.id !== photo.id));
@@ -232,6 +240,7 @@ export default function AdminPage() {
         } catch {
           showToast("Failed to delete photo", "error");
         } finally {
+          setDeletingPhotoId(null);
           setDeleteModalConfig(null);
         }
       },
@@ -245,8 +254,10 @@ export default function AdminPage() {
       title: `Delete Review by "${review.name}"?`,
       message: `Are you sure you want to permanently delete this review? This action cannot be undone.`,
       confirmLabel: "Delete Review",
+      isProcessing: false,
       onCancel: () => setDeleteModalConfig(null),
       onConfirm: async () => {
+        setDeleteModalConfig((prev) => (prev ? { ...prev, isProcessing: true } : null));
         try {
           await reviewService.deleteReview(review.id);
           setReviews((prev) => prev.filter((r) => r.id !== review.id));
@@ -309,6 +320,7 @@ export default function AdminPage() {
             onRequestDeletePhoto={onRequestDeletePhoto}
             onUploadPhotos={handleUploadPhotos}
             isUploading={isUploadingPhotos}
+            deletingPhotoId={deletingPhotoId}
           />
         )}
 
