@@ -27,10 +27,6 @@ export default function AdminPhotosTab({
   const [isDropZoneActive, setIsDropZoneActive] = useState(false);
   const [stagedFiles, setStagedFiles] = useState<{ file: File; preview: string }[]>([]);
 
-  // Drag to delete state
-  const [draggedPhoto, setDraggedPhoto] = useState<PhotoItem | null>(null);
-  const [isTrashOver, setIsTrashOver] = useState(false);
-
   // Lightbox preview modal
   const [previewPhoto, setPreviewPhoto] = useState<PhotoItem | null>(null);
 
@@ -99,66 +95,24 @@ export default function AdminPhotosTab({
 
   // Drop zone events for file upload
   const handleDropZoneDragOver = (e: React.DragEvent) => {
-    // Only activate for external file drops (not photo card drag-to-delete)
-    if (draggedPhoto) return;
     e.preventDefault();
     e.stopPropagation();
     setIsDropZoneActive(true);
   };
 
   const handleDropZoneDragLeave = (e: React.DragEvent) => {
-    if (draggedPhoto) return;
     e.preventDefault();
     e.stopPropagation();
     setIsDropZoneActive(false);
   };
 
   const handleDropZoneDrop = (e: React.DragEvent) => {
-    if (draggedPhoto) return;
     e.preventDefault();
     e.stopPropagation();
     setIsDropZoneActive(false);
 
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       handleProcessFiles(e.dataTransfer.files);
-    }
-  };
-
-  // Drag-to-delete handlers for photo cards
-  const handleCardDragStart = (e: React.DragEvent, photo: PhotoItem) => {
-    setDraggedPhoto(photo);
-    e.dataTransfer.setData("text/plain", String(photo.id));
-    e.dataTransfer.effectAllowed = "move";
-  };
-
-  const handleCardDragEnd = () => {
-    setDraggedPhoto(null);
-    setIsTrashOver(false);
-  };
-
-  const handleTrashDragOver = (e: React.DragEvent) => {
-    if (!draggedPhoto) return;
-    e.preventDefault();
-    e.stopPropagation();
-    e.dataTransfer.dropEffect = "move";
-    setIsTrashOver(true);
-  };
-
-  const handleTrashDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsTrashOver(false);
-  };
-
-  const handleTrashDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsTrashOver(false);
-
-    if (draggedPhoto) {
-      const target = draggedPhoto;
-      setDraggedPhoto(null);
-      onRequestDeletePhoto(target);
     }
   };
 
@@ -340,37 +294,6 @@ export default function AdminPhotosTab({
           )}
         </div>
 
-        {/* Drag to Delete Trash Bin Zone */}
-        <div
-          onDragOver={handleTrashDragOver}
-          onDragLeave={handleTrashDragLeave}
-          onDrop={handleTrashDrop}
-          className={`border-2 border-dashed rounded-2xl p-3.5 text-center transition-all flex items-center justify-center gap-3 ${
-            draggedPhoto
-              ? isTrashOver
-                ? "border-rose-600 bg-rose-100 text-rose-900 scale-[1.02] shadow-lg animate-pulse"
-                : "border-rose-400 bg-rose-50/70 text-rose-800 shadow-sm"
-              : "border-stone-200 bg-stone-50/40 text-stone-400 hover:border-stone-300"
-          }`}
-        >
-          <span className={`text-xl transition-transform ${draggedPhoto ? "scale-125" : ""}`}>
-            🗑️
-          </span>
-          <div className="text-left">
-            <p className="text-xs font-bold">
-              {draggedPhoto
-                ? isTrashOver
-                  ? `Release to permanently delete "${draggedPhoto.title}"`
-                  : `Drop "${draggedPhoto.title}" here to Delete`
-                : "Drag & Drop to Delete Zone"}
-            </p>
-            <p className="text-[10.5px]">
-              {draggedPhoto
-                ? "Drop on this bin to remove the photo from gallery & database"
-                : "Drag any photo card below into this zone to instantly delete it, or use the card's delete button"}
-            </p>
-          </div>
-        </div>
 
         {/* Search & Category Filter Pills */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
@@ -441,18 +364,10 @@ export default function AdminPhotosTab({
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {filteredPhotos.map((photo) => {
-            const isBeingDragged = draggedPhoto?.id === photo.id;
             return (
               <div
                 key={photo.id}
-                draggable={true}
-                onDragStart={(e) => handleCardDragStart(e, photo)}
-                onDragEnd={handleCardDragEnd}
-                className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden shadow-2xs group flex flex-col justify-between cursor-grab active:cursor-grabbing ${
-                  isBeingDragged
-                    ? "opacity-40 scale-95 border-rose-400 ring-2 ring-rose-400"
-                    : "border-stone-200 hover:border-stone-400 hover:shadow-md"
-                }`}
+                className="bg-white rounded-2xl border border-stone-200 hover:border-stone-400 hover:shadow-md transition-all duration-200 overflow-hidden shadow-2xs group flex flex-col justify-between"
               >
                 <div className="relative aspect-[16/10] w-full bg-stone-100 overflow-hidden">
                   <Image
@@ -462,12 +377,6 @@ export default function AdminPhotosTab({
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                   />
-
-                  {/* Drag Grip Handle Pill */}
-                  <div className="absolute top-2 right-2 bg-stone-900/80 backdrop-blur-xs text-white text-[10px] px-2 py-0.5 rounded-full font-medium flex items-center gap-1 shadow-xs opacity-90 group-hover:opacity-100">
-                    <span className="tracking-tighter">⋮⋮</span>
-                    <span>Drag to Delete</span>
-                  </div>
 
                   {/* Category Pill */}
                   <span className="absolute top-2 left-2 bg-amber-950/85 backdrop-blur-xs text-amber-200 text-[10px] px-2 py-0.5 rounded-full font-medium capitalize shadow-xs">
